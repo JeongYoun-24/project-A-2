@@ -14,22 +14,24 @@ import org.modelmapper.ModelMapper;
 import com.ex01.dao.MapperUtil;
 import com.ex01.domain.ManagerVO;
 import com.ex01.domain.Manager_BoardVO;
+import com.ex01.domain.ProductVO;
 import com.ex01.domain.UsersVO;
 import com.ex01.util.ConnectionUtil;
 import com.mapper.mybatis.ManagerMapper;
+import com.mapper.mybatis.ProductMapper;
 import com.mapper.mybatis.UsersMapper;
 
 import lombok.Builder;
 
 
 
-public class userMapperTest2 {
+public class ProductMapperTest {
 
 	
 	
 	private SqlSessionFactory factor;
 	private ManagerMapper memberMapper;
-	private UsersMapper userMapper;
+	private ProductMapper productMapper;
 	private ModelMapper modelMapper;
 	private SqlSession session;
 	
@@ -42,7 +44,7 @@ public class userMapperTest2 {
 		factor = ConnectionUtil.INSTANCE.getSqlSessionFactorty();
 		session = factor.openSession();
 		memberMapper = session.getMapper(ManagerMapper.class);
-		userMapper = session.getMapper(UsersMapper.class);
+		productMapper = session.getMapper(ProductMapper.class);
 		
 	}
 	@After
@@ -51,15 +53,15 @@ public class userMapperTest2 {
 	}
 	
 	@Test
-	public void userFindlsit() { // 회원 조회 테스트 
+	public void userFindlsit() { // 상품 상세 조회 테스트 
 		try {
 			SqlSessionFactory factor = ConnectionUtil.INSTANCE.getSqlSessionFactorty();
 			SqlSession session = factor.openSession();
 			
-			userMapper = session.getMapper(UsersMapper.class);
+			productMapper = session.getMapper(ProductMapper.class);
 			
 			
-			UsersVO list = userMapper.login("aaa");
+			ProductVO list = productMapper.prodctCodeList(2);
 			
 			System.out.println(list);
 			
@@ -71,40 +73,87 @@ public class userMapperTest2 {
 	}
 	
 	@Test
-	public void testinsrt() { // 회원 등록 테스트 
+	public void testupdate() { // 상품 수정 테스트
 		SqlSessionFactory factor = ConnectionUtil.INSTANCE.getSqlSessionFactorty();
 		SqlSession session = factor.openSession();
 		
-		userMapper = session.getMapper(UsersMapper.class);
+		productMapper = session.getMapper(ProductMapper.class);
+		try {
+			ProductVO vo = ProductVO.builder()
+					
+					.product_code(5)
+					.category(2)
+					.pro_name("아무튼 향수임")
+					.pro_info("디올")
+					.pro_price("30000")
+					.pro_qty(1)
+					.pro_img(".jpg")
+					.build();
+			
+				int result =productMapper.productupdate(vo);
+			
+				System.out.println(result);
+				session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		
-		UsersVO vo = UsersVO.builder()
-				
-				.user_id("fff")
-				.user_pwd("1234")
-				.user_name("프라잇")
-				.user_email("ddd@naver.com")
-				.address("집 주소 데이터 ")
-				.phone("010-4887-4444")
-				.build();
+	}
+	@Test
+	public void testdelete() { // 상품 삭제 테스트 
+		int product = 5;
+		int r = productMapper.productdelete(product);
+		session.commit();
 		
-			int result =userMapper.userinsert(vo);
+		System.out.println(r);
+	}
+	
+	
+	@Test
+	public void testinsrt() { // 상품  등록 테스트 
+		SqlSessionFactory factor = ConnectionUtil.INSTANCE.getSqlSessionFactorty();
+		SqlSession session = factor.openSession();
 		
-			System.out.println(result);
-			session.close();
+		productMapper = session.getMapper(ProductMapper.class);
+		try {
+			ProductVO vo = ProductVO.builder()
+					
+					.product_code(6)
+					.category(2)
+					.pro_name("아무튼 향수임")
+					.pro_info("디올")
+					.pro_price("30000")
+					.pro_qty(1)
+					.pro_img(".jpg")
+					.build();
+			
+				System.out.println(vo);
+				int result =productMapper.productInsert(vo);
+			
+				System.out.println(result);
+				session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 	
 	
 	
 	
+	
+	
+	
 	@Test
-	public void userListTest() { // 회원 전체 정보 테스트 
+	public void userListTest() { // 상품 전체 정보 테스트 
 		try {
 			SqlSessionFactory factor = ConnectionUtil.INSTANCE.getSqlSessionFactorty();
 			SqlSession session = factor.openSession();
 			
-			userMapper = session.getMapper(UsersMapper.class);
+			productMapper = session.getMapper(ProductMapper.class);
 			
-			List<UsersVO> memberVO = userMapper.selectAll();
+			List<ProductVO> memberVO = productMapper.productAllList();
 			System.out.println(memberVO);
 			
 			

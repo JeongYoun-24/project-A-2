@@ -7,7 +7,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>shoppingmall</title>
+        <title>회원가입</title>
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -380,17 +380,17 @@
 			console.log(_jsonData)	
 			
 			$.ajax({  //페이지가 아닌 데이터만 보내기
-			type: "post",
-			async: true, //true=비동기
-			url: "${ctxPath}/users/userForm.do",
-			data:{ "formdata" : _jsonData}, //매개변수
+			type: "POST",
+			/* async: true, //true=비동기 */
+			url: "${ctxPath}/users/userinsert.do",
+			data:{ "formdata" : _jsonData }, //매개변수
 			success : function(data,textStatus){
 				
-				 var jsonMessage = JSON.parse(data);
+				  var jsonMessage = JSON.parse(data);
 				
-				console.log(jsonMessage)
-				console.log(jsonMessage.code)
-				console.log(jsonMessage.message) 
+				console.log(jsonMessage) 
+				/* console.log(jsonMessage.code)
+				console.log(jsonMessage.message)  */
 				
 				
 			},

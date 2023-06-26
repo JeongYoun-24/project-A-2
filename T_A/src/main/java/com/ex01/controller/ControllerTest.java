@@ -45,7 +45,7 @@ public class ControllerTest extends HttpServlet {
 			
 			nextPage ="/project/join.jsp";
 			resp.sendRedirect(req.getContextPath()+ nextPage);
-		}else if (action.equals("/userForm.do")) { // 회원가입 데이터  
+		}else if (action.equals("/userinsert.do")) { // 회원가입 데이터  
 			
 			String formdate = req.getParameter("formdata");
 		
