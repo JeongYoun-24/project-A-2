@@ -1,0 +1,35 @@
+package com.ex01.dto;
+
+import java.time.LocalDate;
+
+
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+
+@Data
+@ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Manager_BoardDTO {
+
+	
+	private int m_board; // 공지번호
+	private String id;  // 관리자 아이디
+	private String title;  // 글제목 
+	private String content; // 글 내용
+	private String img_name ; // 이미지 파일 
+	private String name; 	// 관리자 이름
+	private LocalDate writedate; // 작성일 
+	private int hitCount; 	// 조회수
+	
+	
+	
+	
+}
