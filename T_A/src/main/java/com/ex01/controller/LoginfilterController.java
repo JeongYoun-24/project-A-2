@@ -112,7 +112,7 @@ public class LoginfilterController extends HttpServlet {
 						
 						isOk = 1;
 						HttpSession session = req.getSession();
-						session.setAttribute("loginInfo", member.getUser_name());
+						session.setAttribute("loginInfo", member.getUser_id());
 						
 					}else {
 						isOk=2;

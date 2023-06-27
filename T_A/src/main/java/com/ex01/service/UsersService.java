@@ -13,7 +13,9 @@ import com.ex01.dao.MapperUtil;
 import com.ex01.dao.UsersDAO;
 
 import com.ex01.domain.UsersVO;
+import com.ex01.domain.UsersVO2;
 import com.ex01.dto.UsersDTO;
+import com.ex01.dto.UsersDTO2;
 import com.ex01.util.ConnectionUtil;
 import com.mapper.mybatis.UsersMapper;
 
@@ -40,23 +42,41 @@ public enum UsersService {
 	
 	
 	// 로그인 서비스 
-	public UsersDTO login(String user_id)  {
-		UsersVO vo = usersMapper.login(user_id);
-		UsersDTO dto = modelMapper.map(vo, UsersDTO.class);
+		public UsersDTO login(String user_id)  {
+			UsersVO vo = usersMapper.login(user_id);
+			UsersDTO dto = modelMapper.map(vo, UsersDTO.class);
 
-		return dto;
-			
+			return dto;
+				
 	}
-	// 회원 등록 
-	public int insert (UsersDTO dto) { 
-		UsersVO vo = modelMapper.map(dto, UsersVO.class);
-		int r = usersMapper.userinsert(vo);
+		// 로그인 서비스 
+		public UsersDTO2 login2(String user_id)  {
+			UsersVO2 vo = usersMapper.SelectOne(user_id);
+			UsersDTO2 dto = modelMapper.map(vo, UsersDTO2.class);
+
+			return dto;
+				
+		}	
+		
+		
+	// 회원 등록 2
+	public int insert (UsersDTO2 dto) { 
+		UsersVO2 vo = modelMapper.map(dto, UsersVO2.class);
+		int r = usersMapper.userinsert2(vo);
 		session.commit();
 		
 		
 		return r;
 	}
-	
+	// 회원 등록 2
+	public int insert2 (UsersDTO dto) { 
+		UsersVO vo = modelMapper.map(dto, UsersVO.class);
+		int r = usersMapper.userinsert(vo);
+		session.commit();
+			
+			
+		return r;
+	}
 	
 	// 회원 조회 
 	public void findList (String id ) {

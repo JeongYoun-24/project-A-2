@@ -18,10 +18,10 @@ public interface ProductMapper { // 상품 테이블
 
 	// 상품 등록 
 	String insert = """
-			insert into PRODUCT (product_code,CATEGORY,PRO_NAME,
-				PRO_INFO,PRO_PRICE,PRO_QTY,PRO_IMG)
-				VALUES (#{product_code},#{category},#{pro_name},
-				#{pro_info},#{pro_price},#{pro_qty},#{pro_img});
+			insert into PRODUCT (product_code,category,pro_name
+				,pro.info,pro_price,pro_qty,pro_img)
+				VALUES (#{product_code},#{category},#{pro_name}
+				,#{pro_info},#{pro_price},#{pro_qty},#{pro_img});
 			""";
 	String insert2 = """
 			insert into PRODUCT (PRODUCT_CODE,CATEGORY,PRO_NAME,
@@ -30,8 +30,8 @@ public interface ProductMapper { // 상품 테이블
 				?,?,?,?);
 			""";
 	
-	@Insert(insert2)
-	@Options(useGeneratedKeys = true,keyProperty = "#{product_code}")
+	@Insert(insert)
+	@Options(useGeneratedKeys = true,keyProperty = "product_code")
 	public int productInsert(ProductVO vo);
 	
 	
@@ -46,7 +46,7 @@ public interface ProductMapper { // 상품 테이블
 			update product set category =#{category}, pro_name=#{pro_name} , 
 			pro_info =#{pro_info}, pro_price=#{pro_price} , 
 			pro_qty=#{pro_qty}, pro_img=#{pro_img} 
-			 where product_code =product_code}"
+			 where product_code =#{product_code}"
 			""";
 	
 	@Update(update)

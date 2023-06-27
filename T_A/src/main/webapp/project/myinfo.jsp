@@ -25,6 +25,12 @@
         text-decoration: none;
         color: #111;
     }
+   .add{
+   width: ;
+   height: 20px;
+   
+   }
+   
    
 </style>
  <div class="swiper-slide pop2 show" data-time-start="2023/02/27 00:00:00" data-time-end="2025/03/01 23:59:59" style="background: #000000 ;">
@@ -121,7 +127,7 @@
     </div>
         <div class="container w-100">
             <form action="#" method="post" class="" >
-                </div>
+                
                 <div class=" form">
                 <table class="table table-bordered">
                     
@@ -133,7 +139,7 @@
                         </th>
                         
                         <td>
-                            <input type="user_id" name="user_id" id="user_id" value="">
+                            <input type="user_id" name="user_id" id="user_id" value="${users.user_id}" disabled="disabled">
                             <span>(영문소문자/숫자,4~16자)</span>
                         </td>
                     </tr>
@@ -165,7 +171,7 @@
                 <img src="https://img.echosting.cafe24.com/skin/base/common/ico_required.gif">
             </th>
             <td>
-                <input type="user_name" name="user_name" id="user_name"value="">
+                <input type="user_name" name="user_name" id="user_name"value="${users.user_name}">
             </td>
 
             <tr>
@@ -174,19 +180,29 @@
                     <img src="https://img.echosting.cafe24.com/skin/base/common/ico_required.gif">
                 </th>
                 <td>
-                    <input type="adress" name="adress1" id="user_addr1"placeholder="readonly"label="주소">  <img src="https://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_zipcode.gif"><br>  
-                    <input type="adress"  class="mt-2"name="adress2" id="user_addr2" value="">    
+                    <!-- <input type="adress" name="adress1" id="sample4_postcode" placeholder="우편번호"label="주소">  <img src="https://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_zipcode.gif"><br>  
+                    <input  class="btn btn-outline-dark mb-1" style="height: 50px;" type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
+                    <input type="adress"  class="mt-2"name="adress2" id="sample4_roadAddress" placeholder="도로명주소" value="">    
                    기본주소<br>
-                    <input type="adress" class="mt-2" name="adress3" id="user_addr3" value="">나머지주소(선택가능)
+                    <input type="adress" class="mt-2" name="adress3" id="sample4_detailAddress" value="">나머지주소(선택가능) -->
+               		<input name="zip_code"  class="add" style="height: 35px; width: 380px;" type="adress" id="sample4_postcode" placeholder="우편번호">
+                    <input  class="btn btn-outline-dark mb-1" style="height: 35px;" type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+                    <input name="address"  class="mt-2 add" style="height: 35px; width: 510px;" type="adress" id="sample4_roadAddress" placeholder="도로명주소"><br>
+                    <input name="DetAddress"  class="mt-2 add"  style="height: 35px; width:510px ; " type="adress" id="sample4_detailAddress" placeholder="상세주소">
+               
+               
                 </td>
         </tr>
+                        
+        
+        
         <tr>
             <th scope="row">
                 <span class="m-2">휴대전화</span>
             <img src="https://img.echosting.cafe24.com/skin/base/common/ico_required.gif">
         </th>
         <td>
-            <select id="mobile1" name="mobile1" fw-filter="isNumber" fw-label="휴대전화">
+            <select id=phone1 name="phone1" fw-filter="isNumber" fw-label="휴대전화">
                 <option value="010">010</option>
                 <option value="011">011</option>
                 <option value="016">016</option>
@@ -196,8 +212,8 @@
 
             </select> -
 
-            <input type="text" name="user_mobile2" id="user_mobile2" fw-filter="isNumber" maxlength="4" value type="text"> -
-            <input type="text" name="user_mobile3" id="user_mobile3" fw-filter="isNumber" maxlength="4" value type="text" ><br>
+            <input type="text" name="phone2" id="phone2" fw-filter="isNumber" maxlength="4" value type="text"> -
+            <input type="text" name="phone3" id="phone3" fw-filter="isNumber" maxlength="4" value type="text" ><br>
             <input class="form-check-input" type="radio" name="radio1" id="radio1">수신함
          
             <input class="form-check-input" type="radio" name="radio2" id="radio2">수신안함
@@ -213,7 +229,7 @@
                 
             </th>
             <td>
-                <input type="user_email" name="user_email" id="user_email"value=""><br>
+                <input type="user_email" name="user_email" id="user_email"value="${users.user_email}"><br>
                 <div class="email_check">
                 <input class="form-check-input" type="radio" name="radio1" id="radio3">수신함
             
@@ -245,18 +261,19 @@
                         </th>
                         
                         <td>
-                            <input type="date" name="user_br" id="user_br" value="">
-                                    <span>(영문소문자/숫자,4~16자)</span>
+                            <input type="text" name="birthdate" id="birthdate" fw-filter="isNumber" maxlength="8" value="">
+                                    <span>(예)19990101)</span>
                                 </td>
                             </tr>
                       </tbody>
                    </table>
                   </div>
+               </form>   
               </div>
               <div class="row">
               <div class="d-flex justify-content-center">
                 <div class="col-3">
-                <button type= "button" class="btn btn-outline-dark w-50" value="onClick">회원정보수정</button>
+                <button type= "button" id="formbtn" class="btn btn-outline-dark w-50" value="onClick">회원정보수정</button>
             </div>
                 <div class="col-3">
             <button type= "button" class="btn btn-outline-secondary w-50" value="onClick">취소</button>
@@ -313,4 +330,150 @@
 
     
 </body>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" 
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" 
+    crossorigin="anonymous"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+
+    
+    
+<script type="text/javascript">
+function sample4_execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var roadAddr = data.roadAddress; // 도로명 주소 변수
+            var extraRoadAddr = ''; // 참고 항목 변수
+
+            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                extraRoadAddr += data.bname;
+            }
+            // 건물명이 있고, 공동주택일 경우 추가한다.
+            if(data.buildingName !== '' && data.apartment === 'Y'){
+               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+            }
+            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+            if(extraRoadAddr !== ''){
+                extraRoadAddr = ' (' + extraRoadAddr + ')';
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('sample4_postcode').value = data.zonecode;
+            document.getElementById("sample4_roadAddress").value = roadAddr;
+            document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+            
+            // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+            if(roadAddr !== ''){
+                document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+            } else {
+                document.getElementById("sample4_extraAddress").value = '';
+            }
+
+            var guideTextBox = document.getElementById("guide");
+            // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+            if(data.autoRoadAddress) {
+                var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                guideTextBox.style.display = 'block';
+
+            } else if(data.autoJibunAddress) {
+                var expJibunAddr = data.autoJibunAddress;
+                guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                guideTextBox.style.display = 'block';
+            } else {
+                guideTextBox.innerHTML = '';
+                guideTextBox.style.display = 'none';
+            }
+        }
+    }).open();
+}
+
+$(function () {
+	var user_id;
+	var user_pwd;
+	var user_name;
+	var user_email;
+	var phone1;
+	var phone2;
+	var phone3;
+	var phone ;
+	var p = "-";
+	var sample4_roadAddress ; // 도로명 주소
+	var sample4_detailAddress;  // 상세주소 
+	var p2 = " ";
+	var address;  // 주소 합친거
+	var birthdate ; // 생년월일
+	
+	$('#formbtn').click(function(e) {
+		e.preventDefault();
+		user_id = $('#user_id').val();
+		user_pwd = $('#user_pwd').val();
+		user_name = $('#user_name').val();
+		user_email = $('#user_email').val();
+		phone = $('#phone1').val()+p+$('#phone2').val()+p+$('#phone3').val();
+		address = $('#sample4_roadAddress').val()+p2+$('#sample4_detailAddress').val()
+		birthdate = $('#birthdate').val()
+		console.log(user_id)
+		console.log(user_pwd)
+		console.log(user_name)
+		console.log(user_email)
+		console.log(phone)
+		console.log(address)
+		console.log(birthdate)
+		
+		 $.ajax({  //페이지가 아닌 데이터만 보내기
+		type: "POST",
+		 async: true, //true=비동기 
+		url: "${ctxPath}/users/U_update.do",
+		data:{user_id,user_pwd ,user_name,user_email,phone,address,birthdate}, //매개변수
+		success : function(data,textStatus){
+			 var jsonMessage = data;
+			
+			
+			$('#id_message').text('');
+			
+			
+			if(jsonMessage.code === 'id_fail'){
+				alert('수정 실패');
+	//			$('#id_message').text(jsonMessage.message);
+			
+			}else{
+				alert('수정 성공');
+				location.href="${ctxPath}/main.do"
+				 
+			} 
+			
+			
+		},
+		error: function(){
+			
+		},
+		complete : function(){
+			
+		}
+		
+		
+	}) //end  
+		
+		
+		
+		
+		
+		
+	})
+	
+	
+})
+
+
+
+</script>
+
+
 </html>

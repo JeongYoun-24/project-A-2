@@ -81,7 +81,7 @@ public class ProductMapperTest {
 		try {
 			ProductVO vo = ProductVO.builder()
 					
-					.product_code(5)
+					.product_code(3)
 					.category(2)
 					.pro_name("아무튼 향수임")
 					.pro_info("디올")

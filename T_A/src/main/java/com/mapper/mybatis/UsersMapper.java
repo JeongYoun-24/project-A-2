@@ -15,6 +15,7 @@ import org.apache.ibatis.annotations.Update;
 
 
 import com.ex01.domain.UsersVO;
+import com.ex01.domain.UsersVO2;
 import com.ex01.dto.UsersDTO;
 
 @Mapper
@@ -29,17 +30,25 @@ public interface UsersMapper {
 	
 	// 회원가입 SQL 
 	String insertform = """
-			insert into users (user_id, user_pwd, user_name, user_email, address , phone) 
-			values(#{user_id},#{user_pwd},#{user_name},#{user_email},#{address},#{phone})
+			insert into users (user_id, user_pwd, user_name, user_email , phone) 
+			values(#{user_id},#{user_pwd},#{user_name},#{user_email},#{phone})
 			""";
 	//매개변수와 #{} 의 값이 일치해야함
 	@Insert(insertform)
 	@Options(useGeneratedKeys = true,keyProperty = "user_id")
 	public int userinsert(UsersVO vo);
 	
+	
+	
+	// 회원가입  성공한 SQL 
+	@Insert("insert into users (user_id, user_pwd, user_name, user_email, phone)"
+			+ "values(#{user_id},#{user_pwd},#{user_name},#{user_email},#{phone})")
+	@Options(useGeneratedKeys = true,keyProperty = "user_id")
+	public int userinsert2(UsersVO2 vo);
+	
 	// 아이디 조회 SQL
 	@Select("select * from users where user_id = #{user_id}")
-	public UsersVO SelectOne(UsersVO dto);
+	public UsersVO2 SelectOne(String user_id);
 	
 	// 로그인  SQL
 	@Select("select * from users where user_id = #{user_id}")
@@ -47,7 +56,8 @@ public interface UsersMapper {
 	
 	
 	String update_sql = """
-			update users set user_pwd=#{user_pwd}, user_name=#{user_name}, user_email=#{user_email} 
+			update users set user_pwd=#{user_pwd}, user_name=#{user_name},
+			 user_email=#{user_email},address=#{address} ,phone =#{phone}, birthdate=#{birthdate}
 			where user_id = #{user_id}
 			""";
 	 // 수정 SQL

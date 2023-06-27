@@ -266,7 +266,7 @@ $(function(){
 			data:{ "logindata" : _jsonData}, //매개변수
 			success : function(data,textStatus){
 				
-				var jsonMessage = JSON.parse(data);
+			var jsonMessage = JSON.parse(data);
 				
 				console.log(jsonMessage)
 				console.log(jsonMessage.code)

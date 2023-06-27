@@ -100,10 +100,11 @@
    
     <div class="join">
         <div class="container w-50">
-            <form action="${ctxPath}/users/userForm" method="post" class="" >
+            <form action="${ctxPath}/users/userinsert.do" method="post" class="" >
                 <div class=" row justify-content-start ">
                 <h3  class="row mt-1 w-75 m-3 p-2">JOIN</h3>
                 <hr>
+                <div id="id_message"></div>
                 </div>
                 <table class="table">
                     <tbody>
@@ -120,10 +121,10 @@
                                   <label for="user_id" class="col-form-label"></label>
                                 </div>
                                 <div class="col-auto">
-                                  <input type="user_id" id="user_id" class="form-control" aria-labelledby="">
+                                  <input type="user_id" id="user_id" value="${users.user_id}" class="form-control" aria-labelledby="">
                                 </div>
                                 <div class="col-auto">
-                                  <span id="user_id" class="form-text">(영문 대,소문자/숫자,4~16자)
+                                  <span id="id" class="form-text">(영문 대,소문자/숫자,4~16자)
                                    
                                   </span>
                                   
@@ -292,12 +293,11 @@
                         <div class="d-flex justify-content-center">
                         <button type="submit" id="formbtn" class="btn btn-outline-dark w-50" value="onClick">가입하기</button>
                     </div>
+				</form>
+    		</div>
 
-    </div>
-</form>
-
-
-        <!--주소-->
+         </div>     
+               <!--주소-->
         <div class="and bg-light">
             <div class="container ">
             <div class="content ">
@@ -345,7 +345,7 @@
                 </div>
                 </div>
             </div>
-            </div>     
+               
                 
     </body>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" 
@@ -376,21 +376,27 @@
 			console.log(user_name)
 			console.log(user_email)
 			console.log(phone)
-			var _jsonData	={"user_id " :user_id ,"user_pwd":user_pwd , "user_name" : user_name,"user_email ": user_email,"phone" :phone};
-			console.log(_jsonData)	
 			
 			$.ajax({  //페이지가 아닌 데이터만 보내기
 			type: "POST",
-			/* async: true, //true=비동기 */
+			 async: true, //true=비동기 
 			url: "${ctxPath}/users/userinsert.do",
-			data:{ "formdata" : _jsonData }, //매개변수
+			data:{user_id,user_pwd ,user_name,user_email,phone}, //매개변수
 			success : function(data,textStatus){
+				var jsonMessage = data;
 				
-				  var jsonMessage = JSON.parse(data);
 				
-				console.log(jsonMessage) 
-				/* console.log(jsonMessage.code)
-				console.log(jsonMessage.message)  */
+				$('#id_message').text('');
+				
+				
+				if(jsonMessage.code === 'id_fail'){
+					$('#id_message').text(jsonMessage.message);
+				
+				}else{
+					alert('회원가입 성공');
+					location.href="${ctxPath}/users/loginPage.do"
+					 
+				}
 				
 				
 			},
@@ -410,7 +416,7 @@
 			
 			
 		})
-
+		
 		
 	})
     
