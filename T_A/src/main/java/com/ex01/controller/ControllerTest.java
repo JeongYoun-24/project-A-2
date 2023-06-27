@@ -153,9 +153,13 @@ public class ControllerTest extends HttpServlet {
 			resp.sendRedirect(req.getContextPath() + nextPage);
 
 		} else if (action.equals("/cart.do")) { // 장바구니 페이지
-
 			
 			nextPage = "/project/cart.jsp";
+			resp.sendRedirect(req.getContextPath() + nextPage);
+		} else if (action.equals("/order.do")) { // 상품 페이지 	
+			
+			
+			nextPage = "/project/menu.jsp";
 			resp.sendRedirect(req.getContextPath() + nextPage);
 //			${ctxPath}/users/cart.do
 		} else {

@@ -173,7 +173,7 @@
                             49,000원
                           </p>
                           <div class="d-grid gap-2">
-                            <a href="#" class=" btn btn-outline-secondary btn-lg">Add To Cart</a>
+                            <a href="${ctxPath}/users/order.do" class=" btn btn-outline-secondary btn-lg">Add To Cart</a>
                             </div>
                         </div>
                       </div>

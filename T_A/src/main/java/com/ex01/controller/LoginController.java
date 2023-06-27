@@ -16,7 +16,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.ex01.domain.ManagerVO;
+import com.ex01.dto.ManagerDTO;
 import com.ex01.dto.UsersDTO;
+import com.ex01.service.ManagerService;
 import com.ex01.service.UsersService;
 
 import lombok.extern.log4j.Log4j2;
@@ -52,12 +55,12 @@ public class LoginController extends HttpServlet {
 			
 			
 			//db에 회원여부 확인 후 로그인 상태로 전환
-			UsersService service = UsersService.INSTANCE;
+			ManagerService service = ManagerService.INSTANCE;
 			
 			req.setCharacterEncoding("utf-8");
-			String user_id = req.getParameter("id");
-			String user_pwd = req.getParameter("pwd");
-			String login_auto = req.getParameter("auto");
+			String id = req.getParameter("id");
+			String pwd = req.getParameter("pwd");
+//			String login_auto = req.getParameter("auto");
 			
 			//클라이언트에서 json 구조 형식 데이터를 ajax 로 보냈을 경우
 			String logindata = req.getParameter("logindata");
@@ -70,12 +73,12 @@ public class LoginController extends HttpServlet {
 				System.out.println("2"+jsonObject);
 				System.out.println("3"+jsonObject.get("id"));
 				
-				user_id = (String) jsonObject.get("id");
-				user_pwd = (String) jsonObject.get("pwd");
-				login_auto = (String) jsonObject.get("auto");
+				id = (String) jsonObject.get("id");
+				pwd = (String) jsonObject.get("pwd");
+//				login_auto = (String) jsonObject.get("auto");
 				
-				System.out.println(user_id);
-				System.out.println(user_pwd);
+				System.out.println(id);
+				System.out.println(pwd);
 				
 				
 				
@@ -86,25 +89,25 @@ public class LoginController extends HttpServlet {
 
 			
 			
-			UsersDTO member = null;
-			log.info("login_auto => "+login_auto);
+			ManagerDTO member = null;
+//			log.info("login_auto => "+login_auto);
 
 			//자동 로그인 체크 on과 null의 값 
-			boolean rememberMe = login_auto != null && login_auto.equals("on");
+//			boolean rememberMe = login_auto != null && login_auto.equals("on");
 			int isOk =0;
 			try {
 				
-				member = service.login(user_id);
+				member = service.login(id);
 				
-				String memberId = member.getUser_id();
-				String memberPwd = member.getUser_pwd();
-				if(memberId.equals(user_id)) {
+				String memberId = member.getId();
+				String memberPwd = member.getPwd();
+				if(memberId.equals(id)) {
 					
-					if(memberPwd.equals(user_pwd)) {
+					if(memberPwd.equals(pwd)) {
 						
 						isOk = 1;
 						HttpSession session = req.getSession();
-						session.setAttribute("loginInfo", member.getUser_name());
+						session.setAttribute("loginInfo", member.getName());
 						
 					}else {
 						isOk=2;

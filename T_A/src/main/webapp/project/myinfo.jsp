@@ -39,7 +39,7 @@
     <div >
         <nav class=" navbar navbar-expand-lg bg-body-tertiary">
             <div class="alert">
-            <img src="https://theforment.com/web/upload/images/logo_header_main.svg"  href="shoppingmall.html">
+            <a href="${ctxPath}/main.do"><img src="https://theforment.com/web/upload/images/logo_header_main.svg"  href="shoppingmall.html"></a>
             </div>
             <div class="container-fluid">
               <a class="navbar-brand" href="#"></a>
