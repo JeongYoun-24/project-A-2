@@ -6,7 +6,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>shoppingmall</title>
+        <title>관리자 로그인페이지</title>
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -32,10 +32,6 @@
         <a href="#none" ><span style="color: #ffffff; "class="d-flex justify-content-center">신규회원 무료배송 + 1만원 쿠폰팩</span></a></div>
       
       
-      
-      
-      
-      
         <!--네비바-->
         <div class="main">
           <div>
@@ -56,7 +52,6 @@
                            전제품보기
                           </a>
                           <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="${ctxPath}/users/m_board.do">공지사항</a></li>
                             <li><a class="dropdown-item" href="#">PRDUCT</a></li>
                             <li><a class="dropdown-item" href="${ctxPath}/user/main.do">전체</a></li>
                             <li><hr class="dropdown-divider"></li>
@@ -108,13 +103,13 @@
                 </div>
                     <div class=" row justify-content-around ">
                     <div class="row mt-1 w-75">
-                        <input type="text" name="user_id" id="user_id" class="form-control m-1" placeholder="아이디">
+                        <input type="text" name="id" id="id" class="form-control m-1" placeholder="아이디">
                     </div>
                     <div id="id_message"></div>
                 </div>
                     <div class=" row justify-content-around">
                     <div class="row mt-1 w-75 ">
-                        <input type="password" name="user_pwd" id="user_pwd" class="form-control m-1" placeholder="비밀번호">
+                        <input type="password" name="pwd" id="pwd" class="form-control m-1" placeholder="비밀번호">
                     </div>
                   	<div id="pw_message"></div>
                 </div>
@@ -122,25 +117,8 @@
                     <div class="row mt-1 w-75"> 
                         <input type="submit" id="btnLogin" value="로그인" class="btn btn-outline-dark m-1">
                     </div>
-                    <div class="row  mt-1 w-75"> 
-                        <a type="reset" id="formbtn"  class="btn btn-dark m-1"> 회원가입</a>
-						<input type="hidden" value="${ctxPath}" id="path">
-                    </div>
-                    <div class="mt-1 w-75"> 
-                        <div class="row">
-                            <div class ="col-6 align-content-end"> 
-                                  <input class="form-check-input" type="checkbox" 
-                                            name="auto" value="off" id="auto">
-                                  <label class="form-check-label" for="chk" m-1 form-control>아이디저장</label>
-                                 
-                              </div>
-                            <!--   <div class ="col-6 align-content-around">
-                                  <input class="form-check-input" type="checkbox" 
-                                            name="chk2" value="로그인유지" id="chk2">
-                                  <label class="form-check-label" for="chk2" m-1 form-control>로그인유지</label>
-                                </div> -->
-                             
-                            </div>
+                   
+                    
                           </div>
                           <div class="mt-1 w-75">
                           <div class="row">

@@ -40,7 +40,7 @@ public class ControllerTest extends HttpServlet {
 		String action = req.getPathInfo();
 		String nextPage = null;
 
-		if (action == null || action.equals("/main.do")) {// 메인 페이지
+		if (action == null || action.equals("/main2.do")) {// 메인 페이지
 
 		} else if (action.equals("/loginPage.do")) { // 로그인 페이지
 
@@ -156,12 +156,17 @@ public class ControllerTest extends HttpServlet {
 			
 			nextPage = "/project/cart.jsp";
 			resp.sendRedirect(req.getContextPath() + nextPage);
+			
 		} else if (action.equals("/order.do")) { // 상품 페이지 	
 			
 			
-			nextPage = "/project/menu.jsp";
+			nextPage = "/project/menule.jsp";
 			resp.sendRedirect(req.getContextPath() + nextPage);
 //			${ctxPath}/users/cart.do
+		} else if (action.equals("/managerlogin.do")) { // 관리자 로그인 페이지 
+			
+			nextPage = "/project/managerlogin.jsp";
+			resp.sendRedirect(req.getContextPath() + nextPage);
 		} else {
 
 		}

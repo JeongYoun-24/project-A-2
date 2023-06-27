@@ -54,6 +54,7 @@
                              전제품보기
                             </a>
                             <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="${ctxPath}/users/m_board.do">공지사항</a></li>
                               <li><a class="dropdown-item" href="#">PRDUCT</a></li>
                               <li><a class="dropdown-item" href="#">전체</a></li>
                               <li><hr class="dropdown-divider"></li>
