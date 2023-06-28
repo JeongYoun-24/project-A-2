@@ -28,6 +28,8 @@
             }
            
         </style>
+       </head>
+       <body> 
         <!--배너-->
          <div class="swiper-slide pop2 show" data-time-start="2023/02/27 00:00:00" data-time-end="2025/03/01 23:59:59" style="background: #000000 ;">
           <a href="#none" ><span style="color: #ffffff; "class="d-flex justify-content-center">신규회원 무료배송 + 1만원 쿠폰팩</span></a></div>
@@ -57,6 +59,7 @@
                               <li><a class="dropdown-item" href="#">전체</a></li>
                               <li><hr class="dropdown-divider"></li>
                               <li><a class="dropdown-item" href="#">베스트</a></li>
+                              <li><a class="dropdown-item" href="${ctxPath}/users/managerlogin.do">관리자 로그인</a></li>
                             </ul>
                           </li>
                           <li class="nav-item">
@@ -71,6 +74,11 @@
                         </ul>
                       </div>
                       <div class="col-3">
+                     <c:if test="${manager != null}">
+                      	${manager} 님 방갑습니다.
+                      <a href="${ctxPath}/order/logout.do" class="col-3 mx-4" >로그아웃</a>
+                      </c:if> 
+                      
                       
                        <c:if test="${loginInfo!=null }">
                        <div class="row">
@@ -126,7 +134,7 @@
                 
                 
                     <!--캐러셀 슬라이드-->
-                    <body> 
+                   
               <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                   <div class="carousel-item active">

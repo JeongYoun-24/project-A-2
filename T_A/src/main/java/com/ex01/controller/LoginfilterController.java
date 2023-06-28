@@ -17,7 +17,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.ex01.dto.ManagerDTO;
 import com.ex01.dto.UsersDTO;
+import com.ex01.service.ManagerService;
 import com.ex01.service.UsersService;
 
 
@@ -60,6 +62,7 @@ public class LoginfilterController extends HttpServlet {
 
 			//db에 회원여부 확인 후 로그인 상태로 전환
 			UsersService service = UsersService.INSTANCE;
+			ManagerService m_serverce = ManagerService.INSTANCE;
 			
 			req.setCharacterEncoding("utf-8");
 			String user_id = req.getParameter("user_id");
@@ -93,19 +96,24 @@ public class LoginfilterController extends HttpServlet {
 			
 			
 			UsersDTO member = null;
+			
 			log.info("login_auto => "+login_auto);
 
 			//자동 로그인 체크 on과 null의 값 
 			boolean rememberMe = login_auto != null && login_auto.equals("on");
 			int isOk =0;
 			try {
-				
 				member = service.login(user_id);
 				
+
 				String memberId = member.getUser_id();
 				String memberPwd = member.getUser_pwd();
 				
 				System.out.println(member);
+				
+				
+				
+				
 				if(memberId.equals(user_id)) {
 					
 					if(memberPwd.equals(user_pwd)) {

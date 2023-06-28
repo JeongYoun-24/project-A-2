@@ -33,10 +33,14 @@
    
    
 </style>
+</head>
+<body>
+<header>
  <div class="swiper-slide pop2 show" data-time-start="2023/02/27 00:00:00" data-time-end="2025/03/01 23:59:59" style="background: #000000 ;">
   <a href="#none" ><span style="color: #ffffff; "class="d-flex justify-content-center">신규회원 무료배송 + 1만원 쿠폰팩</span></a></div>
-<div class="main">
-    <div >
+
+	<div class="navMain">
+		<div >
         <nav class=" navbar navbar-expand-lg bg-body-tertiary">
             <div class="alert">
             <a href="${ctxPath}/main.do"><img src="https://theforment.com/web/upload/images/logo_header_main.svg"  href="shoppingmall.html"></a>
@@ -59,6 +63,7 @@
                       <li><a class="dropdown-item" href="#">전체</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="dropdown-item" href="#">베스트</a></li>
+                       <li><a class="dropdown-item" href="${ctxPath}/users/managerlogin.do">관리자 로그인</a></li>
                     </ul>
                   </li>
                   <li class="nav-item">
@@ -76,6 +81,7 @@
                   </li>
                 </ul>
               </div>
+              </div>
               <div class="col-3">
                    <ul class="navbar-nav login ">
                     <li class="nav-item">
@@ -88,20 +94,28 @@
                       <a class="nav-link " href="#">ORDER</a>
                     </li>
                     <li class="nav-item ">
-                      <a class="nav-link " href="#">CART</a>
+                      <a class="nav-link " href="${ctxPath}/users/cart.do">CART</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link " href="#">MYPAGE</a>
+                        <a class="nav-link " href="${ctxPath}/users/mypage.do">MYPAGE</a>
                       </li>
                     <li class="nav-item">
                       <a class="nav-link m-1" href="#"><i class="bi bi-search"></i></a>
                     </li>
                    </ul>
                 </div>
-              </div>
+              
             </div>
           </nav>
-            </div>
+        </div>
+
+
+	</div>
+
+</header>
+
+
+  
         
             <div class="main">
                 <div class="container">
@@ -273,11 +287,18 @@
               </div>
               <div class="row">
               <div class="d-flex justify-content-center">
+               <div class="col-3">
+               
+            </div>
                 <div class="col-3">
                 <button type= "button" id="formbtn" class="btn btn-outline-dark w-50" value="onClick">회원정보수정</button>
             </div>
                 <div class="col-3">
             <button type= "button" class="btn btn-outline-secondary w-50" value="onClick">취소</button>
+        </div>
+        
+         <div class="col-3">
+            <button type= "button" id="deletebtn" class="btn btn-outline-secondary w-50" value="onClick">회원탈퇴</button>
         </div>
         </div>   
     
@@ -335,7 +356,7 @@
     integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" 
     crossorigin="anonymous"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
     
     
@@ -396,6 +417,14 @@ function sample4_execDaumPostcode() {
 }
 
 $(function () {
+	$('#deletebtn').click(function() {
+		var user_id;
+		user_id = $('#user_id').val()
+		
+		location.href="${ctxPath}/users/U_delete.do?user_id=${users.user_id}"
+	})
+	
+	
 	var user_id;
 	var user_pwd;
 	var user_name;

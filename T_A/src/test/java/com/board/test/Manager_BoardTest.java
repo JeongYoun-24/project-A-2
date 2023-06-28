@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.After;
-
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -45,7 +45,7 @@ public class Manager_BoardTest {
 		userMapper = session.getMapper(UsersMapper.class);
 		
 	}
-	@After
+	@AfterEach
 	public void close() {
 		session.close();
 	}
@@ -79,7 +79,7 @@ public class Manager_BoardTest {
 		
 		Manager_BoardVO vo = Manager_BoardVO.builder()
 				.m_board(4)
-				.id("dobi")
+				.id("dobi1")
 //				.title("테스트4")
 //				.content("테스트 내용4")
 //				.img_name("jss123")
@@ -91,7 +91,30 @@ public class Manager_BoardTest {
 			System.out.println(result);
 	}
 	
-	
+	@Test
+	public void testboard() {
+		SqlSessionFactory factor = ConnectionUtil.INSTANCE.getSqlSessionFactorty();
+		SqlSession session = factor.openSession();
+		
+		memberMapper = session.getMapper(ManagerMapper.class);
+		try {
+			Manager_BoardVO vo = Manager_BoardVO.builder()
+					.m_board(memberMapper.getmanager_board())
+					.id("dobi1")
+					.title("테스트4")				
+					.content("테스트 내용4")
+					.img_name("jss123")
+					.name("관리자1")
+					.build();
+			System.out.println(vo);
+				int result =memberMapper.insertboard2(vo);
+			
+				System.out.println(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 	
 	@Test
@@ -102,7 +125,7 @@ public class Manager_BoardTest {
 			
 			memberMapper = session.getMapper(ManagerMapper.class);
 			
-			List<Manager_BoardVO> memberVO = memberMapper.Manager_Board1();
+			List<Manager_BoardVO> memberVO = memberMapper.boardList();
 			System.out.println(memberVO);
 			
 			

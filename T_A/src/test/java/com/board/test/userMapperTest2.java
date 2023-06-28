@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.After;
-
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -15,6 +15,7 @@ import com.ex01.dao.MapperUtil;
 import com.ex01.domain.ManagerVO;
 import com.ex01.domain.Manager_BoardVO;
 import com.ex01.domain.UsersVO;
+import com.ex01.domain.UsersVO2;
 import com.ex01.util.ConnectionUtil;
 import com.mapper.mybatis.ManagerMapper;
 import com.mapper.mybatis.UsersMapper;
@@ -45,7 +46,7 @@ public class userMapperTest2 {
 		userMapper = session.getMapper(UsersMapper.class);
 		
 	}
-	@After
+	@AfterEach
 	public void close() {
 		session.close();
 	}
@@ -77,17 +78,16 @@ public class userMapperTest2 {
 		
 		userMapper = session.getMapper(UsersMapper.class);
 		
-		UsersVO vo = UsersVO.builder()
+		UsersVO2 vo = UsersVO2.builder()
 				
 				.user_id("fff")
 				.user_pwd("1234")
 				.user_name("프라잇")
 				.user_email("ddd@naver.com")
-				.address("집 주소 데이터 ")
 				.phone("010-4887-4444")
 				.build();
 		
-			int result =userMapper.userinsert(vo);
+			int result =userMapper.userinsert2(vo);
 		
 			System.out.println(result);
 			session.close();
@@ -155,7 +155,24 @@ public class userMapperTest2 {
 				
 		
 	}
-	
+	@Test
+	public void deleteuser() {
+		try {
+			SqlSessionFactory factor = ConnectionUtil.INSTANCE.getSqlSessionFactorty();
+			SqlSession session = factor.openSession();
+			
+			userMapper = session.getMapper(UsersMapper.class);
+			
+			
+			int memberVO = userMapper.userDelete("test24");
+			System.out.println(memberVO);
+			session.close();
+			
+			
+		} catch (Exception e) {e.printStackTrace();}
+				
+		
+	}
 		
 	
 	

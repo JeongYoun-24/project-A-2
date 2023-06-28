@@ -67,7 +67,7 @@ public interface UsersMapper {
 	// 삭제 SQL 
 	@Delete("delete from users where user_id = #{user_id}")
 	public int userDelete(@Param("user_id") String user_id);
-	
+//	public int userDelete(String user_id);
 	
 	
 	String checkId = """

@@ -11,12 +11,14 @@ import org.modelmapper.ModelMapper;
 import com.ex01.dao.ManagerDAO;
 import com.ex01.dao.MapperUtil;
 import com.ex01.dao.UsersDAO;
-
+import com.ex01.domain.Manager_BoardVO;
 import com.ex01.domain.UsersVO;
 import com.ex01.domain.UsersVO2;
+import com.ex01.dto.Manager_BoardDTO;
 import com.ex01.dto.UsersDTO;
 import com.ex01.dto.UsersDTO2;
 import com.ex01.util.ConnectionUtil;
+import com.mapper.mybatis.ManagerMapper;
 import com.mapper.mybatis.UsersMapper;
 
 
@@ -29,6 +31,7 @@ public enum UsersService {
 	private UsersDAO userDAO;
 	private ModelMapper modelMapper;
 	private UsersMapper usersMapper;
+	private ManagerMapper managerMaper;
 	private SqlSessionFactory factor;
 	private SqlSession session;
 	
@@ -38,6 +41,8 @@ public enum UsersService {
 		factor = ConnectionUtil.INSTANCE.getSqlSessionFactorty();
 		session = factor.openSession();
 		usersMapper = session.getMapper(UsersMapper.class);
+		managerMaper = session.getMapper(ManagerMapper.class);
+		
 	}
 	
 	
@@ -84,6 +89,20 @@ public enum UsersService {
 		UsersDTO dto = modelMapper.map(vo, UsersDTO.class);
 		
 	}
+	//공지사항 조회 
+	public List<Manager_BoardDTO> boardList (){
+		List<Manager_BoardVO> boardList = managerMaper.boardList();
+		
+		// vo-> dto
+		System.out.println(boardList);
+		List<Manager_BoardDTO> dtoList = boardList.stream()
+							.map(vo -> modelMapper.map(vo, Manager_BoardDTO.class))
+							.collect(Collectors.toList());
+		System.out.println(dtoList);
+		session.close();
+		return dtoList;
+		
+	}
 	
 	
 	// 회원 전체 조회 
@@ -112,13 +131,12 @@ public enum UsersService {
 		// 회원 삭제 
 		public int delete (String user_id) {
 			int r = 0;
-			
+			System.out.println(user_id);
 				r = usersMapper.userDelete(user_id);  //오류 지점
 				
 			session.commit();
 			System.out.println("delete 결과 : " + r);
 			return r;
-
 		}
 	
 	//id 중복 서비스 

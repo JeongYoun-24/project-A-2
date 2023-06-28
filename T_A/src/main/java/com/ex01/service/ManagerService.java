@@ -10,9 +10,13 @@ import org.modelmapper.ModelMapper;
 import com.ex01.dao.ManagerDAO;
 import com.ex01.dao.MapperUtil;
 import com.ex01.domain.ManagerVO;
+import com.ex01.domain.Manager_BoardVO;
 import com.ex01.domain.UsersVO;
+import com.ex01.domain.UsersVO2;
 import com.ex01.dto.ManagerDTO;
+import com.ex01.dto.Manager_BoardDTO;
 import com.ex01.dto.UsersDTO;
+import com.ex01.dto.UsersDTO2;
 import com.ex01.util.ConnectionUtil;
 import com.mapper.mybatis.ManagerMapper;
 import com.mapper.mybatis.UsersMapper;
@@ -40,8 +44,8 @@ public enum ManagerService {
 	// 관리자 아이디 일치 여부 서비스 
 		public ManagerDTO login(String id)  {
 			
-			ManagerVO vo = Mdao.getIdPwd(id);
-			
+			ManagerVO vo = managerMapper.login(id);
+			System.out.println(vo);
 			ManagerDTO orcDTO = modelMapper.map(vo, ManagerDTO.class);
 			
 			return orcDTO;
@@ -82,10 +86,28 @@ public enum ManagerService {
 			return r;
 
 		}
-	
+		// 공지사항 등록 서비스 
+		public int addboard(Manager_BoardDTO dto) {
+			Manager_BoardVO vo = modelMapper.map(dto, Manager_BoardVO.class);
+			System.out.println(vo);
+			int r =managerMapper.insertboard2(vo);
+			session.commit();
+//			session.close();
+			System.out.println(r);
+			return r;
+			
+		}
 		
-		
-	
+//		// 회원 등록 2
+//		public int insert (UsersDTO2 dto) { 
+//			UsersVO2 vo = modelMapper.map(dto, UsersVO2.class);
+//			int r = usersMapper.userinsert2(vo);
+//			session.commit();
+//			
+//			
+//			return r;
+//		}
+//		
 	
 	
 }

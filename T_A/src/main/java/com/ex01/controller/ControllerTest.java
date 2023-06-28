@@ -2,6 +2,7 @@ package com.ex01.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +14,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-
+import com.ex01.dto.Manager_BoardDTO;
 import com.ex01.dto.UsersDTO;
 import com.ex01.dto.UsersDTO2;
 import com.ex01.service.ManagerService;
@@ -93,11 +94,10 @@ public class ControllerTest extends HttpServlet {
 			nextPage = "/users/loginPage.do";
 			resp.sendRedirect(req.getContextPath() + nextPage);
 		} else if (action.equals("/myinfo.do")) { // 회원정보 수정 페이지
-			String user_id = req.getParameter("user_id")
-					;
-			System.out.println(user_id);
+			String user_id = req.getParameter("user_id");
+//			System.out.println(user_id);
 			UsersDTO2 dto = userService.login2(user_id);
-			System.out.println(dto);
+//			System.out.println(dto);
 			req.setAttribute("users", dto);
 			nextPage = "/project/myinfo.jsp";
 //			resp.sendRedirect(req.getContextPath() + nextPage);
@@ -145,12 +145,31 @@ public class ControllerTest extends HttpServlet {
 						pw.print(sendData);
 				  }
 			
-			nextPage = "/main.do";
+				  nextPage = "/main.do";
+					resp.sendRedirect(req.getContextPath() + nextPage);
+		} else if (action.equals("/U_delete.do")) { // 회원 정보 삭제
+			String user_id = req.getParameter("user_id");		
+			
+			System.out.println(user_id);
+			int result =0;
+			result = userService.delete(user_id);
+			System.out.println(result);
+			
+			nextPage = "/order/logout.do";
+//			nextPage = "/main.do";
 			resp.sendRedirect(req.getContextPath() + nextPage);
 		} else if (action.equals("/m_board.do")) { // 공지사항 페이지
-
-			nextPage = "/project/m_board.jsp";
-			resp.sendRedirect(req.getContextPath() + nextPage);
+			List<Manager_BoardDTO> memberList = userService.boardList();
+			System.out.println(memberList);
+			
+			req.setAttribute("doardList", memberList);
+			
+			nextPage ="/project/m_board.jsp";
+			req.getRequestDispatcher(nextPage).forward(req, resp);
+			
+			
+//			nextPage = "/project/m_board.jsp";
+//			resp.sendRedirect(req.getContextPath() + nextPage);
 
 		} else if (action.equals("/cart.do")) { // 장바구니 페이지
 			
@@ -163,6 +182,12 @@ public class ControllerTest extends HttpServlet {
 			nextPage = "/project/menule.jsp";
 			resp.sendRedirect(req.getContextPath() + nextPage);
 //			${ctxPath}/users/cart.do
+			
+		} else if (action.equals("/mypage.do")) { // 회원 정보 상세 페이지	
+			
+			
+			nextPage = "/project/menule.jsp";
+			resp.sendRedirect(req.getContextPath() + nextPage);
 		} else if (action.equals("/managerlogin.do")) { // 관리자 로그인 페이지 
 			
 			nextPage = "/project/managerlogin.jsp";

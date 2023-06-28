@@ -97,9 +97,9 @@
    
     <div class="logins p-3 m-3">
         <div class="container  d-flex justify-content-center w-100">
-            <form action="#" method="post" class="" >
+            <form action="${ctxPath}/order/loginID.do" method="post" class="" >
                 <div class=" row justify-content-around ">
-                <h3  class="row mt-1 w-75">LOGIN</h3>
+                <h3  class="row mt-1 w-75">관리자 로그인 </h3>
                 </div>
                     <div class=" row justify-content-around ">
                     <div class="row mt-1 w-75">
@@ -130,10 +130,12 @@
                               </div>
                             </div>
                         </div>
+                      
+                     </form> 
                       </div>
                    </div>
+                   
                 </div>
-            </form>
         </div>
       
 
@@ -220,7 +222,7 @@ $(function(){
 	var user_pw;
 	var auto;
 	
-	$('#btnLogin').click(function(e){
+	/* $('#btnLogin').click(function(e){
 		e.preventDefault();
 		$('#pw_message').show()
 		user_id = $('#user_id').val();
@@ -275,7 +277,7 @@ $(function(){
 		}) //end 
 		
 	});
-
+ */
  
 })
  
@@ -294,14 +296,14 @@ $(function(){
 		/* $('#pw_message').text(jsonMessage.message); */
 	});
 	
-	$('#auto').click(function(){
+	/* $('#auto').click(function(){
 		if ($(this).is(":checked")==true){
 			$(this).val('on')
 		} else {
 			$(this).val('off')
 		}
 		console.log($(this).val())
-	});
+	}); */
 
 })
 </script>

@@ -23,6 +23,7 @@
                               <li><a class="dropdown-item" href="#">전체</a></li>
                               <li><hr class="dropdown-divider"></li>
                               <li><a class="dropdown-item" href="#">베스트</a></li>
+                               <li><a class="dropdown-item" href="${ctxPath}/users/managerlogin.do">관리자 로그인</a></li>
                             </ul>
                           </li>
                           <li class="nav-item">

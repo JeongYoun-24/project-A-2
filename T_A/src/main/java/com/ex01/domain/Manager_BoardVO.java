@@ -1,5 +1,6 @@
 package com.ex01.domain;
 
+
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -24,8 +25,9 @@ public class Manager_BoardVO {
 	private String content; // 글 내용
 	private String img_name ; // 이미지 파일 
 	private String name; 	// 관리자 이름
-	private int hitcount; 	// 조회수
 	private Date writedate; // 작성일 
+	private int hitcount; 	// 조회수
+	
 	
 //	WRITEDATE
 //	

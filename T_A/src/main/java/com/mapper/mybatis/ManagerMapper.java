@@ -15,6 +15,7 @@ import com.ex01.domain.ManagerVO;
 import com.ex01.domain.Manager_BoardVO;
 
 import com.ex01.domain.UsersVO;
+import com.ex01.domain.UsersVO2;
 
 @Mapper
 public interface ManagerMapper { // 관리자 sql 
@@ -22,30 +23,38 @@ public interface ManagerMapper { // 관리자 sql
 	@Select("select *from m_manager") // 관리자 전체 조회
 	public List<ManagerVO> selectAll();
 	
-	@Select("select *from m_manager id = #{id}") // 관리자 전체 조회
+	@Select("select *from m_manager where id = #{id}") // 관리자 id 조회
 	public int selectfind(String id);
 	
+	@Select("select *from m_manager where id = #{id}") // 관리자 로그인 일치 조회
+	public ManagerVO login(String id);
+	
 	@Select("select *from manager_board ") // 공지사항 전체 조회
-	public List<Manager_BoardVO> Manager_Board1();
+	public List<Manager_BoardVO> boardList();
 	
 	@Select("SELECT * FROM manager_board WHERE m_board = #{m_board}  ") // 공지사항 상세 조회
 	public Manager_BoardVO boardfind(int m_board);
 	
-	@Select("select max( m_board)+1 from manager_board") // 공지사항 글 번호 생성
+	@Select("select max(m_board)+1 from manager_board") // 공지사항 글 번호 생성
 	public int getmanager_board();
 	
 	@Update("update manager_board set hitCount=hitCount+1 where m_board= #{m_board}") // 조회수 증가 업데이트 
 	public int hitboard();
 
 	String boardInsert = """
-			insert into manager_board (m_board,id,title,content,img_name,name,HITCOUNT) 
-				VALUES (#{m_board},#{id},#{title},#{content},#{img_name},#{name},1);
+			insert into manager_board (m_board,id,title,content,img_name,name) 
+				VALUES (#{m_board},#{id},#{title},#{content},#{img_name},#{name});
 			""";
 	
 	@Insert(boardInsert) // 공지사항 등록 
 	@Options(useGeneratedKeys = true,keyProperty = "m_board")
 	public int insertboard(Manager_BoardVO vo);
-	
+	// 회원가입  성공한 SQL 
+	@Insert("insert into manager_board (m_board, id, title, content, img_name,name)"
+			+ "values(#{m_board},#{id},#{title},#{content},#{img_name},#{name})")
+//	@Options(useGeneratedKeys = true,keyProperty = "m_board")
+	public int insertboard2(Manager_BoardVO vo);
+		
 	
 	@Update("update manager_board set title=#{title},content=#{content},img_name=#{img_name} WHERE m_board=#{m_board} ")
 	public int boardupdate(); // 공지사항 업데이트 
