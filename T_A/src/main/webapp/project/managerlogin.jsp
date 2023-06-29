@@ -37,7 +37,9 @@
           <div>
               <nav class=" navbar navbar-expand-lg bg-body-tertiary">
                   <div class="alert">
-                  <img src="https://theforment.com/web/upload/images/logo_header_main.svg"  href="shoppingmall.html">
+                  
+                  <a href="${ctxPath}/main.do }"><img src="https://theforment.com/web/upload/images/logo_header_main.svg"  href="shoppingmall.html"></a>
+                  
                   </div>
                   <div class="container-fluid">
                     <a class="navbar-brand" href="#"></a>
@@ -97,7 +99,7 @@
    
     <div class="logins p-3 m-3">
         <div class="container  d-flex justify-content-center w-100">
-            <form action="${ctxPath}/order/loginID.do" method="post" class="" >
+            <form action="${ctxPath}/managerlogin.do" method="post" class="" >
                 <div class=" row justify-content-around ">
                 <h3  class="row mt-1 w-75">관리자 로그인 </h3>
                 </div>

@@ -38,8 +38,8 @@ public interface ManagerMapper { // 관리자 sql
 	@Select("select max(m_board)+1 from manager_board") // 공지사항 글 번호 생성
 	public int getmanager_board();
 	
-	@Update("update manager_board set hitCount=hitCount+1 where m_board= #{m_board}") // 조회수 증가 업데이트 
-	public int hitboard();
+	@Update("update manager_board set hitcount=hitcount+1 where m_board= #{m_board}") // 조회수 증가 업데이트 
+	public int hitboard(int m_board);
 
 	String boardInsert = """
 			insert into manager_board (m_board,id,title,content,img_name,name) 
@@ -50,17 +50,17 @@ public interface ManagerMapper { // 관리자 sql
 	@Options(useGeneratedKeys = true,keyProperty = "m_board")
 	public int insertboard(Manager_BoardVO vo);
 	// 회원가입  성공한 SQL 
-	@Insert("insert into manager_board (m_board, id, title, content, img_name,name)"
-			+ "values(#{m_board},#{id},#{title},#{content},#{img_name},#{name})")
+	@Insert("insert into manager_board (m_board, id, title, content, img_name,name,hitcount)"
+			+ "values(#{m_board},#{id},#{title},#{content},#{img_name},#{name},#{hitcount})")
 //	@Options(useGeneratedKeys = true,keyProperty = "m_board")
 	public int insertboard2(Manager_BoardVO vo);
 		
 	
 	@Update("update manager_board set title=#{title},content=#{content},img_name=#{img_name} WHERE m_board=#{m_board} ")
-	public int boardupdate(); // 공지사항 업데이트 
+	public int boardupdate(Manager_BoardVO vo); // 공지사항 업데이트 
 	
 	@Delete("delete manager_board where m_board = #{m_board} ") // 공지사항 삭제 
-	public int deleteboard ();
+	public int deleteboard (int m_board);
 	
 	
 	// --------------------------------------

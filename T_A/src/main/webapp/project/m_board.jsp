@@ -137,7 +137,7 @@
                       </div>
                     </div>
                   </nav>
-                    </div>
+                </div>
    
         <!--제목부분-->
      <div class="main">
@@ -191,7 +191,7 @@
                   <tr>
                       <th scope="row">${loop.index+1}</th>
                       <td>
-                       <a href="#"  
+                       <a href="${ctxPath}/users/m_boardview.do?m_board=${mem.m_board}"  
                           class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">${mem.title}</a>
                       </td>
                        <td>${mem.name}>

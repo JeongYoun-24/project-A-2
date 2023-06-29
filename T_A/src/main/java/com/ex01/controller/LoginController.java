@@ -12,23 +12,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.modelmapper.ModelMapper;
 
 import com.ex01.domain.ManagerVO;
 import com.ex01.dto.ManagerDTO;
 import com.ex01.dto.UsersDTO;
 import com.ex01.service.ManagerService;
 import com.ex01.service.UsersService;
+import com.mapper.mybatis.ManagerMapper;
 
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-@WebServlet("/managerlogin")
+@WebServlet("/managerlogin.do")
 public class LoginController extends HttpServlet {
 	String nextPage = "";
+	private ManagerService managerService = ManagerService.INSTANCE;
+	private UsersService userService = UsersService.INSTANCE;
+	private ImgNameController imgname = ImgNameController.INSTENS;
 	
+	private ModelMapper modelMapper;
+	private ManagerMapper managerMapper;
+	private SqlSessionFactory factor;
+	private SqlSession session;
 		@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			log.info("/login Get.....");
@@ -38,7 +49,7 @@ public class LoginController extends HttpServlet {
 			String ctxPath = req.getContextPath();
 			System.out.println(ctxPath);
 			
-			nextPage = "/show/login.jsp";
+			nextPage = "/main.do";
 			
 			resp.sendRedirect(req.getContextPath()+nextPage);
 			
@@ -48,11 +59,53 @@ public class LoginController extends HttpServlet {
 		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			log.info("/login post.....");
 			
+			String id = req.getParameter("id");
+			String pwd = req.getParameter("pwd");
+			System.out.println(id);
+			System.out.println(pwd);
+		
+			ManagerDTO manager = new ManagerDTO();
 			
+			manager = managerService.login(id);
+
+			System.out.println(manager);
+			String memberId = manager.getId();
+			String memberPwd = manager.getPwd();
 			
+			System.out.println(memberId);
+			System.out.println(memberPwd);
 			
+			int isOK =0;
+			if(memberId.equals(id)) { // 아이디 일치
+				if(memberPwd.equals(pwd)) { // 비밀번호 일치
+					isOK =1;
+					HttpSession session =req.getSession();
+					session.setAttribute("manager", manager.getName());
+					session.setAttribute("managerid", manager.getId());
+					nextPage ="/main.do";
+					req.getRequestDispatcher(nextPage).forward(req, resp);
+					if(session.isNew()) {
+						session.setAttribute("manager", manager.getName());
+						session.setAttribute("managerid", manager.getId());
+					}else {
+						session.getAttribute("manager");
+					}
+					
+				}else {
+					isOK =2;
+					System.out.println("비밀번호 틀림");
+				}
+				
+			}else {
+				isOK =0;
+				System.out.println("아이디 틀림");
+			}
+			nextPage ="/managerlogin.do";
+			req.getRequestDispatcher(nextPage).forward(req, resp);
 			
+		
 			
+			/*
 			
 			//db에 회원여부 확인 후 로그인 상태로 전환
 			ManagerService service = ManagerService.INSTANCE;
@@ -198,7 +251,7 @@ public class LoginController extends HttpServlet {
 				
 				e.printStackTrace();
 			}
-
+			 	*/
 		}
 			
 	}

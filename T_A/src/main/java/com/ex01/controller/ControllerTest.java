@@ -14,12 +14,17 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+
+import com.ex01.dto.ManagerDTO;
 import com.ex01.dto.Manager_BoardDTO;
 import com.ex01.dto.UsersDTO;
 import com.ex01.dto.UsersDTO2;
 import com.ex01.service.ManagerService;
 import com.ex01.service.UsersService;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 @WebServlet("/users/*")
 public class ControllerTest extends HttpServlet {
 	private ManagerService managerService = ManagerService.INSTANCE;
@@ -161,16 +166,29 @@ public class ControllerTest extends HttpServlet {
 		} else if (action.equals("/m_board.do")) { // 공지사항 페이지
 			List<Manager_BoardDTO> memberList = userService.boardList();
 			System.out.println(memberList);
-			
 			req.setAttribute("doardList", memberList);
 			
 			nextPage ="/project/m_board.jsp";
 			req.getRequestDispatcher(nextPage).forward(req, resp);
 			
-			
 //			nextPage = "/project/m_board.jsp";
 //			resp.sendRedirect(req.getContextPath() + nextPage);
-
+		} else if (action.equals("/m_boardview.do")) { // 공지사항 상세 페이지
+			int m_board = Integer.parseInt(req.getParameter("m_board"));
+//			int m_board =req.getIntHeader("m_board");
+			System.out.println("m_board 값 :"+m_board);
+			
+			int dto = managerService.hitCount(m_board);
+			log.info(dto);
+			Manager_BoardDTO article = managerService.boardfind(m_board);
+			log.info("------------");
+			log.info(m_board);
+			req.setAttribute("boardfind", article);
+			
+			nextPage ="/project_board/boardview.jsp";
+//			nextPage ="/project/boardtest.jsp";
+//			resp.sendRedirect(req.getContextPath() + nextPage);
+			req.getRequestDispatcher(nextPage).forward(req, resp);
 		} else if (action.equals("/cart.do")) { // 장바구니 페이지
 			
 			nextPage = "/project/cart.jsp";

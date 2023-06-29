@@ -207,6 +207,7 @@ public class Controller extends HttpServlet {
 			dto.setContent(articleMap.get("content"));
 			dto.setName(articleMap.get("name"));
 			dto.setImg_name (articleMap.get("img_name"));
+			dto.setHitcount(Integer.parseInt(articleMap.get("hitcount")));
 			System.out.println(dto);
 			
 			// 서비스 호출 
@@ -228,8 +229,91 @@ public class Controller extends HttpServlet {
 			}
 			
 			
-			nextPage ="/users/m_board.do";
+			nextPage ="/main.do";
 			resp.sendRedirect(req.getContextPath()+ nextPage);
+		}else if(action.equals("/modefy_M_board.do")) { // 공지사항 데이터 수정 페이지
+			int m_board = Integer.parseInt(req.getParameter("m_board"));
+//			int m_board =req.getIntHeader("m_board");
+			System.out.println("m_board 값 :"+m_board);
+			
+			Manager_BoardDTO article = managerService.boardfind(m_board);
+			log.info("------------");
+			log.info(m_board);
+			req.setAttribute("boardfind", article);
+			
+			
+			nextPage ="/project_board/boardmodefy.jsp";
+			req.getRequestDispatcher(nextPage).forward(req, resp);
+		}else if(action.equals("/update_M_board.do")) { // 공지사항 데이터 수정
+			factor = ConnectionUtil.INSTANCE.getSqlSessionFactorty();
+			session = factor.openSession();
+			managerMapper = session.getMapper(ManagerMapper.class);
+			
+			
+			
+			Manager_BoardDTO dto = new Manager_BoardDTO();
+		
+			// 업로드 기능 있을때 호출
+			Map<String, String> articleMap = upload(req, resp);// 업로드기능 호출
+			
+//			dto.setM_board(Integer.parseInt(articleMap.get("m_board")));
+			dto.setM_board(Integer.parseInt( articleMap.get("m_board")));
+			dto.setId(articleMap.get("id")) ;
+			dto.setTitle(articleMap.get("title"));
+			dto.setContent(articleMap.get("content"));
+			dto.setName(articleMap.get("name"));
+			dto.setImg_name (articleMap.get("img_name"));
+			System.out.println(dto);
+			
+			// 서비스 호출 
+			int result = managerService.updateboard(dto);
+				//첨부파일 있을 경우만 처리 	
+			if (dto.getImg_name()!= null && dto.getImg_name().length() != 0) {
+				// temp폴더에 임시로 보관된 파일경로 설정
+				File srcFile = 
+					new File(ARTICLE_IMAGE_REPO+"\\"+"temp"+"\\"+dto.getImg_name());
+				
+				//  ARTICLE_IMAGE_REPO 하위 경로에 글 번호 폴더를 생성: "d:\\file_repo\글번호폴더
+				File descFile = new File(ARTICLE_IMAGE_REPO+"\\"+dto.getM_board());
+				descFile.mkdirs();
+				
+				//temp폴더의 이미지 첨부파일을 글번호이름으로하는 폴더로 이동
+				FileUtils.moveFileToDirectory(srcFile, descFile, true);
+				
+				
+			}
+			
+			
+			nextPage ="/main.do";
+			resp.sendRedirect(req.getContextPath()+ nextPage);
+		}else if(action.equals("/delete_M_board.do")) { // 공지사항 데이터 삭제 	
+			int m_board = Integer.parseInt(req.getParameter("m_board"));
+//			Manager_BoardDTO article = managerService.boardfind(m_board);
+//			List<Integer> m_boardList = managerService.deleteArticle(m_board);
+			int dto = managerService.deleteboard(m_board);
+			//이미지 폴더 및 파일 삭제
+			
+			int _m_boardno = m_board; 
+				
+				File imgDir = new File(ARTICLE_IMAGE_REPO+"\\"+_m_boardno);
+				
+				if(imgDir.exists()) {
+					FileUtils.deleteDirectory(imgDir);
+					
+				}
+			
+			resp.setContentType("text/html; charset=utf-8");
+			PrintWriter pw = resp.getWriter();
+			pw.print("<script> alert('글 삭제 완료'); location.href='" + req.getContextPath() + "/main.do" +" </script>");
+			
+			nextPage ="/main.do";
+			resp.sendRedirect(req.getContextPath()+ nextPage);
+		}else if(action.equals("/users/manager.do")) { // 관리자 회원 관리 페이지 	
+			
+			
+			
+			
+			
 		}else {
 
 			

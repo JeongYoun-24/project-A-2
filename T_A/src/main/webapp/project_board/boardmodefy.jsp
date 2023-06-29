@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>공지사항 수정 페이지</title>
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
           <!--부트 아이콘 -->
@@ -26,7 +26,7 @@
         }
        
     </style>
-
+</head>
         <header>
     <!--배너-->
      <div class="swiper-slide pop2 show" data-time-start="2023/02/27 00:00:00" data-time-end="2025/03/01 23:59:59" style="background: #000000 ;">
@@ -37,7 +37,9 @@
         <div>
             <nav class=" navbar navbar-expand-lg bg-body-tertiary">
                 <div class="alert">
-                <img src="https://theforment.com/web/upload/images/logo_header_main.svg"  href="shoppingmall.html">
+                 
+                <a href="${ctxPath}/main.do"> <img src="https://theforment.com/web/upload/images/logo_header_main.svg"  href="shoppingmall.html"></a>
+                
                 </div>
                 <div class="container-fluid">
                   <a class="navbar-brand" href="#"></a>
@@ -126,39 +128,46 @@
                     <div class="main">
                         <div class="container mt-3">
                         
-                           
+                           <!-- boardfind -->
                             
                             <!-- 업로드(이미지파일)기능이 포함된 form  -->
-                            <form action="${ctxPath}/order/add_M_board.do" 
+                            <form action="${ctxPath}/order/update_M_board.do" 
                                   enctype="multipart/form-data"
                                   method="post" >
                                 <div class="w-75 m-auto" >
-                                    <h4 class="text-center">게시글 등록</h4>
+                                    <h4 class="text-center">게시글 수정</h4>
                                     <hr>
                                 </div>
                                 <div class="w-75 m-auto" >
                                 	<input type="hidden" name="hitcount" id="hitcount" value="1">
-                                    <input type="hidden" name="m_board" id="m_board"  value="1000" >
+                                
+                                     <div class="mb-3 row">
+                                        <label for="id" class="col-sm-2 col-form-label">공지 번호</label>
+                                    <div class="col-sm-10">
+                                    <label for="id" class="col-sm-2 col-form-label">${boardfind.m_board}</label>
+                                    </div>
+                                    </div>
+                                    
                                     <div class="mb-3 row">
                                         <label for="id" class="col-sm-2 col-form-label">ID</label>
                                     <div class="col-sm-10">
                                     <input type="hidden" name="name" id="name" value="${manager} ">
                                         <input type="text" name="id" 
-                                                class="form-control border rounded-1 p-2" id="id" value="${managerid}" placeholder="아이디">
+                                                class="form-control border rounded-1 p-2" id="id" value="${managerid}" disabled="disabled" placeholder="아이디">
                                     </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="title" class="col-sm-2 col-form-label">제목</label>
                                         <div class="col-sm-10">
                                           <input type="text" name="title"
-                                                class="form-control border rounded-1 p-2" id="title" placeholder="제목">
+                                                class="form-control border rounded-1 p-2" value="${boardfind.title}" id="title" placeholder="제목">
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="content" class="col-sm-2 col-form-label">내용</label>
                                     <div class="col-sm-10">
                                         <textarea  name="content"  id="content" maxlength="4000"
-                                            class="form-control border rounded-1 p-2" rows="10"></textarea>
+                                            class="form-control border rounded-1 p-2" rows="10"  >${boardfind.content}</textarea>
                                     </div>
                                     </div>
                                     <div class="mb-3 row">
@@ -170,15 +179,15 @@
                                                   <label id="img_name2"></label>
                                               </div>
                                               <div class="alert alert-light" role="alert">
-                                                <img src="#" id="preview" width="300">
+                                                <img src="#" id="preview" width="300" >
                                               </div>
             
                                           </div>
                                           
                                           <input type="file"  name="img_name" id="img_name" 
                                                 onchange="readURL(this)"
-                                                class="form-control  p-2">
-                                                
+                                                class="form-control  p-2" value="${boardfind.img_name}">
+                                                ${boardfind.img_name}
                                        
                                     </div>                                 
                                 </div>
@@ -205,15 +214,28 @@
                             </form>
                         </div>
                     </div>
+                    
+     
+                    
 </body>
 <script
   src="https://code.jquery.com/jquery-3.5.0.js"
   integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc="
   crossorigin="anonymous"></script>
 <script>
+function delete2(){
+	
+	var isOK = confirm('삭제하시겠습니까?')
+	if(isOK){
+		/* location.href="${ctxPath}/orcle/deleteboard.do?articleNO=${dto.articleNO}"; */
+	}else{
+		return;
+	}
+}
+
 $(function () {
 	$('#btn_m').click(function () {
-		location.href="${ctxPath}/main.do";
+		location.href="${ctxPath}/users/m_board.do";
 	})
 	
 	$('#m_btn').click(function (e) {

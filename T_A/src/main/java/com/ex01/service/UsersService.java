@@ -99,7 +99,8 @@ public enum UsersService {
 							.map(vo -> modelMapper.map(vo, Manager_BoardDTO.class))
 							.collect(Collectors.toList());
 		System.out.println(dtoList);
-		session.close();
+		
+		session.commit();
 		return dtoList;
 		
 	}

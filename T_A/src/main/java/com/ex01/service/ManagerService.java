@@ -39,6 +39,9 @@ public enum ManagerService {
 		factor = ConnectionUtil.INSTANCE.getSqlSessionFactorty();
 		session = factor.openSession();
 		managerMapper = session.getMapper(ManagerMapper.class);
+		session.commit();
+//		session.close();
+		
 	}
 	
 	// 관리자 아이디 일치 여부 서비스 
@@ -95,8 +98,67 @@ public enum ManagerService {
 //			session.close();
 			System.out.println(r);
 			return r;
+		}
+		// 공지사항 수정 서비스 
+		public int updateboard(Manager_BoardDTO dto) {
+			Manager_BoardVO vo = modelMapper.map(dto, Manager_BoardVO.class);
+			int r =managerMapper.boardupdate(vo);
+			session.commit();
+			System.out.println("공지사항 수정 값 : "+r);
+			return r;
+		}
+		// 공지 사항 삭제 서비스 
+		public int deleteboard(int m_board) {
+			int result = 0;
+//			List<Integer> m_boardList = managerMapper.selectRemoveArticles(m_board);
+			result = managerMapper.deleteboard(m_board);
+			session.commit();
+			return result;
 			
 		}
+		
+		
+		// 조회수 업데이트 서비스 
+		public int hitCount(int m_board) {
+			System.out.println();
+			int boardVO = managerMapper.hitboard(m_board); 
+			System.out.println("m_board 값은 : "+boardVO);
+			// vo 객체  DTO 전환 
+			//Manager_BoardDTO boardDTO = modelMapper.map(boardVO, Manager_BoardDTO.class);
+			session.commit();
+			
+			// 값 리턴 
+			return boardVO; 
+		}
+		// 조회수 업데이트 서비스 
+		public Manager_BoardDTO hitCount2(int m_board) {
+			System.out.println();
+			int boardVO = managerMapper.hitboard(m_board); 
+			System.out.println("m_board 값은 : "+boardVO);
+			// vo 객체  DTO 전환 
+			Manager_BoardDTO boardDTO = modelMapper.map(boardVO, Manager_BoardDTO.class);
+			session.commit();
+			
+			// 값 리턴 
+			return boardDTO; 
+		}
+		//  공지사항 상세 조회 서비스 
+		public Manager_BoardDTO boardfind(int m_board) {
+			Manager_BoardVO boardVO = managerMapper.boardfind(m_board); 
+			
+			// vo 객체  DTO 전환 
+			Manager_BoardDTO boardDTO = modelMapper.map(boardVO, Manager_BoardDTO.class);
+			session.commit();
+			
+			return boardDTO;
+		}
+		
+			
+			
+			
+
+		
+		
 		
 //		// 회원 등록 2
 //		public int insert (UsersDTO2 dto) { 
