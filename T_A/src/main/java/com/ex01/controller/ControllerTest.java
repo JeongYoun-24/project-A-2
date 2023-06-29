@@ -52,7 +52,22 @@ public class ControllerTest extends HttpServlet {
 
 			nextPage = "/project/login.jsp";
 			req.getRequestDispatcher(nextPage).forward(req, resp);
-		} else if (action.equals("/userForm.do")) { // 회원가입 페이지
+		} else if (action.equals("/loginID.do")) { // 아이디 찾기 페이지
+		
+			nextPage = "/project/loginID.jsp";
+			req.getRequestDispatcher(nextPage).forward(req, resp);
+		} else if (action.equals("/loginIDdate.do")) { // 아이디 찾기 데이터 
+		
+		
+		} else if (action.equals("/loginPWD.do")) { // 비밀번호 찾기 페이지 
+		
+			nextPage = "/project/loginPWD.jsp";
+			req.getRequestDispatcher(nextPage).forward(req, resp);
+		} else if (action.equals("/loginPWDdate.do")) { // 비밀번호 찾기 데이터 
+		
+		
+		
+		} else if (action.equals("/ss")) { // 
 
 			nextPage = "/project/join.jsp";
 			resp.sendRedirect(req.getContextPath() + nextPage);

@@ -6,7 +6,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>shoppingmall</title>
+        <title>로그인 페이지</title>
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -81,7 +81,7 @@
                             <a class="nav-link " href="${ctxPath}/users/loginPage.do">LOGIN</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" href="${ctxPath}/users/userForm.do">JOIN</a>
+                            <a class="nav-link" href="#">JOIN</a>
                           </li>
                           <li class="nav-item">
                             <a class="nav-link " href="#">ORDER</a>
@@ -147,9 +147,9 @@
                           <div class="row">
                             <div class="col-2"></div>
                             <div class="col-10 text-end">
-                                <a href="#" class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">아이디찾기</a>
+                                <a href="${ctxPath}/users/loginID.do" class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">아이디찾기</a>
                                 <a class = "text-secondary">|</a>
-                                <a href="#" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">비밀번호찾기</a>
+                                <a href="${ctxPath}/users/loginPWD.do" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">비밀번호찾기</a>
                               </div>
                             </div>
                         </div>

@@ -527,6 +527,11 @@ public class Controller extends HttpServlet {
 			
 			nextPage ="/project_m_users/usersList.jsp";
 			req.getRequestDispatcher(nextPage).forward(req, resp);
+		}else if(action.equals("/users/manager_list.do")) { // QnA 페이지 연결 		
+			
+			
+			nextPage ="/project_m_users/usersList.jsp";
+			req.getRequestDispatcher(nextPage).forward(req, resp);
 		}else {
 
 			
