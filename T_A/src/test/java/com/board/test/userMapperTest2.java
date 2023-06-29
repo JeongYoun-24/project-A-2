@@ -1,3 +1,4 @@
+
 package com.board.test;
 
 import java.util.List;
@@ -87,12 +88,29 @@ public class userMapperTest2 {
 				.phone("010-4887-4444")
 				.build();
 		
-			int result =userMapper.userinsert2(vo);
+		int result =userMapper.userinsert2(vo);
 		
-			System.out.println(result);
-			session.close();
+		System.out.println(result);
+//		session.close();
 	}
-	
+	@Test
+	public void testAddMember() {
+
+		for(int i = 50; i<=100; i++) {
+			UsersVO2 vo = UsersVO2.builder()
+					.user_id("user"+i)
+					.user_pwd("1234")
+					.user_name("유저"+i)
+					.user_email("user"+i+"@naver.com")
+					.phone("010-4887-1234")
+					.build();
+		
+		
+		int result=	userMapper.userinsert2(vo);
+		System.out.println(result);
+		}
+		session.commit();
+	}
 	
 	
 	

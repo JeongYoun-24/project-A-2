@@ -101,10 +101,10 @@ public interface ManagerMapper { // 관리자 sql
 			select * from(
 			 select 
               ROWNUM as recNum,
-              user_id, user_pwd,user_name,user_email,regdate
+              user_id,user_name,user_email,phone,regdate
 				from (
 				select 
-               user_id, user_pwd,user_name,user_email, regdate
+               user_id,user_name,user_email,phone,regdate
                from users 
 		)WHERE user_id LIKE '%'||#{user_id}||'%'
 	)  where recNum between (#{section}-1)*100 + (#{pageNum}-1)*10+1 and (#{section}-1) *100 + (#{pageNum})*10
@@ -116,10 +116,10 @@ public interface ManagerMapper { // 관리자 sql
 			select * from(
 			 select 
               ROWNUM as recNum,
-              user_id, user_pwd,user_name,user_email,regdate
+              user_id,user_name,user_email,phone,regdate
 				from (
 				select 
-               user_id, user_pwd,user_name,user_email, regdate
+               user_id,user_name,user_email,phone,regdate
                from users 
 		)WHERE user_name LIKE '%'||#{user_name}||'%'
 	)  where recNum between (#{section}-1)*100 + (#{pageNum}-1)*10+1 and (#{section}-1) *100 + (#{pageNum})*10
@@ -132,19 +132,35 @@ public interface ManagerMapper { // 관리자 sql
 			select * from(
 			 select 
               ROWNUM as recNum,
-              user_id, user_pwd,user_name,user_email,regdate
+              user_id,user_name,user_email,phone,regdate
 				from (
 				select 
-               user_id, user_pwd,user_name,user_email, regdate
+               user_id,user_name,user_email,phone,regdate
                from users 
 		)WHERE user_email LIKE '%'||#{user_email}||'%'
-	)  where recNum between (#{section}-1)*100 + (#{pageNum}-1)*10+1 and (#{section}-1) *100 + (#{pageNum})*10
+	)  where recNum between (#{section}-1)*10 + (#{pageNum}-1)*10+1 and (#{section}-1) *10 + (#{pageNum})*10
 		
 			""";
 	@Select(emailList) // 이메일로 검색 조회
 	public List<UsersVO> emailList(Map<String,String> pageingMap);
 	
+	String phoneList = """
+			select * from(
+			 select 
+              ROWNUM as recNum,
+              user_id,user_name,user_email,phone,regdate
+				from (
+				select 
+               user_id,user_name,user_email,phone,regdate
+               from users 
+		)WHERE phone LIKE '%'||#{phone}||'%'
+	)  where recNum between (#{section}-1)*10 + (#{pageNum}-1)*10+1 and (#{section}-1) *10 + (#{pageNum})*10
+		
+			""";
+	@Select(phoneList) // 이메일로 검색 조회
+	public List<UsersVO> phoneList(Map<String,String> pageingMap);
 	
+	/*
 	String numList = """
 			select * from(
 			 select 
@@ -159,13 +175,28 @@ public interface ManagerMapper { // 관리자 sql
 			""";
 	@Select(numList)
 	public List<UsersVO> numList(Map<String,Integer> pageingMap);
-	
-	@Select("select count(*) from t_member")
+	*/
+	// 회원 전체 갯수 
+	@Select("select count(*) from users")
 	public int recNum();
 	
 	
 	
-	
+	String usersList = """
+			select * from(
+			 select 
+              ROWNUM as recNum,
+              user_id,user_name,user_email,phone,regdate
+				from (
+				select 
+               user_id,user_name,user_email,phone,regdate
+               from users
+               )
+ )where recNum between (#{section}-1)*100 + (#{pageNum}-1)*10+1 and (#{section}-1) *100 + (#{pageNum})*10
+			""";
+	// 회원 전체 리스트 
+	@Select(usersList)
+	public List<UsersVO> usersList(Map<String,Integer> pageingMap);
 	
 	
 	

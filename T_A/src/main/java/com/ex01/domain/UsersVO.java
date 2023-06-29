@@ -16,11 +16,12 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UsersVO { // 회원 정보 vo
-
+	private int recNum;
 	private String user_id ;
 	private String user_pwd;
 	private String user_name;
 	private String user_email;
+	
 //	private String zip_code;
 	private String address;
 	private String phone;

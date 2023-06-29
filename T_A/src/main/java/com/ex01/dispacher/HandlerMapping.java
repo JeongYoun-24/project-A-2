@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.ex01.dispacher.controller.MainController;
 import com.ex01.dispacher.controller.ProductListController;
+import com.ex01.dispacher.controller.UsersListController;
 
 
 
@@ -18,7 +19,7 @@ public class HandlerMapping {
 		
 		mappings.put("/productList.do", new ProductListController()); // 상품 전체 페이지
 		mappings.put("/main.do", new MainController()); // 메인 페이지 
-		
+//		mappings.put("/test/usersList.do", new UsersListController()); // 회원 관리 페이지
 		
 		
 	}
