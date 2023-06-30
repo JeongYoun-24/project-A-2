@@ -45,8 +45,28 @@ public enum ProductService {
 				
 		return dtoList;	
 	}
-	
-	
+	//상품 전체 4번쩨까지 서비스
+	public List<ProductDTO>	proList(){
+		List<ProductVO> boardList = userMapper.proList();
+		// vo-> dto
+		List<ProductDTO> dtoList = boardList.stream()
+							.map(vo -> modelMapper.map(vo, ProductDTO.class))
+							.collect(Collectors.toList());
+					
+					
+		return dtoList;	
+	}	
+	//상품 전체 5~9번쩨까지 서비스
+	public List<ProductDTO>	proList2(){
+		List<ProductVO> boardList = userMapper.proList2();
+		// vo-> dto
+		List<ProductDTO> dtoList = boardList.stream()
+								.map(vo -> modelMapper.map(vo, ProductDTO.class))
+								.collect(Collectors.toList());
+						
+						
+		return dtoList;	
+	}		
 	
 	
 	

@@ -12,6 +12,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductDTO {
+	private int	recNum;
 	private Number product_code; 	// 상품 번호 
 	private Number category ;   	// 카테고리 번호
 	private String pro_name; 	// 상품 이름

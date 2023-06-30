@@ -17,9 +17,10 @@ public class MainController implements Controller {
 	@Override
 	public String handleRequest(HttpServletRequest req, HttpServletResponse resp) {
 		
-		List<ProductDTO> list = proService.proAllList();
+//		List<ProductDTO> list = proService.proAllList();
+//		req.setAttribute("proList", list);
+		List<ProductDTO> list = proService.proList();
 		req.setAttribute("proList", list);
-		
 		
 		
 		

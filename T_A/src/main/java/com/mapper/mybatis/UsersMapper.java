@@ -189,6 +189,54 @@ public interface UsersMapper {
 	
 	
 	
+	String proList1 ="""
+		select *from (
+        select 
+        ROWNUM as recNum,
+        product_code, category,pro_name,pro_info, pro_price,pro_img
+        from (
+        select 
+        product_code, category,pro_name,pro_info, pro_price,pro_img
+        from product
+        )  
+
+)where recNum BETWEEN  1 and 4
+			""";
+	@Select(proList1) // 첫번째 상품 리스트 
+	public List<ProductVO> proList();
+	String proList2 ="""
+			select *from (
+        select 
+        ROWNUM as recNum,
+        product_code, category,pro_name,pro_info, pro_price,pro_img
+        from (
+        select 
+        product_code, category,pro_name,pro_info, pro_price,pro_img
+        from product
+        )  
+
+)where recNum BETWEEN  5 and 9
+			""";
+	@Select(proList2) // 첫번째 리스트 
+	public List<ProductVO> proList2();
+	String proList3 ="""
+			select *from (
+        select 
+        ROWNUM as recNum,
+        product_code, category,pro_name,pro_info, pro_price,pro_img
+        from (
+        select 
+        product_code, category,pro_name,pro_info, pro_price,pro_img
+        from product
+        )  
+
+)where recNum BETWEEN  10 and 14
+			""";
+	@Select(proList3) // 첫번째 리스트 
+	public List<ProductVO> proList3();
+	
+	
+	
 	
 	
 //	pstmt.setInt(1, section);

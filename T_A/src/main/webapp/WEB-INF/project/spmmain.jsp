@@ -198,33 +198,35 @@
                 </button>
               </div>
               
-           <%--    <div>
-              <div class="mt_neo alert"><h3>MD's Pick</h3></div>
-               <c:forEach var="mem" items="${proList}" varStatus="loop">
-              	<div class="main contents">
-              		<div class="container d-flex">
-              			<div class="row row-cols-1 row-cols-md-4 g-3">
-              				 <div class="col-3">
-		                      <div class="card h-50">
-		                        <img src="https://www.theforment.com/web/product/big/202305/9a89fd2ce12405b9cc15c43e965fa378.jpg" class="card-img-top" alt="">
-		                        <div class="card-body">
-		                          <h6 class="card-title">${mem.pro_name}</h6>
-		                          <p class="card-text">
-		                           <!--  나무잎ㅣ바이올렛ㅣ샌달우드<hr> -->
-		                            ${mem.pro_price}원
-		                          </p>
-		                          	<div class="d-grid gap-2">
-		                            <a href="${ctxPath}/product/revList.do" class=" btn btn-outline-secondary btn-lg">Add To Cart</a>
-		                            </div>
-		                        </div>
-		                      </div>
-		                    </div>
-              			</div>
-              		</div>
-              	</div>
-              </c:forEach>
               
-              </div> --%>
+         <div class="mt_neo alert"><h3>MD's Pick</h3></div>
+          <div class="container d-flex" >
+           <c:forEach var="mem" items="${proList}" varStatus="loop">
+             	<div class=" ">
+             	<div class="row">
+             		<div class="mx-3"><img src="https://www.theforment.com/web/product/big/202305/9a89fd2ce12405b9cc15c43e965fa378.jpg" class="card-img-top" alt=""></div>
+             		<div class=" ">${mem.pro_price}</div>
+                    <div class=" ">${mem.pro_name}</div>
+                    
+             	
+             	</div>
+             	
+             	</div>
+             	<div></div>
+             	
+             
+           </c:forEach>     	
+         
+       </div>
+          <div class="row row-cols-1 row-cols-md-4 g-3">
+                    <div class="col-3 ">
+                     
+                    </div>
+                    
+              </div>
+              
+              
+              
               
               
               

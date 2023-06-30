@@ -13,7 +13,7 @@ import lombok.ToString;
 @NoArgsConstructor
 public class ProductVO {
 
-	
+	private int	recNum;
 	private int product_code; 	// 상품 번호 
 	private int category ;   	// 카테고리 번호
 	private String pro_name; 	// 상품 이름
