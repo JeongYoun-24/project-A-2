@@ -179,7 +179,7 @@
                       </thead>
                       
                       <tbody>
-                      <c:choose>
+             <c:choose>
                 <c:when test="${doardList.size() == 0 || doardList == null}">
                   <tr>
                     <td colspan="1">1</td>
@@ -202,6 +202,8 @@
                   </c:forEach>
                 </c:when>
                
+               
+               
               </c:choose>
                            
                      <!--  <tr>
@@ -221,23 +223,15 @@
             <div>
               	<button class="btn border" id="m_btn">공지사항 및 이벤트 쓰기 </button>
             </div>
-                      
+        
           </c:if>      
-              
-                  
-                  
-                  
-                 <%--  <c:choose> <!--조건문   -->
-                  <c:catch>
-                  </c:catch>
-                  <c:otherwise>
-                  
-                  </c:otherwise>
-                  
-                  </c:choose> --%>
-                  
-                  
-                </div>
+           
+       </div>
+                
+          <footer>
+          
+          </footer>      
+                
  </body>
  <script src="https://code.jquery.com/jquery-3.6.4.min.js" 
     integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" 

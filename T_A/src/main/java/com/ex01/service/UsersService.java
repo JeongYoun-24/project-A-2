@@ -12,13 +12,16 @@ import com.ex01.dao.ManagerDAO;
 import com.ex01.dao.MapperUtil;
 import com.ex01.dao.UsersDAO;
 import com.ex01.domain.Manager_BoardVO;
+import com.ex01.domain.RevVO;
 import com.ex01.domain.UsersVO;
 import com.ex01.domain.UsersVO2;
 import com.ex01.dto.Manager_BoardDTO;
+import com.ex01.dto.RevDTO;
 import com.ex01.dto.UsersDTO;
 import com.ex01.dto.UsersDTO2;
 import com.ex01.util.ConnectionUtil;
 import com.mapper.mybatis.ManagerMapper;
+import com.mapper.mybatis.RevMapper;
 import com.mapper.mybatis.UsersMapper;
 
 
@@ -31,6 +34,7 @@ public enum UsersService {
 	private UsersDAO userDAO;
 	private ModelMapper modelMapper;
 	private UsersMapper usersMapper;
+	
 	private ManagerMapper managerMaper;
 	private SqlSessionFactory factor;
 	private SqlSession session;
@@ -43,7 +47,24 @@ public enum UsersService {
 		usersMapper = session.getMapper(UsersMapper.class);
 		managerMaper = session.getMapper(ManagerMapper.class);
 		
+		
+		
 	}
+	
+	//상품 상세 조회 리뷰 
+		public List<RevDTO>	RevAllList(){
+
+			List<RevVO> boardList = usersMapper.revAllList();
+			
+			// vo-> dto
+
+			List<RevDTO> dtoList = boardList.stream()
+							.map(vo -> modelMapper.map(vo, RevDTO.class))
+							.collect(Collectors.toList());
+
+			
+			return dtoList;	
+		}
 	
 	
 	// 로그인 서비스 
@@ -90,20 +111,20 @@ public enum UsersService {
 		
 	}
 	//공지사항 조회 
-	public List<Manager_BoardDTO> boardList (){
-		List<Manager_BoardVO> boardList = managerMaper.boardList();
-		
-		// vo-> dto
-		System.out.println(boardList);
-		List<Manager_BoardDTO> dtoList = boardList.stream()
-							.map(vo -> modelMapper.map(vo, Manager_BoardDTO.class))
-							.collect(Collectors.toList());
-		System.out.println(dtoList);
-		
-		session.commit();
-		return dtoList;
-		
-	}
+		public List<Manager_BoardDTO> boardList (){
+			List<Manager_BoardVO> boardList = managerMaper.boardList();
+			
+			// vo-> dto
+			System.out.println(boardList);
+			List<Manager_BoardDTO> dtoList = boardList.stream()
+								.map(vo -> modelMapper.map(vo, Manager_BoardDTO.class))
+								.collect(Collectors.toList());
+			System.out.println(dtoList);
+			
+			session.commit();
+			return dtoList;
+			
+		}
 	
 	
 	// 회원 전체 조회 
@@ -162,16 +183,18 @@ public enum UsersService {
 		}
 		
 		// 아이디 찾기 서비스 
-		public String findID(String email) {
-			String vo = usersMapper.findID( email);
-//			OrcDTO dto = modelMapper.map(vo, OrcDTO.class);
-			return vo;
+		public String findID(UsersDTO2 dto) {
+			UsersVO2 vo = modelMapper.map(dto, UsersVO2.class);
+			String id = usersMapper.loginId(vo);
+
+			return id;
 		}
 		// 비밀번호 찾기 서비스 
-		public String findPWD(String id ,String email) {
-			String vo = usersMapper.findPwd(id ,email);
-//			OrcDTO dto = modelMapper.map(vo, OrcDTO.class);
-			return vo;
+		public String findPWD(UsersDTO2 dto) {
+			UsersVO2 vo = modelMapper.map(dto, UsersVO2.class);
+			String pwd = usersMapper.loginPwd(vo);
+			
+			return pwd;
 		}
 		
 	

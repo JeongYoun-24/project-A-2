@@ -227,7 +227,7 @@ public enum ManagerService {
 				List<UsersDTO> dtoList = null;
 			
 				try {
-					boardlist = managerMapper.emailList(pageingMap);
+					boardlist = managerMapper.nameList(pageingMap);
 						System.out.println(boardlist);
 						dtoList = boardlist.stream().map(x -> modelMapper.map(x,UsersDTO.class)).collect(Collectors.toList());
 								

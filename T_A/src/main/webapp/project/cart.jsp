@@ -18,7 +18,7 @@
         <head>
             <meta charset="UTF-8">
             <title>shoppingmall</title>
-            
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
             <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
     
@@ -52,7 +52,8 @@
               <div>
                 <nav class=" navbar navbar-expand-lg bg-body-tertiary">
                     <div class="alert">
-                    <img src="https://theforment.com/web/upload/images/logo_header_main.svg"  href="shoppingmall.html">
+                    
+                    <a href="${ctxPath}/main.do "> <img src="https://theforment.com/web/upload/images/logo_header_main.svg"  href="shoppingmall.html"></a>
                     </div>
                     <div class="container-fluid">
                       <a class="navbar-brand" href="#"></a>
@@ -89,7 +90,7 @@
                       
                        <c:if test="${loginInfo!=null }">
                        <div class="row">
-							    	<div class="mx-5 login">
+							    	<div class="mx-3 login">
 							    	${loginInfo}님 방갑습니다.
 							    	<a href="${ctxPath}/order/logout.do" class="col-3">로그아웃</a>
 				                    
@@ -101,13 +102,14 @@
                               <li class="nav-item">
                                
                               </li>
-                              <li class="nav-item">
-                                <a  href="${ctxPath}/users/myinfo.do" class="mx-4"><svg  xmlns="http://www.w3.org/2000/svg" width="30" height="22" fill="currentColor" class="bi bi-person" viewBox="0 0 16 14">
+                              <li class="nav-item ">
+                                <a  href="${ctxPath}/users/myinfo.do?user_id=${loginInfo}" class="mx-4"><svg  xmlns="http://www.w3.org/2000/svg" width="30" height="22" fill="currentColor" class="bi bi-person" viewBox="0 0 16 14">
 				                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
 				                      </svg></a>
+				                         <input type="hidden" id="user_id" value="${loginInfo}">
                               </li>
                               <li class="nav-item">
-                              <a id="" href="${ctxPath}/users/cart.do"  data-bs-target="#exampleModal"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
+                              <a id="" href="${ctxPath}/users/orderList.do"  data-bs-target="#exampleModal"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
 								  <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
 								</svg></a>
                               </li>
@@ -133,7 +135,7 @@
                               <a class="nav-link " href="${ctxPath}/users/loginPage.do">LOGIN</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" href="#">JOIN</a>
+                              <a class="nav-link" href="${ctxPath}/users/userForm.do">JOIN</a>
                             </li>
                             <li class="nav-item">
                               <a class="nav-link " href="#">ORDER</a>

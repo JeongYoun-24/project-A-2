@@ -90,32 +90,54 @@
                       
                        <c:if test="${loginInfo!=null }">
                        <div class="row">
-							    	<div class="mx-5 login">
+							    	<div class="mx-3 login">
 							    	${loginInfo}님 방갑습니다.
-							    	<a href="${ctxPath}/order/logout.do" class="col-3 mx-4" >로그아웃</a>
-				                    <a  href="${ctxPath}/users/myinfo.do?user_id=${loginInfo}" class="mx-4"><svg  xmlns="http://www.w3.org/2000/svg" width="30" height="22" fill="currentColor" class="bi bi-person" viewBox="0 0 16 14">
+							    	<a href="${ctxPath}/order/logout.do" class="col-3">로그아웃</a>
+				                    
+				                </div>
+				                 <div class="col-3">
+				                 
+                             <ul class="navbar-nav login ">
+                            
+                              <li class="nav-item">
+                               
+                              </li>
+                              <li class="nav-item ">
+                                <a  href="${ctxPath}/users/myinfo.do?user_id=${loginInfo}" class="mx-4"><svg  xmlns="http://www.w3.org/2000/svg" width="30" height="22" fill="currentColor" class="bi bi-person" viewBox="0 0 16 14">
 				                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
 				                      </svg></a>
-				                      <input type="hidden" id="user_id" value="${loginInfo}">
-				                      
-									<!--  <a id="" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="20" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
-				                        <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-				                      </svg></a> -->
-				                       <a id="" href="${ctxPath}/users/cart.do"  data-bs-target="#exampleModal"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="20" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
+				                         <input type="hidden" id="user_id" value="${loginInfo}">
+                              </li>
+                              <li class="nav-item">
+                              <a id="" href="${ctxPath}/users/orderList.do"  data-bs-target="#exampleModal"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
+								  <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+								</svg></a>
+                              </li>
+                              <li class="nav-item mx-4 ">
+                               <a id="" href="${ctxPath}/users/cart.do"  data-bs-target="#exampleModal"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="20" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
 				                        <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
 				                      </svg></a>
-				                      
-				                </div>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link  " href="#" ><svg xmlns="http://www.w3.org/2000/svg" width="30" height="16" fill="currentColor" class="bi bi-search mb-5" viewBox="0 0 16 16">
+								  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+								</svg></a>
+                              </li>
+                             </ul>
+                          </div>
+				                
+				                
 						</div>	    
 						</c:if>
                        
+				                     
                       <c:if test="${loginInfo==null }">
                            <ul class="navbar-nav login ">
                             <li class="nav-item">
                               <a class="nav-link " href="${ctxPath}/users/loginPage.do">LOGIN</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" href="#">JOIN</a>
+                              <a class="nav-link" href="${ctxPath}/users/userForm.do">JOIN</a>
                             </li>
                             <li class="nav-item">
                               <a class="nav-link " href="#">ORDER</a>
@@ -136,14 +158,16 @@
                       </div>
                     </div>
                   </nav>
-                    </div>
+                 </div>
              
                 
                 
                     <!--캐러셀 슬라이드-->
                    
               <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
+                
+                
+              	<div class="carousel-inner">
                   <div class="carousel-item active">
                     <img src="https://theforment.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/102da6866c9542f3cd22ad8fd4894f2d.jpg" class="d-block w-100" alt="...">
                   </div>
@@ -173,6 +197,39 @@
                   <span class="visually-hidden">Next</span>
                 </button>
               </div>
+              
+           <%--    <div>
+              <div class="mt_neo alert"><h3>MD's Pick</h3></div>
+               <c:forEach var="mem" items="${proList}" varStatus="loop">
+              	<div class="main contents">
+              		<div class="container d-flex">
+              			<div class="row row-cols-1 row-cols-md-4 g-3">
+              				 <div class="col-3">
+		                      <div class="card h-50">
+		                        <img src="https://www.theforment.com/web/product/big/202305/9a89fd2ce12405b9cc15c43e965fa378.jpg" class="card-img-top" alt="">
+		                        <div class="card-body">
+		                          <h6 class="card-title">${mem.pro_name}</h6>
+		                          <p class="card-text">
+		                           <!--  나무잎ㅣ바이올렛ㅣ샌달우드<hr> -->
+		                            ${mem.pro_price}원
+		                          </p>
+		                          	<div class="d-grid gap-2">
+		                            <a href="${ctxPath}/product/revList.do" class=" btn btn-outline-secondary btn-lg">Add To Cart</a>
+		                            </div>
+		                        </div>
+		                      </div>
+		                    </div>
+              			</div>
+              		</div>
+              	</div>
+              </c:forEach>
+              
+              </div> --%>
+              
+              
+              
+              
+              
               <!--첫줄-->
               <div class="main contents">
                 <div class="container">
@@ -188,11 +245,14 @@
                             49,000원
                           </p>
                           <div class="d-grid gap-2">
-                            <a href="${ctxPath}/users/order.do" class=" btn btn-outline-secondary btn-lg">Add To Cart</a>
+                            <a href="${ctxPath}/product/revList.do" class=" btn btn-outline-secondary btn-lg">Add To Cart</a>
                             </div>
                         </div>
                       </div>
                     </div>
+                    
+                    
+                    
                     <div class="col ">
                       <div class="card h-50">
                         <img src="https://www.theforment.com/web/product/big/202305/23237843ddf9097aa0977498efa7603d.jpg" class="card-img-top" alt="...">
@@ -239,6 +299,8 @@
                       </div>
                     </div>
                     </div>
+                    
+                    
                     <!--두번째줄-->
                     <div class="row row-cols-1 row-cols-md-4 g-3  board">
                       <div class="col ">
@@ -304,6 +366,9 @@
                     </div>
                   </div>
                 </div>
+              
+              
+              
               </div>
                       
                       <!--main video-->

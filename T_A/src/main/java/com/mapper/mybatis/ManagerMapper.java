@@ -138,7 +138,7 @@ public interface ManagerMapper { // 관리자 sql
                user_id,user_name,user_email,phone,regdate
                from users 
 		)WHERE user_email LIKE '%'||#{user_email}||'%'
-	)  where recNum between (#{section}-1)*10 + (#{pageNum}-1)*10+1 and (#{section}-1) *10 + (#{pageNum})*10
+	)  where recNum between (#{section}-1)*100 + (#{pageNum}-1)*100+1 and (#{section}-1) *10 + (#{pageNum})*10
 		
 			""";
 	@Select(emailList) // 이메일로 검색 조회
@@ -154,7 +154,7 @@ public interface ManagerMapper { // 관리자 sql
                user_id,user_name,user_email,phone,regdate
                from users 
 		)WHERE phone LIKE '%'||#{phone}||'%'
-	)  where recNum between (#{section}-1)*10 + (#{pageNum}-1)*10+1 and (#{section}-1) *10 + (#{pageNum})*10
+	)  where recNum between (#{section}-1)*100 + (#{pageNum}-1)*100+1 and (#{section}-1) *10 + (#{pageNum})*10
 		
 			""";
 	@Select(phoneList) // 이메일로 검색 조회

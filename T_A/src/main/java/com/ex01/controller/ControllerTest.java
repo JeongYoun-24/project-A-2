@@ -53,22 +53,49 @@ public class ControllerTest extends HttpServlet {
 			nextPage = "/project/login.jsp";
 			req.getRequestDispatcher(nextPage).forward(req, resp);
 		} else if (action.equals("/loginID.do")) { // 아이디 찾기 페이지
-		
+			
 			nextPage = "/project/loginID.jsp";
 			req.getRequestDispatcher(nextPage).forward(req, resp);
 		} else if (action.equals("/loginIDdate.do")) { // 아이디 찾기 데이터 
-		
-		
+			String user_name = req.getParameter("user_name");
+			String user_email = req.getParameter("user_email");
+			
+			UsersDTO2 dto = UsersDTO2.builder()
+					.user_name(user_name)
+					.user_email(user_email)
+					.build();
+			String	user_id = userService.findID(dto);
+			
+			req.setAttribute("user_id", user_id);
+			
+			nextPage ="/project/loginID.jsp";
+			req.getRequestDispatcher(nextPage).forward(req, resp);
 		} else if (action.equals("/loginPWD.do")) { // 비밀번호 찾기 페이지 
 		
 			nextPage = "/project/loginPWD.jsp";
 			req.getRequestDispatcher(nextPage).forward(req, resp);
 		} else if (action.equals("/loginPWDdate.do")) { // 비밀번호 찾기 데이터 
+			String user_id = req.getParameter("user_id");
+			String user_name = req.getParameter("user_name");
+			String user_email = req.getParameter("user_email");
+			
+			UsersDTO2 dto = UsersDTO2.builder()
+					.user_id(user_id)
+					.user_name(user_name)
+					.user_email(user_email)
+					.build();
+			String	user_pwd = userService.findPWD(dto);
+			
+			req.setAttribute("user_pwd", user_pwd);
 		
-		
-		
+			nextPage ="/project/loginPWD.jsp";
+			req.getRequestDispatcher(nextPage).forward(req, resp);
 		} else if (action.equals("/ss")) { // 
 
+			nextPage = "/project/join.jsp";
+			resp.sendRedirect(req.getContextPath() + nextPage);
+		} else if (action.equals("/userForm.do")) { // 회원가입 페이지
+			
 			nextPage = "/project/join.jsp";
 			resp.sendRedirect(req.getContextPath() + nextPage);
 		} else if (action.equals("/userinsert.do")) { // 회원가입 데이터
@@ -194,10 +221,8 @@ public class ControllerTest extends HttpServlet {
 			System.out.println("m_board 값 :"+m_board);
 			
 			int dto = managerService.hitCount(m_board);
-			log.info(dto);
+			
 			Manager_BoardDTO article = managerService.boardfind(m_board);
-			log.info("------------");
-			log.info(m_board);
 			req.setAttribute("boardfind", article);
 			
 			nextPage ="/project_board/boardview.jsp";
@@ -208,7 +233,10 @@ public class ControllerTest extends HttpServlet {
 			
 			nextPage = "/project/cart.jsp";
 			resp.sendRedirect(req.getContextPath() + nextPage);
+		} else if (action.equals("/orderList.do")) { // 주문 내역 페이지 
 			
+			nextPage = "/project/orderList.jsp";
+			req.getRequestDispatcher(nextPage).forward(req, resp);
 		} else if (action.equals("/order.do")) { // 상품 페이지 	
 			
 			

@@ -139,26 +139,38 @@
 </header>
 <body>
     <div class="container">
-        <form action="" method="post" class="d-flex justify-content-center">
+        <form action="${ctxPath}/users/loginPWDdate.do" method="post" class="d-flex justify-content-center">
             <div class="login row w-75 m-3 p-3 border justify-content-center rounded">
                 <h3>비밀번호찾기</h3>
+                <c:choose>
+                    <c:when test="${not empty user_pwd }">
+                        <div class="d-flex justify-content-center">
+                        <h5>아이디는 ${user_pwd}입니다.</h5>
+                        </div>
+                    </c:when>
+                <c:otherwise>
+                
+                
+                </c:otherwise>
+                
+                </c:choose>
                 <div class="row">
                  <div class="card-body">
-			      <form action="" class="form-signin" method="POST">
+			      
 			  		 <p class="text2"> </p>
-			        <input type="text" name="member_id" id="member_id" class="form-control" placeholder="아이디" required><br>
-        			<input type="text" name="name" id="name" class="form-control" placeholder="이름" required><br>
-        			<input type="email" name="email" id="email" class="form-control" placeholder="이메일" required>
+			        <input type="text" name="user_id" id="user_id" class="form-control" placeholder="아이디" required><br>
+        			<input type="text" name="user_name" id="user_name" class="form-control" placeholder="이름" required><br>
+        			<input type="email" name="user_email" id="user_email" class="form-control" placeholder="이메일" required>
 			        	<p class="checks" id="checks"></p><br/>
                 <div class="row justify-content-around"> 
                         <input type="submit" value="비밀번호찾기" class="btn btn-outline-secondary">  
                 </div>
-                 </form>
+                
                 <div class=" m-2">
                     <div>
-                    <a href="#" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">비밀번호찾기</a>|
-                    <a href="#" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">로그인</a>|
-                    <a href="#" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">회원가입</a>
+                    <a href="${ctxPath}/users/loginID.do" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">아이디찾기</a>|
+                    <a href="${ctxPath}/users/loginPage.do" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">로그인</a>|
+                    <a href="${ctxPath}/users/userForm.do" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">회원가입</a>
                     </div>
                 </div>
             </div>

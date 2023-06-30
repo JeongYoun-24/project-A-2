@@ -143,27 +143,40 @@
 <!--아이디찾기-->
 <body>
     <div class="container">
-        <form action="" method="post" class="d-flex justify-content-center">
+        <form action="${ctxPath}/users/loginIDdate.do" method="post" class="d-flex justify-content-center">
             <div class="login row w-75 m-3 p-3 border justify-content-center rounded">
                 <h3>아이디 찾기</h3>
+                <c:choose>
+                    <c:when test="${not empty user_id }">
+                        <div class="d-flex justify-content-center">
+                        <h5>아이디는 ${user_id}입니다.</h5>
+                        </div>
+                    </c:when>
+                <c:otherwise>
+                
+                
+                </c:otherwise>
+                
+                </c:choose>
                 <div class="row">
                  <div class="card-body">
-			      <form action="findId" class="form-signin" method="POST">
+			     <!--  <form action="" class="form-signin" method="POST"> -->
 			  		 <p class="text2"></p>
-			        <input type="text" name="name" id="name" class="form-control" placeholder="이름" required autofocus><BR>
-			        <input type="email" name="email" id="email" class="form-control" placeholder="이메일" required><br>
+			        <input type="text" name="user_name" id="user_name" class="form-control" placeholder="이름" required autofocus><BR>
+			        <input type="email" name="user_email" id="user_email" class="form-control" placeholder="이메일" required><br>
 			        	<p class="check" id="check"></p><br/>
                 <div class="row justify-content-around"> 
                         <input type="submit" value="아이디찾기" id="loingidbtn" class="btn btn-outline-secondary">  
                 </div>
-                 </form>
+                <!--  </form> -->
                 <div class=" m-2">
                     <div>
-                    <a href="#" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">비밀번호찾기</a>|
-                    <a href="#" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">로그인</a>|
-                    <a href="#" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">회원가입</a>
+                    <a href="${ctxPath}/users/loginPWD.do" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">비밀번호찾기</a>|
+                    <a href="${ctxPath}/users/loginPage.do" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">로그인</a>|
+                    <a href="${ctxPath}/users/userForm.do" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">회원가입</a>
                     </div>
                 </div>
+                 
             </div>
         </div>
         </div>
@@ -226,20 +239,26 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script>
     $(function () {
-    	
+    	var user_name;
+    	var user_email;
     	
     	
 		$("#loingidbtn").click(function (e) {
-			e.preventDefault();
-			$.ajax({  //페이지가 아닌 데이터만 보내기
+			/* e.preventDefault(); */
+			user_name = $('#user_name').val()
+			user_email = $('#user_email').val()
+			console.log(user_name)
+			console.log(user_email)
+			
+		/* 	 $.ajax({  //페이지가 아닌 데이터만 보내기
 				type: "post",
 				async: true, //true=비동기
-				url: "${ctxPath}/",
+				url: "${ctxPath}/users/loginIDdate.do",
 				dataType : 'text', //서버로부터 받은 데이터 타입
-				data:{ "logindata" : _jsonData}, //매개변수
+				data:{user_name, user_email}, //매개변수
 				success : function(data,textStatus){
 					
-				var jsonMessage = JSON.parse(data);
+				 var jsonMessage = data;
 					
 					console.log(jsonMessage)
 					console.log(jsonMessage.code)
@@ -256,7 +275,7 @@
 						
 					}else{
 						 location.href="${ctxPath}/main.do" 
-					}
+					} 
 				},
 				error: function(){
 					
@@ -266,7 +285,7 @@
 				}
 				
 				
-			}) //end
+			}) */   //end
 			
 			
 		})

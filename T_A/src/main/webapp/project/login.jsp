@@ -41,7 +41,7 @@
           <div>
               <nav class=" navbar navbar-expand-lg bg-body-tertiary">
                   <div class="alert">
-                  <img src="https://theforment.com/web/upload/images/logo_header_main.svg"  href="shoppingmall.html">
+                  <a href="${ctxPath}/main.do"><img src="https://theforment.com/web/upload/images/logo_header_main.svg"  href="shoppingmall.html"></a>
                   </div>
                   <div class="container-fluid">
                     <a class="navbar-brand" href="#"></a>
@@ -161,7 +161,7 @@
       
 
 <!--주소-->
-    <div class="and bg-light">
+    <div class="and bg-light mt-5">
         <div class="container ">
           <div class="content ">
             <div class=" p-5 ">
@@ -175,7 +175,7 @@
 
               </div>
           </div>
-          <div class="d-flex justify-content-between ">
+          <div class="d-flex justify-content-between  ">
             <div class="container">
                 <p>
                     <strong>(주)FORMENT</strong>

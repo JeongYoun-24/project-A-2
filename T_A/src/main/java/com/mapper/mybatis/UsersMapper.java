@@ -13,7 +13,8 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 
-
+import com.ex01.domain.ProductVO;
+import com.ex01.domain.RevVO;
 import com.ex01.domain.UsersVO;
 import com.ex01.domain.UsersVO2;
 import com.ex01.dto.UsersDTO;
@@ -78,11 +79,12 @@ public interface UsersMapper {
 	public Boolean checkID(@Param("id") String id);
 	
 	// 아이디 찾기 
-	@Select("SELECT user_id  FROM  users  WHERE  user_email=#{user_email}")
-	public String findID(String user_email);
+//	@Select("SELECT user_id  FROM  users  WHERE  user_email=#{user_email}")
+//	public String findID(String user_email);
+	
 	// 비밀번호 찾기 
-	@Select("SELECT user_pwd  FROM  users  WHERE user_id =#{user_id} and user_email=#{user_email}")
-	public String findPwd(String user_id ,String user_email);
+//	@Select("SELECT user_pwd  FROM  users  WHERE user_id =#{user_id} and user_email=#{user_email}")
+//	public String findPwd(String user_id ,String user_email);
 	
 	// 자동 로그인 체크시 수행하는 메서드
 	@Update("update users set uuid=#{uuid} where user_id=#{user_id}")
@@ -92,6 +94,15 @@ public interface UsersMapper {
 	@Select("SELECT * FROM users WHERE UUID=#{uuid}")
 	public UsersVO selectUUID(String uuid) ;
 		
+	// 로그인 아이디 찾기 
+	@Select("select user_id from users where user_name =#{user_name} and user_email=#{user_email}")
+	public String loginId(UsersVO2 vo);
+	
+	// 로그인 비밀번호 찾기 
+	@Select("select user_pwd from users where user_name =#{user_name} and user_email=#{user_email} and user_id =#{user_id}")
+	public String loginPwd(UsersVO2 vo);
+	
+	
 	
 	String idList = """
 			select * from(
@@ -158,6 +169,26 @@ public interface UsersMapper {
 	
 	@Select("select count(*) from t_member")
 	public int recNum();
+	
+	// 상품 상세조회 리뷰 
+	@Select("select *from product_rev where product_code=#{product_code}")
+	public List<RevVO> revList(String product_code);
+	
+	// 상품 상세 조회
+	@Select("select * from product where product_code = #{product_code}")
+	public ProductVO findProductlist(String product_code);
+	
+	// 상품 전체 리스트 조회
+	@Select("select *from product ")
+	public List<ProductVO> productAllList();
+	
+	
+	// 리뷰 전체 조회 
+	@Select("select *from product_rev ")
+	public List<RevVO> revAllList();
+	
+	
+	
 	
 	
 //	pstmt.setInt(1, section);
