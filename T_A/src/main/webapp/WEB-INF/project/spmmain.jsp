@@ -202,13 +202,16 @@
          <div class="mt_neo alert"><h3>MD's Pick</h3></div>
           <div class="container d-flex" >
            <c:forEach var="mem" items="${proList}" varStatus="loop">
-             	<div class=" ">
-             	<div class="row">
-             		<div class="mx-3"><img src="https://www.theforment.com/web/product/big/202305/9a89fd2ce12405b9cc15c43e965fa378.jpg" class="card-img-top" alt=""></div>
-             		<div class=" ">${mem.pro_price}</div>
-                    <div class=" ">${mem.pro_name}</div>
-                    
-             	
+             	<div class="p-3 ">
+             	<div class="">
+             		<div class=""><img src="https://www.theforment.com/web/product/big/202305/9a89fd2ce12405b9cc15c43e965fa378.jpg" class="card-img-top" alt=""></div>
+             		<div class=" "> ${mem.pro_name}</div>
+                    <div class=" ">${mem.pro_price}원</div>
+                    <hr>
+                   <div class=" ">
+                       <a href="${ctxPath}/product/revList.do" class=" btn btn-outline-secondary btn-lg">Add To Cart</a>
+                   </div>
+                   
              	</div>
              	
              	</div>
