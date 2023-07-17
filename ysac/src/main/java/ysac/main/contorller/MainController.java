@@ -31,10 +31,11 @@ public class MainController extends HttpServlet {
 		List<ProductDTO> list = service.proList();
 		req.setAttribute("proList", list);
 		
-		
-		
-
-		
+//		List<ProductDTO> list2 = service.proList2();
+//		req.setAttribute("proList2", list2);
+//		
+//
+//		
 		
 		nextPage = "/project/spmmain.jsp";
 		req.getRequestDispatcher(nextPage).forward(req, resp);

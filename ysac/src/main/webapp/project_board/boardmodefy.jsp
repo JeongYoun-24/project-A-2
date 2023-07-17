@@ -131,7 +131,7 @@
                            <!-- boardfind -->
                             
                             <!-- 업로드(이미지파일)기능이 포함된 form  -->
-                            <form action="${ctxPath}/order/update_M_board.do" 
+                            <form action="${ctxPath}/modefy_M_board.do" 
                                   enctype="multipart/form-data"
                                   method="post" >
                                 <div class="w-75 m-auto" >
@@ -235,7 +235,7 @@ function delete2(){
 
 $(function () {
 	$('#btn_m').click(function () {
-		location.href="${ctxPath}/users/m_board.do";
+		location.href="${ctxPath}/users/m_boardList";
 	})
 	
 	$('#m_btn').click(function (e) {

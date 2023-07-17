@@ -78,7 +78,7 @@
                       <div class="col-3">
                      <c:if test="${manager != null}">
                       	${manager} 님 방갑습니다.
-                      <a href="${ctxPath}/order/logout.do" class="col-3 mx-4" >로그아웃</a>
+                      <a href="${ctxPath}/logout" class="col-3 mx-4" >로그아웃</a>
                      <div>
                       <a  href="${ctxPath}/order/users/manager.do" class="mx-4"><svg  xmlns="http://www.w3.org/2000/svg" width="30" height="22" fill="currentColor" class="bi bi-person" viewBox="0 0 16 14">
 				        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
@@ -198,18 +198,40 @@
                 </button>
               </div>
               
-              
+              <!--"https://www.theforment.com/web/product/big/202305/9a89fd2ce12405b9cc15c43e965fa378.jpg"  -->
          <div class="mt_neo alert"><h3>MD's Pick</h3></div>
           <div class="container d-flex" >
            <c:forEach var="mem" items="${proList}" varStatus="loop">
              	<div class="p-3 ">
              	<div class="">
-             		<div class=""><img src="https://www.theforment.com/web/product/big/202305/9a89fd2ce12405b9cc15c43e965fa378.jpg" class="card-img-top" alt=""></div>
+             		<div class=""><img style="width: 250px" src="${ctxPath}/product_img.do?pro_img=${mem.pro_img}&product_code=${mem.product_code}" class="card-img-top" alt=""></div>
              		<div class=" "> ${mem.pro_name}</div>
                     <div class=" ">${mem.pro_price}원</div>
                     <hr>
                    <div class=" ">
-                       <a href="${ctxPath}/product/revList.do" class=" btn btn-outline-secondary btn-lg">Add To Cart</a>
+                       <a href="${ctxPath}/rev/revList.do?product_code=${mem.product_code}" class=" btn btn-outline-secondary btn-lg">Add To Cart</a>
+                   </div>
+                   
+             	</div>
+             	
+             	</div>
+             	
+             	
+             
+           </c:forEach>     	
+         
+       </div>
+       
+        <%--  <div class="container d-flex" >
+           <c:forEach var="mem" items="${proList2}" varStatus="loop">
+             	<div class="p-3 ">
+             	<div class="">
+             		<div class=""><img style="width: 250px" src="${ctxPath}/product_img.do?pro_img=${mem.pro_img}&product_code=${mem.product_code}" class="card-img-top" alt=""></div>
+             		<div class=" "> ${mem.pro_name}</div>
+                    <div class=" ">${mem.pro_price}원</div>
+                    <hr>
+                   <div class=" ">
+                       <a href="${ctxPath}/rev/revList.do?product_code=${mem.product_code}" class=" btn btn-outline-secondary btn-lg">Add To Cart</a>
                    </div>
                    
              	</div>
@@ -220,7 +242,7 @@
              
            </c:forEach>     	
          
-       </div>
+       </div> --%>
           <div class="row row-cols-1 row-cols-md-4 g-3">
                     <div class="col-3 ">
                      
@@ -375,6 +397,11 @@
               
               
               </div>
+                      
+                      
+               
+                      
+                      
                       
                       <!--main video-->
                 <div class="main bg-light">

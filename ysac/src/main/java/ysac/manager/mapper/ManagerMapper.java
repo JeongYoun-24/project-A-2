@@ -16,7 +16,7 @@ public interface ManagerMapper { // 관리자 sql
 	@Select("select *from m_manager where id = #{id}") // 관리자 id 조회
 	public int selectfind(String id);
 	
-	@Select("select *from m_manager where id = #{id} and pwd = #{pwd}") // 관리자 로그인 일치 조회
+	@Select("select *from m_manager where id = #{id}") // 관리자 로그인 일치 조회
 	public ManagerVO login(String id);
 
 	

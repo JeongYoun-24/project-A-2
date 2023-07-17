@@ -24,7 +24,7 @@ import ysac.manager_board.service.Manager_BoardService;
 @WebServlet("/m_boardInfo")
 public class Manager_BoardInfoController extends HttpServlet{
 
-private static String ARTICLE_IMAGE_REPO = "C:\\JAVAstady2023\\JAVA\\T_A\\src\\main\\webapp\\project_A_img";
+private static String ARTICLE_IMAGE_REPO = "C:\\JAVAstady2023\\JAVA\\ysac\\src\\main\\webapp\\project_A_img";
 	
 	Manager_BoardService manager_BoardService = Manager_BoardService.INSTANCE;
 	String nextPage = null;

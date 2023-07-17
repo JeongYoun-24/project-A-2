@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ProductDTO {
-	
+	private int	recNum;
 	private String product_code;
 	private String category;
 	private String pro_name;

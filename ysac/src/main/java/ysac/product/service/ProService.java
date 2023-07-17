@@ -44,6 +44,17 @@ public enum ProService {
 							
 							
 		return dtoList;	
+	}
+	//상품 전체 5번~9조회 서비스
+	public List<ProductDTO>	proList2(){
+			List<ProductVO> boardList = productSqlMapper.proList2();
+				// vo-> dto
+			List<ProductDTO> dtoList = boardList.stream()
+							.map(vo -> modelMapper.map(vo, ProductDTO.class))
+							.collect(Collectors.toList());
+							
+							
+		return dtoList;	
 	}	
 	
 	

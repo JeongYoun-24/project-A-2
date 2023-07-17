@@ -32,7 +32,25 @@ public interface ProductSqlMapper {
 		@Select(proList1) // 메인  첫번째 상품 리스트  1~4번째
 		public List<ProductVO> proList();
 	
-	
+		String proList2 ="""
+				select *from (
+		        select 
+		        ROWNUM as recNum,
+		        product_code, category,pro_name,pro_info, pro_price,pro_img
+		        from (
+		        select 
+		        product_code, category,pro_name,pro_info, pro_price,pro_img
+		        from product
+		        )  
+
+		)where recNum BETWEEN  5 and 9
+					""";
+			@Select(proList2) // 메인  첫번째 상품 리스트  1~4번째
+			public List<ProductVO> proList2();
+		
+		
+		
+		
 	
 	
 

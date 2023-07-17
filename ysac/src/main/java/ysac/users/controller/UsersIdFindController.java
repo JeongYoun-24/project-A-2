@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import ysac.users.dto.UsersDTO;
 import ysac.users.service.UsersService;
 
-@WebServlet("/usersId")
+@WebServlet("/users/loginID.do")
 public class UsersIdFindController extends HttpServlet{
 
 	private UsersService usersService = UsersService.INSTANCE;

@@ -248,7 +248,7 @@
                             
      <div class="">
              <div class="d-flex align-content-start">
-               <a href="${ctxPath}/users/m_board.do" class="btn" >목록</a>
+               <a href="${ctxPath}/users/m_boardList" class="btn" >목록</a>
           	
           	 <c:if test="${manager != null}">
            		 <div>
@@ -326,14 +326,14 @@
 		
 		var isOK = confirm('삭제하시겠습니까?')
 		if(isOK){
-			location.href="${ctxPath}/order/delete_M_board.do?m_board=${boardfind.m_board}";
+			location.href="${ctxPath}/delete_M_board?m_board=${boardfind.m_board}";
 		}else{
 			return;
 		}
 	}
  $(function () {
 	$('#updetebtn').click(function () {
-		location.href="${ctxPath}/order/modefy_M_board.do?m_board=${boardfind.m_board}"
+		location.href="${ctxPath}/modefy_M_board.do?m_board=${boardfind.m_board}"
 		
 	})
 	 

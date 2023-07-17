@@ -19,67 +19,72 @@ import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+
+
+import lombok.extern.log4j.Log4j2;
+import ysac.manager.mapper.ManagerMapper;
 import ysac.manager_board.dto.Manager_BoardDTO;
 import ysac.manager_board.mapper.Manager_BoardMapper;
 import ysac.manager_board.service.Manager_BoardService;
 import ysac.util.ConnectionOracleUtil;
 
-@WebServlet("/m_boardInsert")
-public class Manager_BoardInsertController extends HttpServlet{
-
+@Log4j2
+@WebServlet("/modefy_M_board.do")
+public class Manager_BoardModifyController  extends HttpServlet{
 	private static String ARTICLE_IMAGE_REPO = "C:\\JAVAstady2023\\JAVA\\ysac\\src\\main\\webapp\\project_A_img";
-	
-	Manager_BoardService manager_BoardService = Manager_BoardService.INSTANCE;
+	private Manager_BoardService manager_BoardService = Manager_BoardService.INSTANCE;
 	private Manager_BoardMapper manager_BoardMapper;
+	private ManagerMapper managerMapper;
 	private SqlSessionFactory factor;
 	private SqlSession session;
-	String nextPage = null;
-	
-	
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String action = req.getPathInfo();
+		String nextPage = null;
 		
-		factor = ConnectionOracleUtil.INSTANCE.getSqlSessionFactory();
-		session = factor.openSession();
-		manager_BoardMapper = session.getMapper(Manager_BoardMapper.class);
+		int m_board = Integer.parseInt(req.getParameter("m_board"));
+//		int m_board =req.getIntHeader("m_board");
+		System.out.println("m_board 값 :"+m_board);
 		
-		manager_BoardMapper.getmanager_board();
+		Manager_BoardDTO article = manager_BoardService.boardfind(m_board);
+		log.info("------------");
+		log.info(m_board);
+		req.setAttribute("boardfind", article);
 		
 		
-		
-		nextPage ="/project/m_boardform.jsp";
-		resp.sendRedirect(req.getContextPath()+ nextPage);	
+		nextPage ="/project_board/boardmodefy.jsp";
+		req.getRequestDispatcher(nextPage).forward(req, resp);
 	}
+	
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		factor = ConnectionOracleUtil.INSTANCE.getSqlSessionFactory();
-		session = factor.openSession();
-		manager_BoardMapper = session.getMapper(Manager_BoardMapper.class);
+		String action = req.getPathInfo();
+		String nextPage = null;
+		
+//		factor = ConnectionOracleUtil.INSTANCE.getSqlSessionFactory();
+//		session = factor.openSession();
+//		managerMapper = session.getMapper(ManagerMapper.class);
 		
 		
 		
 		Manager_BoardDTO dto = new Manager_BoardDTO();
-		
-		
-		
-		
+		System.out.println("111");
 		// 업로드 기능 있을때 호출
 		Map<String, String> articleMap = upload(req, resp);// 업로드기능 호출
-		
+		System.out.println("222");
 //		dto.setM_board(Integer.parseInt(articleMap.get("m_board")));
-		dto.setM_board(manager_BoardMapper.getmanager_board());
+		dto.setM_board(Integer.parseInt( articleMap.get("m_board")));
 		dto.setId(articleMap.get("id")) ;
 		dto.setTitle(articleMap.get("title"));
 		dto.setContent(articleMap.get("content"));
 		dto.setName(articleMap.get("name"));
 		dto.setImg_name (articleMap.get("img_name"));
-		dto.setHitcount(Integer.parseInt(articleMap.get("hitcount")));
-		System.out.println(dto);
+		System.out.println("--------------"+dto);
 		
 		// 서비스 호출 
-		int result = manager_BoardService.addboard(dto);
+		int result = manager_BoardService.updateboard(dto);
 			//첨부파일 있을 경우만 처리 	
 		if (dto.getImg_name()!= null && dto.getImg_name().length() != 0) {
 			// temp폴더에 임시로 보관된 파일경로 설정
@@ -92,12 +97,16 @@ public class Manager_BoardInsertController extends HttpServlet{
 			
 			//temp폴더의 이미지 첨부파일을 글번호이름으로하는 폴더로 이동
 			FileUtils.moveFileToDirectory(srcFile, descFile, true);
+			
+			
 		}
 		
 		
-		nextPage ="/users/m_boardList";
+		nextPage ="/main.do";
 		resp.sendRedirect(req.getContextPath()+ nextPage);
-	
+		
+		
+		
 	}
 	private Map<String, String> upload(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
 		
@@ -158,4 +167,6 @@ public class Manager_BoardInsertController extends HttpServlet{
 		
 		return articleMap;
 	}	
+	
+	
 }
