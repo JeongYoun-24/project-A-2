@@ -74,7 +74,7 @@ public class ManagerUsersListController extends HttpServlet{
 		
 		
 		
-		nextPage ="/WEB-INF/managerUsers/userList.jsp";
+		nextPage ="/project_m_users/usersList.jsp";
 		req.getRequestDispatcher(nextPage).forward(req, resp);
 	}
 	

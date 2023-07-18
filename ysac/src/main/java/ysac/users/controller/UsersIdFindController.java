@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lombok.extern.log4j.Log4j2;
 import ysac.users.dto.UsersDTO;
 import ysac.users.service.UsersService;
 
+@Log4j2
 @WebServlet("/users/loginID.do")
 public class UsersIdFindController extends HttpServlet{
 
@@ -32,7 +34,14 @@ public class UsersIdFindController extends HttpServlet{
 				.build();
 		String	user_id = usersService.findID(dto);
 		
+		log.info("클라이언트에게서 받은 송신 데이터 :"+dto.getUser_name());
+		log.info("클라이언트에게서 받은 송신 데이터 :"+dto.getUser_email());
+		
+		
 		req.setAttribute("user_id", user_id);
+	
+		
+		
 		
 		nextPage ="/project/loginID.jsp";
 		req.getRequestDispatcher(nextPage).forward(req, resp);

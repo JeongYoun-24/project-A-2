@@ -93,6 +93,7 @@
                                         <label for="id" class="col-sm-2 col-form-label">공지 번호</label>
                                     <div class="col-sm-10">
                                     <label for="id" class="col-sm-2 col-form-label">${boardfind.m_board}</label>
+                                    <input type="hidden" name="m_board" value="${boardfind.m_board}">
                                     </div>
                                     </div>
                                     
@@ -131,7 +132,7 @@
                                               </div>
             
                                           </div>
-                                          
+                                          <input type="hidden" name = "originalImg_name" value="${boardfind.img_name}">
                                           <input type="file"  name="img_name" id="img_name" 
                                                 onchange="readURL(this)"
                                                 class="form-control  p-2" value="${boardfind.img_name}">

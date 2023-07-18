@@ -45,7 +45,9 @@
                 <c:choose>
                     <c:when test="${not empty user_id }">
                         <div class="d-flex justify-content-center">
+                        
                         <h5>아이디는 ${user_id}입니다.</h5>
+                        
                         </div>
                     </c:when>
                 <c:otherwise>

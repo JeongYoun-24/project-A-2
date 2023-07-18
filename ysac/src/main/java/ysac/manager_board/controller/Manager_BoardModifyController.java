@@ -63,9 +63,9 @@ public class Manager_BoardModifyController  extends HttpServlet{
 		String action = req.getPathInfo();
 		String nextPage = null;
 		
-//		factor = ConnectionOracleUtil.INSTANCE.getSqlSessionFactory();
-//		session = factor.openSession();
-//		managerMapper = session.getMapper(ManagerMapper.class);
+		factor = ConnectionOracleUtil.INSTANCE.getSqlSessionFactory();
+		session = factor.openSession();
+		managerMapper = session.getMapper(ManagerMapper.class);
 		
 		
 		
@@ -73,6 +73,11 @@ public class Manager_BoardModifyController  extends HttpServlet{
 		System.out.println("111");
 		// 업로드 기능 있을때 호출
 		Map<String, String> articleMap = upload(req, resp);// 업로드기능 호출
+		String m_board = articleMap.get("m_board");
+		
+		System.out.println("------------------------13212"+m_board);
+		
+		
 		System.out.println("222");
 //		dto.setM_board(Integer.parseInt(articleMap.get("m_board")));
 		dto.setM_board(Integer.parseInt( articleMap.get("m_board")));
@@ -82,6 +87,10 @@ public class Manager_BoardModifyController  extends HttpServlet{
 		dto.setName(articleMap.get("name"));
 		dto.setImg_name (articleMap.get("img_name"));
 		System.out.println("--------------"+dto);
+		
+
+		
+		
 		
 		// 서비스 호출 
 		int result = manager_BoardService.updateboard(dto);
@@ -97,9 +106,16 @@ public class Manager_BoardModifyController  extends HttpServlet{
 			
 			//temp폴더의 이미지 첨부파일을 글번호이름으로하는 폴더로 이동
 			FileUtils.moveFileToDirectory(srcFile, descFile, true);
-			
+			//수정 전 이미지 삭제
+			String originalImg_name = articleMap.get("originalImg_name");
+			File oldFile = new File(ARTICLE_IMAGE_REPO+"\\"+dto.getM_board()+"\\"+ originalImg_name);
+			oldFile.delete();
 			
 		}
+		
+		
+		
+		
 		
 		
 		nextPage ="/main.do";

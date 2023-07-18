@@ -200,7 +200,7 @@
               
               <!--"https://www.theforment.com/web/product/big/202305/9a89fd2ce12405b9cc15c43e965fa378.jpg"  -->
          <div class="mt_neo alert"><h3>MD's Pick</h3></div>
-          <div class="container d-flex" >
+          <div class="container d-flex justify-content-center" >
           
          
            <c:forEach var="mem" items="${proList}" varStatus="loop">
@@ -223,7 +223,7 @@
          
        </div>
        
-      <div class="container d-flex" >
+      <div class="container d-flex justify-content-center" >
            <c:forEach var="mem2" items="${proList2}" varStatus="loop">
              	<div class="p-3 ">
              	<div class="">
@@ -406,11 +406,11 @@
                       
                       <!--main video-->
                 <div class="main bg-light">
-                 <div class="container">
+                 <div class="container ">
                   <div class="content_main">
                     <div class="row">
                       
-                        <div>
+                        <div class="">
                           <strong><h3 class="row mt-5"><strong>FORMENT VIDEO</strong></h3></strong> 
                           </div>
                           <div class="d-flex">
@@ -441,8 +441,8 @@
                       </div>
                    
                              <div id="video_id3" class="video_large"style="display: none;">
-                                <div class="video-contanier">
-                                   <iframe  width="1024" height="560" class="m-3 p-3" src="https://www.youtube.com/embed/ZQDWl6HCHpE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                <div class="video">
+                                   <iframe style="width:768px; height: 568px; "  class="m-3 p-3" src="https://www.youtube.com/embed/ZQDWl6HCHpE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                   </div> 
                                    <div class ="video_txt  d-flex justify-content-center">
                                        <strong class="col-8">향기와 함께 피어오르는 코랄빛 설렘의 기억</strong>
@@ -457,6 +457,9 @@
                                 </div>
                               </div>
                               </div>
+                              
+                              
+                              
                             </div>
                           </div>
                         </div>  

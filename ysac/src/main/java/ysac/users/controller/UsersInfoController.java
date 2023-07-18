@@ -34,16 +34,23 @@ public class UsersInfoController extends HttpServlet{
 	}
 	
 	@Override
-	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String user_id = req.getParameter("user_id");
+		String user_pwd = req.getParameter("user_pwd");
+		String user_name = req.getParameter("user_name");
+		String user_email = req.getParameter("user_email");
+		String phone = req.getParameter("phone");
+		String address = req.getParameter("address");
+		String birthdate = req.getParameter("birthdate");
 		
 		UsersDTO dto = UsersDTO.builder()
-				.user_id(req.getParameter("user_id"))
-				.user_pwd(req.getParameter("user_pwd"))
-				.user_name(req.getParameter("user_name"))
-				.user_email(req.getParameter("user_email"))
-				.phone(req.getParameter("phone"))
-				.address(req.getParameter("address"))
-				.birthdate(req.getParameter("birthdate"))
+				.user_id(user_id)
+				.user_pwd(user_pwd)
+				.user_name(user_name)
+				.user_email(user_email)
+				.phone(phone)
+				.address(address)
+				.birthdate(birthdate)
 				.build();
 		
 		System.out.println(dto);
@@ -70,19 +77,22 @@ public class UsersInfoController extends HttpServlet{
 			  }
 		
 			  nextPage = "/main.do";
-			  resp.sendRedirect(req.getContextPath() + nextPage);
+				resp.sendRedirect(req.getContextPath() + nextPage);
 	}
 	
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		int result =0;
-		result = usersService.delete(req.getParameter("user_id"));
-		
-		System.out.println(result);
-		
-		nextPage = "/order/logout.do";
-		resp.sendRedirect(req.getContextPath() + nextPage);
+//		String user_id = req.getParameter("user_id");
+//		System.out.println("111");
+//		System.out.println(user_id);
+//		
+//		int result =0;
+//		result = usersService.delete(req.getParameter("user_id"));
+//		
+//		System.out.println(result);
+//		
+//		nextPage = "/logout";
+//		resp.sendRedirect(req.getContextPath() + nextPage);
 	}
 	
 }

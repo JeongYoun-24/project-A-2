@@ -350,8 +350,30 @@ $(function () {
 	$('#deletebtn').click(function() {
 		var user_id;
 		user_id = $('#user_id').val()
+		console.log(user_id)
 		
-		location.href="${ctxPath}/users/U_delete.do?user_id=${users.user_id}"
+	
+		
+		
+		 $.ajax({
+			type: "Delete",
+			url: "${ctxPath}/users/usersInfo",
+			data:{"user_id":user_id}, //매개변수
+			success : function(data,textStatus){
+				 var jsonMessage = data;
+	
+			},
+			error: function(){
+				
+			},
+			complete : function(){
+				
+			}
+		 })
+		
+		
+		
+	/* 	location.href="${ctxPath}/users/U_delete.do?user_id=${users.user_id}" */
 	})
 	
 	
@@ -388,35 +410,35 @@ $(function () {
 		console.log(birthdate)
 		
 		 $.ajax({  //페이지가 아닌 데이터만 보내기
-		type: "POST",
+		type: "post",
 		 async: true, //true=비동기 
-		url: "${ctxPath}/users/U_update.do",
-		data:{user_id,user_pwd ,user_name,user_email,phone,address,birthdate}, //매개변수
-		success : function(data,textStatus){
-			 var jsonMessage = data;
-			
-			
-			$('#id_message').text('');
-			
-			
-			if(jsonMessage.code === 'id_fail'){
-				alert('수정 실패');
-	//			$('#id_message').text(jsonMessage.message);
-			
-			}else{
-				alert('수정 성공');
-				location.href="${ctxPath}/main.do"
-				 
-			} 
-			
-			
-		},
-		error: function(){
-			
-		},
-		complete : function(){
-			
-		}
+			url: "${ctxPath}/users/usersInfo",
+			data:{user_id,user_pwd ,user_name,user_email,phone,address,birthdate}, //매개변수
+			success : function(data,textStatus){
+				 var jsonMessage = data;
+				
+				
+				$('#id_message').text('');
+				
+				
+				if(jsonMessage.code === 'id_fail'){
+					alert('수정 실패');
+		//			$('#id_message').text(jsonMessage.message);
+				
+				}else{
+					alert('수정 성공');
+					location.href="${ctxPath}/main.do"
+					 
+				} 
+				
+				
+			},
+			error: function(){
+				
+			},
+			complete : function(){
+				
+			}
 		
 		
 	}) //end  

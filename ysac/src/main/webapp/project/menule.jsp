@@ -183,6 +183,46 @@
         </div>
     </div>
  </div>
+  
+  <!--상품 설명 길게 늘릴칸  -->
+ <div>
+  <div>
+  
+  	<div>
+       	<div class="accordion" id="accordionPanelsStayOpenExample">
+
+  
+  <div class="accordion-item w-50">
+    <h2 class="accordion-header">
+      <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+        상세 설명 
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+      <div class="accordion-body">
+        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+     
+     
+      </div>
+    </div>
+  </div>
+</div>
+       	
+       	
+    </div>
+ 
+ 	
+ 
+ 
+ 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 <!--리뷰-->
 <div class="review m-5">
     <h1 class="">REVIEW</h1>
@@ -193,17 +233,27 @@
         <div class="review2 m-3">
             <h3>리뷰</h3>
         </div>
+        
+        <div> <button class="" id="revBtn">리뷰보기</button> </div>
+        <div> <button class="" id="revBtn2">리뷰닫기</button> </div>
+        
+       <c:if test="${loginInfo!=null }">
         <div class="">
             <button class="btn btn-dark">리뷰 작성하기</button>
         </div>
+        </c:if>
+        
+        
     </div>
     <hr>
     
 </div>
 <div>
 	<div>
+	 	
+	 	
 	 
-               <div class="container">
+            <div class="container" id=rev>
                   <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -288,11 +338,25 @@ function readURL(img_name){
 $(function () {
 	var info ;
 	
+	$('#rev').hide()
+	$('#revBtn2').hide()
 	info = $('#info').val()
 	
-	
-	
-	console.log(info)
+	$('#revBtn').click(function () {
+		$('#rev').show()
+		$('#revBtn2').show()
+		$('#revBtn').hide()
+		
+	})
+	$('#revBtn2').click(function () {
+		console.log("닫기 버튼 ")
+		
+		$('#rev').hide()
+		$('#revBtn2').hide()
+		$('#revBtn').show()
+		
+	})
+
 	
 })
 </script>
