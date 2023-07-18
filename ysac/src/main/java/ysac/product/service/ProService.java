@@ -9,11 +9,12 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.modelmapper.ModelMapper;
 
 
-import com.mapper.mybatis.UsersMapper;
+
 
 import ysac.product.domain.ProductVO;
 import ysac.product.dto.ProductDTO;
 import ysac.product.mapper.ProductSqlMapper;
+import ysac.users.mapper.UsersMapper;
 import ysac.util.ConnectionOracleUtil;
 import ysac.util.MapperUtil;
 
@@ -21,6 +22,7 @@ public enum ProService {
 
 	INSTANCE;
 	private ProductSqlMapper productSqlMapper;
+	private UsersMapper usersMapper;
 	private ModelMapper modelMapper;
 	private SqlSessionFactory factor ;
 	private SqlSession session ;
@@ -31,6 +33,7 @@ public enum ProService {
 		factor = ConnectionOracleUtil.INSTANCE.getSqlSessionFactory();
 		session = factor.openSession();
 		productSqlMapper = session.getMapper(ProductSqlMapper.class);
+//		usersMapper  = session.getMapper(UsersMapper.class);
 
 	}
 	

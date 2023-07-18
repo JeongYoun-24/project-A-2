@@ -201,6 +201,8 @@
               <!--"https://www.theforment.com/web/product/big/202305/9a89fd2ce12405b9cc15c43e965fa378.jpg"  -->
          <div class="mt_neo alert"><h3>MD's Pick</h3></div>
           <div class="container d-flex" >
+          
+         
            <c:forEach var="mem" items="${proList}" varStatus="loop">
              	<div class="p-3 ">
              	<div class="">
@@ -215,23 +217,22 @@
              	</div>
              	
              	</div>
-             	
-             	
-             
-           </c:forEach>     	
+
+           </c:forEach>   
+      	
          
        </div>
        
-        <%--  <div class="container d-flex" >
-           <c:forEach var="mem" items="${proList2}" varStatus="loop">
+      <div class="container d-flex" >
+           <c:forEach var="mem2" items="${proList2}" varStatus="loop">
              	<div class="p-3 ">
              	<div class="">
-             		<div class=""><img style="width: 250px" src="${ctxPath}/product_img.do?pro_img=${mem.pro_img}&product_code=${mem.product_code}" class="card-img-top" alt=""></div>
-             		<div class=" "> ${mem.pro_name}</div>
-                    <div class=" ">${mem.pro_price}원</div>
+             		<div class=""><img style="width: 250px" src="${ctxPath}/product_img.do?pro_img=${mem2.pro_img}&product_code=${mem2.product_code}" class="card-img-top" alt=""></div>
+             		<div class=" "> ${mem2.pro_name}</div>
+                    <div class=" ">${mem2.pro_price}원</div>
                     <hr>
                    <div class=" ">
-                       <a href="${ctxPath}/rev/revList.do?product_code=${mem.product_code}" class=" btn btn-outline-secondary btn-lg">Add To Cart</a>
+                       <a href="${ctxPath}/rev/revList.do?product_code=${mem2.product_code}" class=" btn btn-outline-secondary btn-lg">Add To Cart</a>
                    </div>
                    
              	</div>
@@ -242,7 +243,7 @@
              
            </c:forEach>     	
          
-       </div> --%>
+       </div> 
           <div class="row row-cols-1 row-cols-md-4 g-3">
                     <div class="col-3 ">
                      
@@ -258,7 +259,7 @@
               
               
               <!--첫줄-->
-              <div class="main contents">
+              <%-- <div class="main contents">
                 <div class="container">
                 <div class="mt_neo alert"><h3>MD's Pick</h3></div>
                   <div class="row row-cols-1 row-cols-md-4 g-3">
@@ -392,7 +393,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> --%>
               
               
               

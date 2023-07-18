@@ -235,6 +235,10 @@ public interface UsersMapper {
 					""";
 			@Select(proList1) // 첫번째 상품 리스트 
 			public List<ProductVO> proList();
+			
+			
+			
+			
 		String proList2 ="""
 				select *from (
 	        select 
@@ -246,10 +250,13 @@ public interface UsersMapper {
 	        from product
 	        )  
 
-	)where recNum BETWEEN  5 and 9
+	)where recNum BETWEEN  5 and 8
 				""";
 		@Select(proList2) // 첫번째 리스트 
 		public List<ProductVO> proList2();
+		
+		
+		
 		String proList3 ="""
 				select *from (
 	        select 
@@ -261,7 +268,7 @@ public interface UsersMapper {
 	        from product
 	        )  
 
-	)where recNum BETWEEN  10 and 14
+	)where recNum BETWEEN  9 and 12
 				""";
 		@Select(proList3) // 첫번째 리스트 
 		public List<ProductVO> proList3();

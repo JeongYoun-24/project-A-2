@@ -22,6 +22,8 @@
     </head>
 <body>
 
+		<jsp:include page="../nav/nav.jsp"/>   
+
     <div class="main">
         <div class="container ">
             <div class="w-75 m-auto border rounded-top-4 mt-5 text-primary ">

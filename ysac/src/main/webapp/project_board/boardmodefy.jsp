@@ -34,64 +34,12 @@
     
     <!--네비바-->
       <div class="main">
-        <div>
-            <nav class=" navbar navbar-expand-lg bg-body-tertiary">
-                <div class="alert">
-                 
-                <a href="${ctxPath}/main.do"> <img src="https://theforment.com/web/upload/images/logo_header_main.svg"  href="shoppingmall.html"></a>
-                
-                </div>
-                <div class="container-fluid">
-                  <a class="navbar-brand" href="#"></a>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse row" id="navbarNav">
-                    <div class="col-8">
-                    <ul class="navbar-nav ">
-                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                         전제품보기
-                        </a>
-                        <ul class="dropdown-menu">
-                           <li><a class="dropdown-item" href="${ctxPath}/users/m_board.do">공지사항</a></li>
-                              <li><a class="dropdown-item" href="#">PRDUCT</a></li>
-                              <li><a class="dropdown-item" href="#">전체</a></li>
-                              <li><hr class="dropdown-divider"></li>
-                              <li><a class="dropdown-item" href="#">베스트</a></li>
-                               <li><a class="dropdown-item" href="${ctxPath}/users/managerlogin.do">관리자 로그인</a></li>
-                            
-                        </ul>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">선물제안</a>
-                      </li>
-                     
-                      <li class="nav-item">
-                        <a class="nav-link active" href="#">정기배송</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link active" href="#">브랜드</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link active" href="#">cs센터</a>
-                      </li>
-                    </ul>
-                  </div>
-                  
-                  <div class="col-3">
-                       <c:if test="${manager != null}">
-                      	${manager} 님 방갑습니다.
-                      <a href="${ctxPath}/order/logout.do" class="col-3 mx-4" >로그아웃</a>
-                      </c:if> 
-                    </div>
-                    
-                    
-                  </div>
-                </div>
-            </nav>
-        </div>
-     </div>
+      <jsp:include page="../nav/nav.jsp"/>   
+      
+      </div>
+        
+        
+        
 
     </header>
     
