@@ -46,11 +46,11 @@ public class ProductViewController extends HttpServlet {
 		
 //		String product_code = req.getParameter("product_code");
 		String product_code ="1";
-		ProductDTO product = revService.findProductlist(product_code);
-		request.setAttribute("proList", product);
-
-		List<RevDTO> list = revService.RevAllList(product_code);
-		request.setAttribute("RevList", list);
+//		ProductDTO product = revService.findProductlist(product_code);
+//		request.setAttribute("proList", product);
+//
+//		List<RevDTO> list = revService.RevAllList(product_code);
+//		request.setAttribute("RevList", list);
 
     	
     	String nextPage = null;

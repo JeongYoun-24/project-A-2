@@ -8,9 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.modelmapper.ModelMapper;
 
-
-
-
+import ysac.manager_board.domain.Manager_BoardVO;
+import ysac.manager_board.dto.Manager_BoardDTO;
 import ysac.product.domain.ProductVO;
 import ysac.product.dto.ProductDTO;
 import ysac.product.mapper.ProductSqlMapper;
@@ -36,6 +35,21 @@ public enum ProService {
 //		usersMapper  = session.getMapper(UsersMapper.class);
 
 	}
+	
+	//  상품 상세 조회 서비스 
+	public ProductDTO profind(int procuct_code) {
+		ProductVO proVO = productSqlMapper.proCodeSelectOne2(procuct_code); 
+			
+		// vo 객체  DTO 전환 
+		ProductDTO proDTO = modelMapper.map(proVO, ProductDTO.class);
+		session.commit();
+			
+		return proDTO;
+	}
+	
+	
+	
+	
 	
 	//상품 전체 4번쩨까지 서비스
 	public List<ProductDTO>	proList(){

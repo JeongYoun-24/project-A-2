@@ -70,14 +70,14 @@ public enum UsersService {
 		}
 	
 	// 회원 등록 2
-	public int insert2 (UsersDTO dto) { 
-		UsersVO vo = modelMapper.map(dto, UsersVO.class);
-		int r = usersMapper.userinsert(vo);
-		session.commit();
-			
-			
-		return r;
-	}
+		public int insert2 (UsersDTO dto) { 
+			UsersVO vo = modelMapper.map(dto, UsersVO.class);
+			int r = usersMapper.userinsert(vo);
+			session.commit();
+				
+				
+			return r;
+		}
 	
 	// 회원 조회 
 	public void findList (String id ) {

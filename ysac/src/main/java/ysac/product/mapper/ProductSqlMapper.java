@@ -8,12 +8,16 @@ import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.UpdateProvider;
 
+import ysac.manager_board.domain.Manager_BoardVO;
 import ysac.product.domain.ProductVO;
 
 public interface ProductSqlMapper {
 
 	@Select("select * from product where product_code = #{product_code}")
 	public ProductVO proCodeSelectOne(String product_code);
+	
+	@Select("select * from product where product_code = #{product_code}")
+	public ProductVO proCodeSelectOne2(int product_code);
 	
 	
 	String proList1 ="""

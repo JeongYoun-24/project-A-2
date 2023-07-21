@@ -2,12 +2,18 @@ package ysac.rev.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import ysac.product.domain.ProductVO;
 import ysac.rev.domain.RevVO;
+import ysac.users.domain.UsersVO;
+import ysac.users.domain.UsersVO2;
 
-
+@Mapper
 public interface RevMapper {
 	
 	
@@ -28,6 +34,38 @@ public interface RevMapper {
 	@Select("select *from product_rev ")
 	public List<RevVO> revAllList();
 	
+	
+	// 리뷰 등록 
+	@Insert("insert into product_rev (rev_code ,user_id ,product_code , rev_title, rev_content,rev_img)"
+			+ "values (#{rev_code} ,#{user_id},#{product_code},#{rev_title},#{rev_content},#{rev_img})")
+	public int revinsert(RevVO vo);
+	
+	
+	
+	// 리뷰 수정 
+	String update_sql = """
+			update product_rev set rev_title=#{rev_title}, rev_content=#{rev_content},
+			 rev_img=#{rev_img} where rev_code = #{rev_code}
+			""";
+	 // 수정 SQL
+	@Update(update_sql) 
+	public int revupdate(RevVO vo);
+	
+	
+	
+	
+	
+	// 회원가입  성공한 SQL 
+		@Insert("insert into users (user_id, user_pwd, user_name, user_email, phone)"
+				+ "values(#{user_id},#{user_pwd},#{user_name},#{user_email},#{phone})")
+		@Options(useGeneratedKeys = true,keyProperty = "user_id")
+		public int userinsert2(UsersVO2 vo);
+	
+		
+	@Select("select max(rev_code)+1 from product_rev") // 공지사항 글 번호 생성
+	public int getproduct_rev();
+		
+		
 	
 	
 	String proList1 ="""

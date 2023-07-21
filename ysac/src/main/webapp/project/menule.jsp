@@ -239,7 +239,7 @@
         
        <c:if test="${loginInfo!=null }">
         <div class="">
-            <button class="btn btn-dark">리뷰 작성하기</button>
+            <button id="revinsertBtn" class="btn btn-dark">리뷰 작성하기</button>
         </div>
         </c:if>
         
@@ -282,7 +282,9 @@
                        <a href=""  
                           class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">${mem.rev_content}</a>
                       </td>
-                       <td>${mem.rev_img}>
+                       <td>${mem.rev_img}  
+                        <img class="w-100"  style="width: 250px" alt="" src="${ctxPath}/revimg.do?rev_img=${mem.rev_img} &rev_code=${mem.rev_code}">
+                       </td>
                       
                       <td>${mem.user_id}</td>
                       <td>${mem.rev_date}</td> 
@@ -314,6 +316,16 @@
 </body>
 
 <script type="text/javascript">
+	$(function () {
+		$('#revinsertBtn').click(function () {
+			console.log("aaa")
+			
+			 location.href="${ctxPath}/pro/revForm?product_code=${proList.product_code}";
+			
+		})
+	})
+
+
 function readURL(img_name){
     if(img_name.files && img_name.files[0]){
         // 파일 입출력 처리하는 객체 생성 

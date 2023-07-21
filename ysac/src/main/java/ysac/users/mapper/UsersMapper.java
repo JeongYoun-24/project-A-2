@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import ysac.manager_board.domain.Manager_BoardVO;
 import ysac.product.domain.ProductVO;
 import ysac.rev.domain.RevVO;
 import ysac.users.domain.UsersVO;
@@ -39,10 +40,10 @@ public interface UsersMapper {
 	
 	
 	// 회원가입  성공한 SQL 
-	@Insert("insert into users (user_id, user_pwd, user_name, user_email, phone)"
-			+ "values(#{user_id},#{user_pwd},#{user_name},#{user_email},#{phone})")
-	@Options(useGeneratedKeys = true,keyProperty = "user_id")
-	public int userinsert2(UsersVO2 vo);
+		@Insert("insert into users (user_id, user_pwd, user_name, user_email, phone)"
+				+ "values(#{user_id},#{user_pwd},#{user_name},#{user_email},#{phone})")
+		@Options(useGeneratedKeys = true,keyProperty = "user_id")
+		public int userinsert2(UsersVO2 vo);
 	
 	// 아이디 조회 SQL
 	@Select("select * from users where user_id = #{user_id}")
@@ -98,6 +99,38 @@ public interface UsersMapper {
 	// 로그인 비밀번호 찾기 
 	@Select("select user_pwd from users where user_email=#{user_email} and user_id =#{user_id}")
 	public String loginPwd(UsersVO vo);
+	
+	
+	
+	// 리뷰 등록 
+	@Insert("insert into product_rev (rev_code,user_id,product_code,rev_title,rev_content,rev_img)"
+			+ "values (#{rev_code},#{user_id},#{product_code},#{rev_title},#{rev_content},#{rev_img})")
+//	@Options(useGeneratedKeys = true,keyProperty = "rev_code")
+	public int revinsert(RevVO vo);
+	
+	
+	
+	
+	
+	
+	@Insert("insert into product_rev (rev_code ,user_id ,product_code , rev_title, rev_content,rev_img)"
+			+ "	values (#{rev_code},#{user_id},#{product_code},#{rev_title},#{rev_content},#{rev_img})")
+	public int revinsert2(RevVO vo);
+	
+	
+	@Select("select max(rev_code)+1 from product_rev") // 리뷰 글 번호 생성
+	public int getproduct_rev();
+		
+	
+	
+	
+//	@Insert("insert into manager_board (m_board, id, title, content, img_name,name,hitcount)"
+//			+ "values(#{m_board},#{id},#{title},#{content},#{img_name},#{name},#{hitcount})")
+//	@Options(useGeneratedKeys = true,keyProperty = "m_board")
+//	public int insertboard2(Manager_BoardVO vo);
+	
+	
+	
 	
 	
 	
