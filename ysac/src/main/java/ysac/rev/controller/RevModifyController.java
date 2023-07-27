@@ -16,114 +16,49 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 
-import lombok.extern.log4j.Log4j2;
-import ysac.manager_board.dto.Manager_BoardDTO;
-import ysac.manager_board.mapper.Manager_BoardMapper;
-import ysac.manager_board.service.Manager_BoardService;
-import ysac.product.dto.ProductDTO;
-import ysac.product.service.ProService;
 import ysac.rev.dto.RevDTO;
-import ysac.rev.mapper.RevMapper;
 import ysac.rev.service.RevService;
-import ysac.users.mapper.UsersMapper;
-import ysac.util.ConnectionOracleUtil;
 
+@WebServlet("/rev/update")
+public class RevModifyController extends HttpServlet {
 
-@Log4j2
-@WebServlet("/pro/revForm")
-public class RevInsrtController extends HttpServlet {
 	private static String ARTICLE_IMAGE_REPO = "C:\\JAVAstady2023\\JAVA\\ysac\\src\\main\\webapp\\project_A_img\\project_rev_img";
-	private Manager_BoardService manager_BoardService = Manager_BoardService.INSTANCE;
 	private RevService revService = RevService.INSTANCE;
-	private ProService proService = ProService.INSTANCE;
-	private RevMapper revMapper;
-	private UsersMapper usersMapper;
-	private SqlSessionFactory factor;
-	private SqlSession session;
-	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String action = req.getPathInfo();
 		String nextPage = null;
 		
-	
+		String rev_code = req.getParameter("rev_code");
+		System.out.println("-------------------"+rev_code);
 		
-//		String product_code = req.getParameter("product_code");
-//		System.out.println("-------------"+product_code);
+		RevDTO revDTO = revService.RevFindList(rev_code);
 		
-		int product_code = Integer.parseInt(req.getParameter("product_code"));
-//		int m_board =req.getIntHeader("m_board");
-		System.out.println("m_board 값 :"+product_code);
-		
-		ProductDTO article = proService.profind(product_code);
-		log.info("------------");
-		log.info(product_code);
-		req.setAttribute("proDTO", article);
+		req.setAttribute("revfind", revDTO);
 		
 		
-		
-		
-		nextPage ="/project_rev/revForm.jsp";
+		nextPage ="/project_rev/revModify.jsp";
 		req.getRequestDispatcher(nextPage).forward(req, resp);
 	}
+	
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String action = req.getPathInfo();
 		String nextPage = null;
-		factor = ConnectionOracleUtil.INSTANCE.getSqlSessionFactory();
-		session = factor.openSession();
-		usersMapper = session.getMapper(UsersMapper.class);
-		int rev_code = usersMapper.getproduct_rev();
-		
-		
-//		int product_code = Integer.parseInt(req.getParameter("product_code"));
-//		String user_id = req.getParameter("user_id");
-	
-		
-//		int product_code = 1;
-		
-		
 		Map<String, String> articleMap = upload(req, resp);// 업로드기능 호출
 		
-		int result2 = Integer.parseInt(articleMap.get("product_code"));
-		System.out.println(result2);
-		
-		
-		
-//		int rev_code = Integer.parseInt(articleMap.get("rev_code"));
-//		int product_code = Integer.parseInt(articleMap.get("product_code"));
-		System.out.println();
-		
-//		String product_code = req.getParameter("product_code");
-		
-//		ProductDTO article = proService.profind(product_code);
 		RevDTO dto = new  RevDTO();	
-
-//		dto.setRev_code(revMapper.getproduct_rev());
-		dto.setRev_code(rev_code);
-		dto.setProduct_code(Integer.parseInt(articleMap.get("product_code")));
+		dto.setRev_code(Integer.parseInt(articleMap.get("rev_code")));
 		dto.setUser_id(articleMap.get("user_id"));
 		dto.setRev_title(articleMap.get("rev_title"));
 		dto.setRev_content(articleMap.get("rev_content"));
 		dto.setRev_img(articleMap.get("rev_img"));
 		
-		System.out.println(dto.getProduct_code());
-		System.out.println(dto.getRev_code());
-		System.out.println(dto.getUser_id());
-		
-
-		
-		
-		
-//				.product_code(Integer.parseInt( articleMap.get("m_board")));
-		
-		
-		int result=	 revService.RevInsert(dto);
-//		System.out.println(result);
+		int result = revService.RevUpdate(dto);
+			
+		System.out.println(result);
 		
 		if (dto.getRev_img()!= null && dto.getRev_img().length() != 0) {
 			// temp폴더에 임시로 보관된 파일경로 설정
@@ -136,17 +71,18 @@ public class RevInsrtController extends HttpServlet {
 			
 			//temp폴더의 이미지 첨부파일을 글번호이름으로하는 폴더로 이동
 			FileUtils.moveFileToDirectory(srcFile, descFile, true);
+			//수정 전 이미지 삭제
+			String originalImg_name = articleMap.get("originalImg_name");
+			File oldFile = new File(ARTICLE_IMAGE_REPO+"\\"+dto.getRev_code()+"\\"+ originalImg_name);
+			oldFile.delete();
+			
 		}
-		
-		
-		
 		
 		
 		
 		nextPage ="/main.do";
 		req.getRequestDispatcher(nextPage).forward(req, resp);
 	}
-	
 	
 private Map<String, String> upload(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
 		
@@ -207,8 +143,6 @@ private Map<String, String> upload(HttpServletRequest request,HttpServletRespons
 		
 		return articleMap;
 	}	
-	
-	
 	
 	
 }

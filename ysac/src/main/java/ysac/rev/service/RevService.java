@@ -7,9 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.modelmapper.ModelMapper;
 
-
-
-
+import ysac.manager_board.domain.Manager_BoardVO;
+import ysac.manager_board.dto.Manager_BoardDTO;
 import ysac.product.domain.ProductVO;
 import ysac.product.dto.ProductDTO;
 import ysac.rev.domain.RevVO;
@@ -38,6 +37,25 @@ public enum RevService {
 //
 //	}
 	
+	// 리뷰 상세 조회 서비스 
+	public RevDTO RevFindList(String rev_code) {
+		modelMapper = MapperUtil.INSTANCE.get();
+		factor = ConnectionOracleUtil.INSTANCE.getSqlSessionFactory();
+		session = factor.openSession();
+		revMapper = session.getMapper(RevMapper.class);
+		
+		RevVO revVO = revMapper.revFindList(rev_code); 
+		
+		RevDTO revDTO = modelMapper.map(revVO, RevDTO.class);
+			
+
+		return revDTO;
+	}
+
+	
+	
+	
+	
 	// 리뷰 등록 서비스 
 	public int RevInsert(RevDTO revDTO) {
 		modelMapper = MapperUtil.INSTANCE.get();
@@ -45,15 +63,11 @@ public enum RevService {
 		session = factor.openSession();
 		usersMapper = session.getMapper(UsersMapper.class);
 
-		System.out.println("fdsdsfs"+revDTO);
 		
-		System.out.println("0000");
+		
+		
 		RevVO vo = modelMapper.map(revDTO, RevVO.class);
-		
-		System.out.println("ssssssssssss"+vo);
-		System.out.println("1111");
 		int r = usersMapper.revinsert(vo);
-		System.out.println("2222");
 		session.commit();
 
 		return r;	
@@ -77,8 +91,16 @@ public enum RevService {
 	
 
 	// 리뷰 삭제 서비스 
-	
-	
+	public int revDelete(int rev_code) {
+		int vo =0;
+		
+		vo= revMapper.revDelete(rev_code); 
+		session.commit();
+		// vo 객체  DTO 전환 
+		
+			
+		return vo;
+	}
 	
 
 	

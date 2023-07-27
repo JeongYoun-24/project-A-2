@@ -79,12 +79,12 @@ public enum UsersService {
 			return r;
 		}
 	
-	// 회원 조회 
-	public void findList (String id ) {
-		UsersVO vo = usersMapper.login(id);
-		UsersDTO dto = modelMapper.map(vo, UsersDTO.class);
-		
-	}
+		// 회원 조회 
+		public void findList (String id ) {
+			UsersVO vo = usersMapper.login(id);
+			UsersDTO dto = modelMapper.map(vo, UsersDTO.class);
+			
+		}
 
 	
 	

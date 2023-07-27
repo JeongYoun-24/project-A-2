@@ -74,11 +74,11 @@
                            
                             
                             <!-- 업로드(이미지파일)기능이 포함된 form  -->
-                            <form action="${ctxPath}/qna/insert" 
+                            <form action="${ctxPath}/rev/update" 
                                   enctype="multipart/form-data"
                                   method="post" >
                                 <div class="w-75 m-auto" >
-                                    <h4 class="text-center">상품문의 등록</h4>
+                                    <h4 class="text-center">상품리뷰 수정</h4>
                                     <hr>
                                 </div>
                                 <div class="w-75 m-auto" >
@@ -87,35 +87,35 @@
                                     <div class="mb-3 row">
                                         <label for="id" class="col-sm-2 col-form-label">상품 번호</label>
                                     <div class="col-sm-10">
-                                    <input type="hidden" name="product_code" id="product_code" value="${proDTO.product_code}">
-                                        <input type="text" name="product_code2" 
-                                                class="form-control border rounded-1 p-2" id="product_code2" value="${proDTO.product_code}" placeholder="상품번호" readonly>
+                                    <input type="hidden" name="rev_code" id="product_code" value="${revfind.rev_code}">
+                                        <input type="text" name="rev_code2" 
+                                                class="form-control border rounded-1 p-2" id="rev_code2" value="${revfind.rev_code}" placeholder="상품번호" readonly>
                                     </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="id" class="col-sm-2 col-form-label">ID</label>
                                     <div class="col-sm-10">
-                                    <input type="hidden" name="id" id="id" value="${loginInfo} ">
+                                    <input type="hidden" name="id" id="id" value="${revfind.user_id} ">
                                         <input type="text" name="user_id" 
-                                                class="form-control border rounded-1 p-2" id="user_id" value="${loginInfo}" readonly  placeholder="아이디">
+                                                class="form-control border rounded-1 p-2" id="user_id" value="${revfind.user_id}" readonly  placeholder="아이디">
                                     </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="title" class="col-sm-2 col-form-label">제목</label>
                                         <div class="col-sm-10">
-                                          <input type="text" name=" qna_title"
+                                          <input type="text" name=" rev_title" value="${revfind.rev_title}"
                                                 class="form-control border rounded-1 p-2" id="rev_title" placeholder="제목">
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="content" class="col-sm-2 col-form-label">내용</label>
                                     <div class="col-sm-10">
-                                        <textarea  name="qna_content"  id="rev_content" maxlength="4000"
-                                            class="form-control border rounded-1 p-2" rows="10"></textarea>
+                                        <textarea  name="rev_content"  id="rev_content" maxlength="4000"
+                                            class="form-control border rounded-1 p-2" rows="10">${revfind.rev_content}</textarea>
                                     </div>
                                     </div>
                                     <div class="mb-3 row">
-                                        <label for="qna_img" class="col-sm-2 col-form-label">이미지</label>
+                                        <label for="rev_img" class="col-sm-2 col-form-label">이미지</label>
                                         <div class="col-sm-10">
                                           <!-- jquery에서 show태그는 숨기기로 설정, 파일선택시 표시하기로 변경 -->
                                           <div id="show2">
@@ -127,8 +127,8 @@
                                               </div>
             
                                           </div>
-                                          
-                                          <input type="file"  name="qna_img" id="qna_img"
+                                         <input type="hidden" name="originalImg_name" value="${revfind.rev_img}">                                  
+                                          <input type="file"  name="rev_img" id="rev_img"
                                                 onchange="readURL(this)"
                                                 class="form-control  p-2">
                                                 
@@ -231,7 +231,7 @@ $(function () {
 		
 		$('#show2').show()
 		
-		if(qna_img.files && qna_img.files[0]){
+		if(rev_img.files && rev_img.files[0]){
 			//파일 입출력 처리하는 객체 생성
 			var reader = new FileReader();
 
@@ -242,7 +242,7 @@ $(function () {
 				//${show = "1"}
 
 			}
-			reader.readAsDataURL(qna_img.files[0])
+			reader.readAsDataURL(rev_img.files[0])
 			
 		}
 

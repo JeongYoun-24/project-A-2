@@ -88,10 +88,10 @@ public enum Manager_BoardService {
 		// 값 리턴 
 		return boardDTO; 
 	}
-	//  공지사항 상세 조회 서비스 
+//  공지사항 상세 조회 서비스 
 	public Manager_BoardDTO boardfind(int m_board) {
 		Manager_BoardVO boardVO = managerBoardMapper.boardfind(m_board); 
-			
+		
 		// vo 객체  DTO 전환 
 		Manager_BoardDTO boardDTO = modelMapper.map(boardVO, Manager_BoardDTO.class);
 		session.commit();

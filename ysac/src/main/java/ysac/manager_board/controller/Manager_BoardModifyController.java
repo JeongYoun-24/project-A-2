@@ -124,7 +124,7 @@ public class Manager_BoardModifyController  extends HttpServlet{
 		
 		
 	}
-	private Map<String, String> upload(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
+private Map<String, String> upload(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
 		
 		Map<String, String> articleMap = new HashMap<String,String>();
 		String encoding = "utf-8";

@@ -237,12 +237,20 @@
         <div> <button class="" id="revBtn">리뷰보기</button> </div>
         <div> <button class="" id="revBtn2">리뷰닫기</button> </div>
         
+        <div> <button class="" id="qnaBtn">문의보기</button> </div>
+        <div> <button class="" id="qnaBtn2">문의닫기</button> </div>
+        
+        
        <c:if test="${loginInfo!=null }">
         <div class="">
             <button id="revinsertBtn" class="btn btn-dark">리뷰 작성하기</button>
         </div>
         </c:if>
-        
+          <c:if test="${loginInfo!=null }">
+        <div class="">
+            <button id="qnainsertBtn" class="btn btn-dark">문의 작성하기</button>
+        </div>
+        </c:if>
         
     </div>
     <hr>
@@ -277,16 +285,74 @@
                 <c:when test="${RevList!=null}">
                     <c:forEach var="mem" items="${RevList}" varStatus="loop">                  
                   <tr>
+                  	${mem.rev_code}
                       <th scope="row">${loop.index+1}</th>
                       <td>
-                       <a href=""  
+                       <a href="${ctxPath}/rev/revFind.do?rev_code=${mem.rev_code}"  
                           class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">${mem.rev_content}</a>
                       </td>
                        <td>${mem.rev_img}  
                         <img class="w-100"  style="width: 250px" alt="" src="${ctxPath}/revimg.do?rev_img=${mem.rev_img} &rev_code=${mem.rev_code}">
                        </td>
                       
-                      <td>${mem.user_id}</td>
+                      <td>${mem.user_id} </td>
+                      <c:if test="${loginInfo == mem.user_id }"> </c:if>
+                      
+                      
+                      <td>${mem.rev_date}</td> 
+                    </tr>
+                  </c:forEach>
+                </c:when>
+              
+               
+               
+              </c:choose>
+                   
+                     
+          </tbody> 
+       </table>
+             
+           
+       </div>
+	
+	<div class="container" id=qna>
+                  <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                          
+                          <th scope="col" width="10%">리뷰번호</th>
+                          <th scope="col"  width="20%">제목</th>
+                          <th scope="col" width="50%"> 이미지</th>
+                          <th scope="col" width="10%">작성자</th>
+                          <th scope="col" width="10%"> 작성일자</th>
+                        </tr>
+                      </thead>
+                      
+                      <tbody>
+             <c:choose>
+                <c:when test="${RevList.size() == 0 || RevList == null}">
+                  <tr>
+                    <td colspan="1">1</td>
+                    <td colspan="5">등록된 리뷰가 없습니다.</td>
+                  </tr>
+                </c:when>
+                <c:when test="${RevList!=null}">
+                    <c:forEach var="mem" items="${RevList}" varStatus="loop">                  
+                  <tr>
+                  	${mem.rev_code}
+                      <th scope="row">${loop.index+1}</th>
+                      <td>
+                       <a href="${ctxPath}/rev/revFind.do?rev_code=${mem.rev_code}"  
+                          class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">${mem.rev_content}</a>
+                      </td>
+                       <td>${mem.rev_img}  
+                        <img class="w-100"  style="width: 250px" alt="" src="${ctxPath}/revimg.do?rev_img=${mem.rev_img} &rev_code=${mem.rev_code}">
+                       </td>
+                      
+                      <td>${mem.user_id} </td>
+                      <c:if test="${loginInfo == mem.user_id }"> </c:if>
+                      
+                      
                       <td>${mem.rev_date}</td> 
                     </tr>
                   </c:forEach>
@@ -304,6 +370,9 @@
        </div>
 	
 	
+	
+	
+	
 	</div>
 
 </div>
@@ -316,15 +385,25 @@
 </body>
 
 <script type="text/javascript">
-	$(function () {
-		$('#revinsertBtn').click(function () {
-			console.log("aaa")
-			
-			 location.href="${ctxPath}/pro/revForm?product_code=${proList.product_code}";
-			
-		})
+$(function () {
+	$('#revinsertBtn').click(function () {
+		console.log("aaa")
+		
+		 location.href="${ctxPath}/pro/revForm?product_code=${proList.product_code}";
+		
 	})
-
+})
+$(function () {
+	$('#qnainsertBtn').click(function () {
+		console.log("aaa")
+			
+		 location.href="${ctxPath}/qna/insert?product_code=${proList.product_code}";
+			
+	})
+})
+	
+	
+	
 
 function readURL(img_name){
     if(img_name.files && img_name.files[0]){
@@ -366,6 +445,30 @@ $(function () {
 		$('#rev').hide()
 		$('#revBtn2').hide()
 		$('#revBtn').show()
+		
+	})
+
+	
+})
+$(function () {
+	var info ;
+	
+	$('#qna').hide()
+	$('#qnaBtn2').hide()
+	info = $('#info').val()
+	
+	$('#qnaBtn').click(function () {
+		$('#qna').show()
+		$('#qnaBtn2').show()
+		$('#qnaBtn').hide()
+		
+	})
+	$('#qnaBtn2').click(function () {
+		console.log("닫기 버튼 ")
+		
+		$('#qna').hide()
+		$('#qnaBtn2').hide()
+		$('#qnaBtn').show()
 		
 	})
 

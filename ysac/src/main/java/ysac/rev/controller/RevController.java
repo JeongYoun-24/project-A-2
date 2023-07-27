@@ -78,9 +78,24 @@ private static String ARTICLE_IMAGE_REPO = "C:\\JAVAstady2023\\JAVA\\ysac\\src\\
 			req.setAttribute("proList", product);
 			
 			List<RevDTO> list = revService.RevAllList(product_code);
+			
+			System.out.println("-=-=-=-=-=-=-=-="+list);
 			req.setAttribute("RevList", list);
 			
 			nextPage ="/project/menule.jsp";
+			req.getRequestDispatcher(nextPage).forward(req, resp);
+		}else if(action.equals("/revFind.do")) { // 상품 상세 페이지 	
+			String rev_code = req.getParameter("rev_code");
+			System.out.println("-----------=-=-=-=-=-=--="+rev_code);
+			
+			
+RevDTO revDTO = revService.RevFindList(rev_code);
+			
+			req.setAttribute("revfind", revDTO);
+			
+			
+			
+			nextPage ="/project_rev/revFind.jsp";
 			req.getRequestDispatcher(nextPage).forward(req, resp);
 		}else {
 

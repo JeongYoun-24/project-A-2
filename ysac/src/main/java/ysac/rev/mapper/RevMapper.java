@@ -2,6 +2,7 @@ package ysac.rev.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -33,6 +34,13 @@ public interface RevMapper {
 	// 리뷰 전체 조회 
 	@Select("select *from product_rev ")
 	public List<RevVO> revAllList();
+	
+	// 리뷰 전체 조회 
+	@Select("select *from product_rev where rev_code=#{rev_code} ")
+	public RevVO revFindList(String rev_code);
+	
+	@Delete("delete from product_rev where rev_code=#{rev_code}")
+	public int revDelete(int rev_code);
 	
 	
 	// 리뷰 등록 

@@ -21,6 +21,8 @@ import ysac.manager.mapper.ManagerMapper;
 import ysac.manager_board.mapper.Manager_BoardMapper;
 import ysac.order.mapper.UorderSqlMapper;
 import ysac.product.mapper.ProductSqlMapper;
+import ysac.qna.mapper.QnaMapper;
+import ysac.rev.mapper.RevMapper;
 import ysac.users.mapper.UsersMapper;
 
 @Log4j2
@@ -66,6 +68,9 @@ public enum ConnectionOracleUtil {
 		configuration.addMapper(UorderSqlMapper.class);
 		configuration.addMapper(ProductSqlMapper.class);
 		configuration.addMapper(UsersMapper.class);
+		configuration.addMapper(RevMapper.class);
+		configuration.addMapper(QnaMapper.class);
+		
 		
 		
 		log.info("sqlSessionFactory: "+ new SqlSessionFactoryBuilder().build(configuration) );
