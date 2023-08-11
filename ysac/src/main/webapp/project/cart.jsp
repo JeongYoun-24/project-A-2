@@ -51,23 +51,54 @@
            <jsp:include page="../nav/nav.jsp"/>   
         
        <!-- 장바구니-->
-        <div class="cart p-3 m-3">
+   <div class="cart p-3 m-3">
             <div class="container justify-content-center w-100">
-                <div class="border-0">
-                <form action="#" method="post" class="" >
-                    <div class=" row justify-content-start">
-                        <h3  class="row mt-1 w-75 m-1 p-5">장바구니</h3>
-                    <div class="row">
-                    <hr class="col-6" style="display: inline-block";>
-                    <div class="col-6">
-                        <button type="button"class="btn btn-dark btn-lg m-1 p-1" style="width: 70%; height: 100%;">총 0개 결제하기</button>
+                
+                
+               
+           
+                <c:choose>
+                    <c:when test="${not empty cartDTO }">
+                 <div class="border-0">
+                    <!-- <div class=" row justify-content-start"> -->
+                     <h3  class="row mt-1 w-75 m-1 p-5">장바구니</h3>
+                    <div class="row  border mt-3">
+                    <hr class="" style="display: inline-block";>
+                    <c:forEach var="dto" items="${cartDTO}" varStatus="loop">
+	                  
+	                    <div class="col-md-3 mt-2">
+	                    	<div>
+	                    		<img alt="" style="width: 200px" src="${ctxPath}/product_img.do?pro_img=${dto.pro_img}&product_code=${dto.product_code}">
+	                    	</div>
+	                    	<div>
+	                    		
+	                    	</div>
+	                    	
+	                    </div>
+	                    <div class="col-md-3 mt-3">
+	                    		${dto.pro_name} <br>
+	                    		${dto.pro_price}원
+	                   	</div>
+	                   	 <div class="col-md-3 border">
+	                    		
+	                   	</div>
+	                   	
+	                    
+                    <div class="col-md-3 mt-3">
+                        <button type="button"class="btn btn-dark btn-lg m-1 p-1" >총 0개 결제하기</button>
 
                     </div>
-                </div>
-
-                    </div>
-                    <!--장바구니가 비어있을때 -->
-                <div class ="container">
+                    <hr>
+                    </c:forEach>
+                	</div>
+            
+				
+                 </div>
+                 
+                 
+                    </c:when>
+	                <c:otherwise>
+	                  <div class ="container">
                     <div class="row">
                         <div class="col-6 align-content-center">
                             <div style="padding: 50px;">
@@ -88,15 +119,21 @@
                            
                         
                     </div>
-                </div>
+	                
+	                
+	                
+	                </c:otherwise>
+	                
+	   </c:choose>
+                  
+                    
+                    
+                	</div>
 
 
                 </div>
             </div>
+    	</div>
 
-
-
-    </div>
-</div>
 </body>
 </html>

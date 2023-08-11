@@ -42,7 +42,7 @@
         	 <img class="w-100"  style="width: 650px" alt="" src="${ctxPath}/product_img.do?pro_img=${proList.pro_img}&product_code=${proList.product_code}">
         	 														
         	<input type="hidden" value="${proList.pro_img}">
-        	<input type="hidden" value="${proList.product_code}">
+        	<input type="hidden" id="product_code" value="${proList.product_code}">
         
         </div>
         <div class="col-6">
@@ -164,6 +164,8 @@
                             <option value="1">퍼퓸1개</option>
                             <option value="2">퍼퓸 + 바질 테라스 퍼퓸 샤워(+스톤디퓨저 증정)(+19,000원)</option>
                         </select>
+                        <label for="pro_qty2">수량</label>
+                        <input type="number" id="pro_qty2" max="999" min="1" placeholder="1">
                     </div>
                 </div>
             </div>
@@ -173,7 +175,7 @@
                 <!--상품 구매, 장바구니이동버튼-->
                 <div class="row">
                     <div class="col-6">
-                        <button type="button" class="btn btn-outline-secondary btn-lg">장바구니</button>
+                        <button type="button" id="cartBtn" class="btn btn-outline-secondary btn-lg">장바구니</button>
                     </div>
                     <div class="col-6 ">
                         <button type="button" class="btn btn-dark btn-lg">구매하기</button>
@@ -243,6 +245,7 @@
         
        <c:if test="${loginInfo!=null }">
         <div class="">
+        	<input type="hidden" id="user_id" value="${loginInfo}">
             <button id="revinsertBtn" class="btn btn-dark">리뷰 작성하기</button>
         </div>
         </c:if>
@@ -330,30 +333,30 @@
                       
                       <tbody>
              <c:choose>
-                <c:when test="${RevList.size() == 0 || RevList == null}">
+                <c:when test="${QnaList.size() == 0 || QnaList == null}">
                   <tr>
                     <td colspan="1">1</td>
-                    <td colspan="5">등록된 리뷰가 없습니다.</td>
+                    <td colspan="5">등록된 문의가 없습니다.</td>
                   </tr>
                 </c:when>
-                <c:when test="${RevList!=null}">
-                    <c:forEach var="mem" items="${RevList}" varStatus="loop">                  
+                <c:when test="${QnaList!=null}">
+                    <c:forEach var="mem" items="${QnaList}" varStatus="loop">                  
                   <tr>
-                  	${mem.rev_code}
+                  	${mem.qna_code}
                       <th scope="row">${loop.index+1}</th>
                       <td>
-                       <a href="${ctxPath}/rev/revFind.do?rev_code=${mem.rev_code}"  
-                          class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">${mem.rev_content}</a>
+                       <a href="${ctxPath}/qna/view?qna_code=${mem.qna_code}"  
+                          class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">${mem.qna_content}</a>
                       </td>
-                       <td>${mem.rev_img}  
-                        <img class="w-100"  style="width: 250px" alt="" src="${ctxPath}/revimg.do?rev_img=${mem.rev_img} &rev_code=${mem.rev_code}">
+                       <td>${mem.qna_img}  
+                     <%--    <img class="w-100"  style="width: 250px" alt="" src="${ctxPath}/revimg.do?qna_img=${mem.qna_img} &qna_code=${mem.qna_code}"> --%>
                        </td>
                       
                       <td>${mem.user_id} </td>
                       <c:if test="${loginInfo == mem.user_id }"> </c:if>
                       
                       
-                      <td>${mem.rev_date}</td> 
+                      <td>${mem.qna_date}</td> 
                     </tr>
                   </c:forEach>
                 </c:when>
@@ -386,12 +389,77 @@
 
 <script type="text/javascript">
 $(function () {
+	$('#cartBtn').click(function () {
+		var user_id = $('#user_id').val();
+		var product_code = $('#product_code').val();
+		var pro_qty =  $('#pro_qty2').val();
+		
+		/* var _jsonData = {
+			user_id = user_id
+			product_code = product_code
+			pro_qty  = pro_qty"
+			
+		} */
+		
+		var _jsonData = '{'+
+		'"user_id": "'+user_id +'", '+
+		'"product_code": "'+product_code+'",'+
+		'"pro_qty":"'+pro_qty+
+'"}'
+		
+
+		console.log(_jsonData)
+		
+		$.ajax({  //페이지가 아닌 데이터만 보내기
+			type: "post",
+			async: true, //true=비동기
+			url: "${ctxPath}/cartList",
+			dataType : 'text', //서버로부터 받은 데이터 타입
+			data:{user_id,product_code ,pro_qty}, //매개변수
+			success : function(data,textStatus){
+				
+			var jsonMessage = JSON.parse(data);
+			alert(jsonMessage);
+			if(jsonMessage.code === 'carterror'){
+				alert('로그인후 이용가능');
+				location.href="${ctxPath}/users/usersLogin"
+			
+			}else if(jsonMessage.code === 'idError'){	
+				alert('로그인후 이용가능');
+				location.href="${ctxPath}/users/usersLogin"
+
+			}else{
+				alert('장바구니 저장성공');
+				 
+			}
+			
+			},
+			error: function(){
+				
+			},
+			complete : function(){
+				
+			}
+			
+			
+			}) //end 
+	
+	})
+})
+
+
+
+$(function () {
 	$('#revinsertBtn').click(function () {
 		console.log("aaa")
 		
 		 location.href="${ctxPath}/pro/revForm?product_code=${proList.product_code}";
 		
 	})
+
+	
+	
+	
 })
 $(function () {
 	$('#qnainsertBtn').click(function () {

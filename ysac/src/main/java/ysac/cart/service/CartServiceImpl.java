@@ -1,5 +1,6 @@
 package ysac.cart.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -7,8 +8,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.modelmapper.ModelMapper;
 
+import ysac.cart.domain.CartJoinVO;
 import ysac.cart.domain.CartVO;
 import ysac.cart.dto.CartDTO;
+import ysac.cart.dto.CartJoinDTO;
 import ysac.cart.mapper.CartSqlMapper;
 import ysac.util.ConnectionOracleUtil;
 import ysac.util.MapperUtil;
@@ -16,6 +19,7 @@ import ysac.util.MapperUtil;
 public class CartServiceImpl implements CartService  {
 		
 	
+		
 	    private  ModelMapper modelMapper;
 	    private  CartSqlMapper cartSqlMapper;
 	    private  SqlSessionFactory factory;
@@ -25,6 +29,7 @@ public class CartServiceImpl implements CartService  {
 	        modelMapper = MapperUtil.INSTANCE.get();
 	        factory = ConnectionOracleUtil.INSTANCE.getSqlSessionFactory();
 	        session = factory.openSession();
+	        cartSqlMapper = session.getMapper(CartSqlMapper.class);
 	    }
 
 	    @Override
@@ -42,10 +47,12 @@ public class CartServiceImpl implements CartService  {
 	    }
 
 	    @Override
-	    public void insertCart(CartDTO dto) {
+	    public int insertCart(CartDTO dto) {
 	        CartVO vo = modelMapper.map(dto, CartVO.class);
-	        cartSqlMapper.insertCart(vo);
+	      int re=  cartSqlMapper.insertCart(vo);
 	        session.commit();
+	        
+	        return re;  
 	    }
 
 	    @Override
@@ -60,4 +67,16 @@ public class CartServiceImpl implements CartService  {
 	        cartSqlMapper.deleteCart(cart, user_id);
 	        session.commit();
 	    }
+
+		@Override
+		public List<CartJoinDTO> getCartById2(String user_id) {
+			List<CartJoinVO> vo = cartSqlMapper.getCartById2(user_id);
+			
+			List<CartJoinDTO> dtoList = new ArrayList<>();
+			for(CartJoinVO cart : vo) {
+				CartJoinDTO cartDTO = CartJoinDTO.of(cart);
+				dtoList.add(cartDTO);
+			}
+			return dtoList;
+		}
 	}

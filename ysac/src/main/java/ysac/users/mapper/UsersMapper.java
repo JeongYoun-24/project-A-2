@@ -234,9 +234,9 @@ public interface UsersMapper {
 	public List<UsersVO> phoneList(Map<String,String> pageingMap);
 	
 	
-	// 상품 상세조회 리뷰 
-		@Select("select *from product_rev where product_code=#{product_code}")
-		public List<RevVO> revList(String product_code);
+		// 상품  리뷰조회 리뷰 
+	@Select("select *from product_rev where product_code=#{product_code}")
+	public List<RevVO> revList(String product_code);
 		
 		// 상품 상세 조회
 		@Select("select * from product where product_code = #{product_code}")

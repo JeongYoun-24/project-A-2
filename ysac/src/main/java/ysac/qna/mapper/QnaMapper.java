@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 
 import ysac.qna.domain.QnaVO;
 import ysac.qna.dto.QnaDTO;
+import ysac.rev.domain.RevVO;
 import ysac.users.domain.UsersVO;
 
 @Mapper
@@ -31,11 +32,16 @@ public interface QnaMapper {
 	public int updateQna(QnaVO vo);
 	
 	@Delete("delete qna WHERE qna_code = #{qna_code}")
-	public int deleteQna(String Qna_code);
+	public int deleteQna(int Qna_code);
 	
 	
 	@Select("select max(qna_code)+1 from qna") // 리뷰 글 번호 생성
 	public int getQna();
+	
+	// 상품 문의 상품값으로 조회 
+	@Select("select *from qna where product_code=#{product_code}")
+	public List<QnaVO> QnaList(String product_code);
+	
 	
 	
 }

@@ -8,17 +8,39 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ysac.qna.service.QnaService;
+
 @WebServlet("/qna/delete")
 public class QnaDeleteController extends HttpServlet {
-
 	
-	String nextPage = null;
+	private QnaService  qnaService = QnaService.INSTANCE;
+	
+	String nextPage = null;	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("---------삭제 요청------------- ");
+		int qan_code = (Integer.parseInt(req.getParameter("qna_code")));
+		System.out.println(qan_code);
+		
+		
+		int result = qnaService.delete(qan_code);
 		
 		
 		
-		nextPage = "/project/loginID.jsp";
+		
+		if(result== 1) {
+			System.out.println("삭제 성공 ");
+			
+		}else {
+			System.out.println("삭제 실패 ");
+			
+			
+		}
+		
+		
+		
+		
+		nextPage = "/main.do";
 		req.getRequestDispatcher(nextPage).forward(req, resp);
 	}
 	

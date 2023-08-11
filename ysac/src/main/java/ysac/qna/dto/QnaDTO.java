@@ -22,7 +22,7 @@ public class QnaDTO {
 	private int product_code;
 	private String qna_title;
 	private String qna_content;
-	private Date qna_data;
+	private Date qna_date;
 	private String qna_img;
 	
 }

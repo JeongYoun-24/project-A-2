@@ -66,16 +66,16 @@
                     <thead>
                      	<tr> 
                           <th scope="col" width="10%">문의 번호</th>
-                          <th scope="col"  width="70%">${revfind.rev_code}</th>
+                          <th scope="col"  width="70%">${qnafind.qna_code}</th>
                         </tr>
                         <tr> 
                           <th scope="col" width="10%">제목</th>
-                          <th scope="col"  width="70%">${revfind.rev_title}</th>
+                          <th scope="col"  width="70%">${qnafind.qna_title}</th>
                         </tr>
                         
                         <tr>
                           <th scope="col" width="10%">작성자</th>
-                          <th scope="col"  width="70%">${revfind.user_id}</th>
+                          <th scope="col"  width="70%">${qnafind.user_id}</th>
                         </tr>
                         </thead>
                         
@@ -85,7 +85,7 @@
                               
                                 <div class="row" >
                                   <div class="col-3 justify-content-start"><p style="font-size: 12px;">작성일</p>
-                                  ${revfind.rev_date}
+                                  ${qnafind.qna_date}
                                      </div>
                                   <div class="col-3 justify-content-between"><p style="font-size:12px;">조회수</p>
                                   <%-- ${boardfind.hitcount} --%>
@@ -99,10 +99,10 @@
                              	</div>
                                  
               <div class="w-75 m-auto border border-1 rounded rounded-bottom-4 p-3">
-                 <c:if test="${ revfind.rev_content != null }">
-                 <div class="d-flex justify-content-center">${revfind.rev_content}</div>
+                 <c:if test="${ qnafind.qna_content != null }">
+                 <div class="d-flex justify-content-center">${qnafind.qna_content}</div>
                  
-                  <c:if test="${not empty revfind.rev_img && revfind.rev_img!=null  }">
+                  <c:if test="${not empty qnafind.qna_img && qnafind.qna_img!=null  }">
                   
                    	<div class="d-flex justify-content-center">
                    		<%-- <img alt="" width="450" src="${ctxPath}/download.do?imageFileName=${dto.imageFileName}&articleNo=${dto.articleNO}">이미지${dto.imageFileName} --%>
@@ -113,7 +113,7 @@
                    	</div>
                    
                     <div class="col-sm-10">
-                      <input type="hidden" id="preview" value="${revfind.rev_img}" readonly name="rev_img" class="form-control border border-primary-subtle rounded rounded-4 p-2" id="rev_img" disabled>
+                      <input type="hidden" id="preview" value="${qnafind.qna_img}" readonly name="rev_img" class="form-control border border-primary-subtle rounded rounded-4 p-2" id="rev_img" disabled>
                     </div>
                   </c:if>
                   </c:if>
@@ -123,30 +123,27 @@
             </div>
                                   
                                   
-                                  
-                                  </div>
-                                  
-                                  
-                                  
-                                  </td>
-                                  </tr>
-                                </div>
-                               </tbody> 
-                            </table>
+             		</div>
+                   
+                  </td>
+                </tr>
+              </div>
+            </tbody> 
+       </table>
                             
     <div class="">
              <div class="d-flex align-content-start">
-               <a href="${ctxPath}/rev/revList.do" class="btn" >목록</a>
+               <a href="${ctxPath}/rev/revList.do?product_code=${qnafind.product_code}" class="btn" >목록</a>
           	
-          	 <c:if test="${loginInfo == revfind.user_id}">
+          	 <c:if test="${loginInfo == qnafind.user_id} &">
            		 <div>
-           		 <form action="${ctxPath}/rev/update" method="get">
-                 <input type="hidden"  name="rev_code" id="m_board" value="${revfind.rev_code}">
-              	 <input type="hidden" id="id" value="${revfind.user_id}">
-                 <input type="hidden" id="title" value="${revfind.rev_title}">
-                 <input type="hidden" id="content" value="${revfind.rev_content}">
+           		 <form action="${ctxPath}/qna/update" method="get">
+                 <input type="hidden"  name=""qna_code"" id="qna_code" value="${qnafind.qna_code}">
+              	 <input type="hidden" id="user_id" value="${qnafind.user_id}">
+                 <input type="hidden" id="qna_title" value="${qnafind.qna_title}">
+                 <input type="hidden" id="qna_content" value="${qnafind.qna_content}">
                  <%-- <input type="hidden" id="name" value="${revfind.name}"> --%>
-                 <input type="hidden" id="img_name" value="${revfind.rev_img}">
+                 <input type="hidden" id="qna_img" value="${qnafind.qna_img}">
               	
                   </div>
                 
@@ -156,12 +153,39 @@
             
              	
              </c:if> 
+           <c:if test="${manager != null}">
+           	<!-- <input type="text" name ="re_content"  id="re_content"> -->
+           	<input type="hidden" name ="id" id="id"  value="${managerid}">
+           
+            <div>
+              	<button class="btn border" id="m_btn">답글 쓰기</button>
+            </div>
+             <div class="mx-5"><button class="btn "  onclick="delete2()">삭제</button> </div> 
+        
+          </c:if> 
+           
+           
+           
            
            
            </div>
            
            
-      </div> 
+      </div> 		
+      		 <c:if test="${manager != null}">
+      			<h3 class="d-flex justify-content-center">답글 써주기 </h3>
+      						
+      		</c:if>		
+                 <div class="d-flex justify-content-center " >
+                 	
+                 	<textarea id="reply" rows="5" cols="100" class="form" placeholder="문의에 대한 답글을쓰시오">
+                 	
+                 	
+                 	</textarea>
+                 
+                 </div>   
+                    
+                    
                     
                         <div class="d-flex m-auto">
                       <input class="form-control m-3" type="text" style= "font-size: 12px;" placeholder="관리자와작성자만 댓글삭제및 수정권한이 있습니다." disabled> 
@@ -192,12 +216,38 @@
 		 <jsp:include page="../footer/footer.jsp"/>  
 		
 </body>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" 
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" 
+    crossorigin="anonymous"></script>
 <script type="text/javascript">
 function delete2() {
-	
-	location.href="${ctxPath}/rev/delete?rev_code=${revfind.rev_code}";
+	alert("삭제 하시겠습니까?")
+	location.href="${ctxPath}/qna/delete?qna_code=${qnafind.qna_code}";
 
 }
+
+$(function () {
+	$('#reply').hide()
+	
+	$('#m_btn').click(function () {
+		var id = $('#id').val();
+		var re_content = $('#re_content').val();
+		console.log("댓글 쓰기 버튼 ")
+		console.log(id)
+		console.log(re_content)
+		$('#reply').show()
+		
+		
+		
+	})
+	 
+})
+	
+	
+
+
+
+
 
 
 </script>

@@ -1,5 +1,8 @@
 package ysac.qna.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.modelmapper.ModelMapper;
@@ -7,6 +10,8 @@ import org.modelmapper.ModelMapper;
 import ysac.qna.domain.QnaVO;
 import ysac.qna.dto.QnaDTO;
 import ysac.qna.mapper.QnaMapper;
+import ysac.rev.domain.RevVO;
+import ysac.rev.dto.RevDTO;
 import ysac.users.domain.UsersVO;
 import ysac.users.domain.UsersVO2;
 import ysac.users.dto.UsersDTO;
@@ -31,6 +36,19 @@ public enum QnaService {
 		factor = ConnectionOracleUtil.INSTANCE.getSqlSessionFactory();
 		session = factor.openSession();
 		qnaMapper = session.getMapper(QnaMapper.class);
+
+	}
+	
+	public List<QnaDTO> AllList(String product_code){
+		
+		List<QnaVO> qnaList = qnaMapper.QnaList(product_code);
+		// vo-> dto
+		List<QnaDTO> dtoList = qnaList.stream()
+						.map(vo -> modelMapper.map(vo, QnaDTO.class))
+						.collect(Collectors.toList());
+					
+					
+		return dtoList;	
 
 	}
 	
@@ -63,7 +81,7 @@ public enum QnaService {
 	
 	
 	// 문의 삭제 
-	public int delete (String qna_code) {
+	public int delete (int qna_code) {
 		int r = 0;
 		
 			r = qnaMapper.deleteQna(qna_code);  //오류 지점

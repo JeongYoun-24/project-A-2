@@ -25,6 +25,8 @@ import com.mapper.mybatis.RevMapper;
 
 import ysac.manager.service.ManagerService;
 import ysac.product.dto.ProductDTO;
+import ysac.qna.dto.QnaDTO;
+import ysac.qna.service.QnaService;
 import ysac.rev.dto.RevDTO;
 import ysac.rev.service.RevService;
 import ysac.users.service.UsersService;
@@ -37,6 +39,7 @@ private static String ARTICLE_IMAGE_REPO = "C:\\JAVAstady2023\\JAVA\\ysac\\src\\
 	private UsersService userService = UsersService.INSTANCE;
 //	private ImgNameController imgname = ImgNameController.INSTENS;
 	private RevService revService = RevService.INSTANCE;
+	private QnaService qnaService = QnaService.INSTANCE;
 //	private ModelMapper modelMapper;
 //	private ManagerMapper managerMapper;
 //	private SqlSessionFactory factor;
@@ -82,6 +85,12 @@ private static String ARTICLE_IMAGE_REPO = "C:\\JAVAstady2023\\JAVA\\ysac\\src\\
 			System.out.println("-=-=-=-=-=-=-=-="+list);
 			req.setAttribute("RevList", list);
 			
+			List<QnaDTO> list2 =qnaService.AllList(product_code);
+			
+			System.out.println(list2);
+			
+			req.setAttribute("QnaList", list2);
+			
 			nextPage ="/project/menule.jsp";
 			req.getRequestDispatcher(nextPage).forward(req, resp);
 		}else if(action.equals("/revFind.do")) { // 상품 상세 페이지 	
@@ -89,7 +98,7 @@ private static String ARTICLE_IMAGE_REPO = "C:\\JAVAstady2023\\JAVA\\ysac\\src\\
 			System.out.println("-----------=-=-=-=-=-=--="+rev_code);
 			
 			
-RevDTO revDTO = revService.RevFindList(rev_code);
+			RevDTO revDTO = revService.RevFindList(rev_code);
 			
 			req.setAttribute("revfind", revDTO);
 			

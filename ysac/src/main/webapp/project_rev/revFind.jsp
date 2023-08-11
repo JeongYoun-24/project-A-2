@@ -136,7 +136,7 @@
                             
     <div class="">
              <div class="d-flex align-content-start">
-               <a href="${ctxPath}/rev/revList.do" class="btn" >목록</a>
+                <a href="${ctxPath}/rev/revList.do?product_code=${revfind.product_code}" class="btn" >목록</a>
           	
           	 <c:if test="${loginInfo == revfind.user_id}">
            		 <div>

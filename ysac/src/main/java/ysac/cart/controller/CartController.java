@@ -42,7 +42,7 @@ public class CartController extends HttpServlet {
         cartDTO.setCart(Integer.parseInt(request.getParameter("cart")));
         cartDTO.setUser_id(request.getParameter("user_id"));
         cartDTO.setProduct_code(request.getParameter("product_code"));
-        cartDTO.setCart_qty(Integer.parseInt(request.getParameter("cart_qty")));
+        cartDTO.setPro_qty(Integer.parseInt(request.getParameter("cart_qty")));
 
         cartService.insertCart(cartDTO);
 

@@ -14,6 +14,6 @@ public class CartDTO {
 	private int cart;
 	private String user_id;
 	private String product_code;
-	private int cart_qty;
+	private int pro_qty;
 	
 }

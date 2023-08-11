@@ -138,11 +138,11 @@
     crossorigin="anonymous"></script>
  <script type="text/javascript">
  $(function () {
-	$('#m_btn').click(function () {
-		location.href="${ctxPath}/m_boardInsert"
+		$('#m_btn').click(function () {
+			location.href="${ctxPath}/m_boardInsert"
+		})
+		 
 	})
-	 
-})
  </script>
  
 </html>
